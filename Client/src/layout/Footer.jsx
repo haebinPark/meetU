@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { ReactComponent as GithubIcon } from "../../assets/github.svg";
+import { ReactComponent as GithubIcon } from "../assets/github.svg";
 
 const StyledFooter = styled.footer`
   background-color: var(--brand-color);

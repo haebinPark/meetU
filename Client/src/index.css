@@ -1,0 +1,114 @@
+/* reset CSS */
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: 400;
+}
+
+blockquote,
+body,
+dd,
+dl,
+dt,
+fieldset,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+html,
+iframe,
+legend,
+li,
+ol,
+p,
+pre,
+textarea,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+select {
+  margin: 0;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  box-sizing: initial;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+iframe {
+  border: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 폰트 */
+body {
+  font-family: "Bebas Neue", sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+/* 브랜드 컬러 */
+:root {
+  --brand-color: #4f8235;
+  --brand-sub-color: #9bbd8a;
+  --font-gray: #888888;
+  --font-red: #ff0000;
+  --font-white: #ffffff;
+  --font-black: #000000;
+  --box-gray: #ebebeb;
+
+  /* 닉네임 배경 색상 */
+  --nickname-brown: #f4eeee;
+  --nickname-orange: #faebdd;
+  --nickname-yellow: #fbf3db;
+  --nickname-green: #edf3ec;
+  --nickname-blue: #e7f3f8;
+  --nickname-purple: #f6f3f9;
+  --nickname-pink: #faf1f5;
+  --nickname-red: #fdebec;
+}

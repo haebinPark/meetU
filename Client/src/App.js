@@ -1,17 +1,20 @@
 import { styled } from "styled-components";
-import Header from "./components/layout/Header.jsx";
-import Footer from "./components/layout/Footer.jsx";
+import { Outlet } from "react-router-dom";
+import Header from "./layout/Header.jsx";
+import Footer from "./layout/Footer.jsx";
 
 const Main = styled.main`
   min-height: 100%;
-  padding-bottom: 8rem;
+  padding: 3rem;
 `;
 
 function App() {
   return (
     <>
       <Header />
-      <Main>메인</Main>
+      <Main>
+        <Outlet />
+      </Main>
       <Footer />
     </>
   );

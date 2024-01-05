@@ -3,6 +3,7 @@ import { useState } from "react";
 import NavButton from "./NavButton.jsx";
 import NavList from "./NavList.jsx";
 import NavItem from "./NavItem.jsx";
+import { useLocation } from "react-router-dom";
 
 const StyledNav = styled.nav`
   @media screen and (max-width: 767px) {
@@ -25,6 +26,7 @@ const navItems = [
 
 function Navigation() {
   const [openNav, setOpenNav] = useState(false);
+  const { pathname } = useLocation();
 
   const openNavList = () => setOpenNav(!openNav);
 
@@ -34,7 +36,12 @@ function Navigation() {
         <NavButton openNavList={openNavList} className={openNav && "openNav"} />
         <NavList className={openNav && "openNav"}>
           {navItems.map((item) => (
-            <NavItem key={item.id} link={item.link} menuName={item.menuName} />
+            <NavItem
+              key={item.id}
+              link={item.link}
+              menuName={item.menuName}
+              className={item.link === pathname ? "seleted-nav" : ""}
+            />
           ))}
         </NavList>
       </StyledNav>

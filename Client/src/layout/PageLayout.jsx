@@ -16,19 +16,11 @@ const Main = styled.main`
   }
 `;
 
-const Section = styled.section`
-  width: 100%;
-  height: 100vh;
-  background-color: beige;
-`;
-
 function PageLayout({ children }) {
   return (
     <>
       <Header />
-      <Main>
-        <Section>{children}</Section>
-      </Main>
+      <Main>{children}</Main>
       <Footer />
     </>
   );

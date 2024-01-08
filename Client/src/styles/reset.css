@@ -42,7 +42,8 @@ ol,
 p,
 pre,
 textarea,
-ul {
+ul,
+button {
   margin: 0;
   padding: 0;
 }
@@ -59,6 +60,10 @@ button,
 input,
 select {
   margin: 0;
+}
+
+input {
+  border: 0;
 }
 
 button {

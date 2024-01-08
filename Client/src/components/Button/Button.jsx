@@ -50,7 +50,7 @@ const StyledButton = styled.button`
   }
 `;
 
-//버튼 함수부분
+//버튼 부분
 function Button({ onClick, size, variant, children }) {
   const sizeStyle = SIZES[size];
   const variantStyle = VARIANTS[variant];

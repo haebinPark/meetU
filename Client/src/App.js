@@ -1,21 +1,12 @@
-import { styled } from "styled-components";
 import { Outlet } from "react-router-dom";
-import Header from "./layout/Header.jsx";
-import Footer from "./layout/Footer.jsx";
-
-const Main = styled.main`
-  min-height: 100%;
-  padding: 3rem;
-`;
+import PageLayout from "./layout/PageLayout.jsx";
 
 function App() {
   return (
     <>
-      <Header />
-      <Main>
+      <PageLayout>
         <Outlet />
-      </Main>
-      <Footer />
+      </PageLayout>
     </>
   );
 }

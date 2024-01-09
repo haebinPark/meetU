@@ -8,8 +8,8 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CommentMapper {
-    Comment comentPostDtoTocoment(CommentDto.Post requestBody);
-    Comment comentPatchDtoTocoment(CommentDto.Patch requestBody);
+    Comment commentPostDtoTocomment(CommentDto.Post requestBody);
+    Comment commentPatchDtoTocomment(CommentDto.Patch requestBody);
 
-    CommentResponseDto comentToComentResponseDto(Comment comment);
+    CommentResponseDto commentToCommentResponseDto(Comment comment);
 }

@@ -14,11 +14,11 @@ public class CommentDto {
     }
     @Getter
     public static class Patch{
-        private Long comentId;
+        private Long commentId;
         private String context;
         private String nickname;
 
-        public void setContext(Long comentId){
+        public void setContext(Long commentId){
             this.context =context;
         }
     }

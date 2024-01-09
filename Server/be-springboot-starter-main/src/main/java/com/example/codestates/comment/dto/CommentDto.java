@@ -1,10 +1,10 @@
-package com.example.codestates.coment.dto;
+package com.example.codestates.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ComentDto {
+public class CommentDto {
     @Getter
     @Setter
     @AllArgsConstructor

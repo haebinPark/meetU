@@ -1,4 +1,4 @@
-package com.example.codestates.coment.entity;
+package com.example.codestates.comment.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @AllArgsConstructor
-public class Coment {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comentid;

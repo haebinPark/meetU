@@ -7,6 +7,7 @@ const Main = styled.main`
   width: 100%;
   min-height: 100%;
   padding: 3rem;
+  padding-bottom: 11rem;
   margin-left: auto;
   margin-right: auto;
 

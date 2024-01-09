@@ -11,11 +11,11 @@ public class UserController {
 
     @GetMapping("users/{userId}")
     public ResponseEntity<GetStyleDto> GetUserStyle() {
-
+        return null;
     }
 
     @PatchMapping("users/{userId}")
     public ResponseEntity<PatchStyleDto> patchUserStyle() {
-
+        return null;
     }
 }

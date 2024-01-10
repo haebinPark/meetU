@@ -30,6 +30,7 @@ function MemberFormInput({
   placeholder,
   description,
   duplicationCheck,
+  onChange,
 }) {
   const id = useId();
 
@@ -51,6 +52,7 @@ function MemberFormInput({
           defaultValue={defaultValue}
           placeholder={placeholder}
           autoComplete={type === "password" ? "off" : null}
+          onChange={onChange}
         />
         {duplicationCheck && (
           <Button type="submit" size="sm">

@@ -8,7 +8,7 @@ const StyledNavButton = styled.button`
   /* 모바일 버전 */
   @media screen and (max-width: 767px) {
     display: block;
-    width: 1rem;
+    width: 1.6rem;
     height: 2rem;
     background: no-repeat center/80%;
     background-image: url(${hambergerIcon});

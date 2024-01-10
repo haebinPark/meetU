@@ -10,6 +10,7 @@ import PageDescription from "../../components/Common/PageDescription.jsx";
 import MemberFormRadio from "../../components/Member/MemberFormRadio.jsx";
 import MemberFormCheckbox from "../../components/Member/MemberFormCheckbox.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
+import Button from "../../components/Common/Button.jsx";
 import getNofity from "../../utils/getNotify.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,7 +97,6 @@ function Join() {
             label="이메일"
             defaultValue={formState.email}
             placeholder="example@email.com"
-            description="관심사를 1 ~ 3개 선택해주세요."
             duplicationCheck={true}
             onChange={handelInput}
           />
@@ -160,7 +160,11 @@ function Join() {
           />
         </MemberFormBlock>
         {/* 회원가입 버튼 */}
-        <MemberFormButtonBlock onClick={handleJoin} />
+        <MemberFormButtonBlock name="회원가입" onClick={handleJoin}>
+          <Button type="submit" size="lg" onClick={handleJoin}>
+            회원가입
+          </Button>
+        </MemberFormButtonBlock>
       </MemberForm>
       <ToastContainer />
     </MemberLayout>

@@ -17,7 +17,7 @@ const TextInputStyled = styled.input`
 //텍스트바CSS
 const TextbarStyled = styled.div`
   width: 100%;
-  height: 43px;
+  height: 47px;
   border-bottom: 2px solid var(--brand-sub-color);
   border-left: 2px solid var(--brand-sub-color);
   border-top: 2px solid var(--box-gray);

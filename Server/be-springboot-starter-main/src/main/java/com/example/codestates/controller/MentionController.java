@@ -19,7 +19,7 @@ public class MentionController {
     private final MentionRepository mentionRepository;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/messages")
+    @PostMapping("/mentions")
     public Response<?> sendMention(@RequestBody MentionDto mentionDto, Authentication authentication) {
         // 임의로 유저 정보를 넣었지만, JWT 도입하고 현재 로그인 된 유저의 정보를 넘겨줘야함
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
@@ -32,12 +32,12 @@ public class MentionController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/mentions/received")
+    @GetMapping("/mentions?type=send")
     public Response<?> getReceivedMention(Authentication authentication) {
         // 임의로 유저 정보를 넣었지만, JWT 도입하고 현재 로그인 된 유저의 정보를 넘겨줘야함
-//        User user = userRepository.findById(14).orElseThrow(() -> {
-//            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
-//        });
+        //        User user = userRepository.findById(14).orElseThrow(() -> {
+        //            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
+        //        });
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         User user = principalDetails.getUser();
@@ -46,12 +46,12 @@ public class MentionController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/mentions/received/{id}")
+    @DeleteMapping("/mentions/sent/{mention_id}")
     public Response<?> deleteReceivedMention(@PathVariable("id") Long id, Authentication authentication) {
         // 임의로 유저 정보를 넣었지만, JWT 도입하고 현재 로그인 된 유저의 정보를 넘겨줘야함
-//        User user = userRepository.findById(1).orElseThrow(() -> {
-//            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
-//        });
+        //        User user = userRepository.findById(1).orElseThrow(() -> {
+        //            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
+        //        });
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         User user = principalDetails.getUser();
@@ -68,12 +68,12 @@ public class MentionController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/messages/send")
+    @GetMapping("/mentions/sent/{user_id}")
     public Response<?> getSendMention(Authentication authentication) {
         // 임의로 유저 정보를 넣었지만, JWT 도입하고 현재 로그인 된 유저의 정보를 넘겨줘야함
-//        User user = userRepository.findById(1).orElseThrow(() -> {
-//            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
-//        });
+        //        User user = userRepository.findById(1).orElseThrow(() -> {
+        //            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
+        //        });
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         User user = principalDetails.getUser();
@@ -83,12 +83,12 @@ public class MentionController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/mentions/send/{id}")
+    @DeleteMapping("/mentions/sent/{mention_id}")
     public Response<?> deleteMentionBySender(@PathVariable("id") Long id, Authentication authentication) {
         // 임의로 유저 정보를 넣었지만, JWT 도입하고 현재 로그인 된 유저의 정보를 넘겨줘야함
-//        User user = userRepository.findById(1).orElseThrow(() -> {
-//            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
-//        });
+        //        User user = userRepository.findById(1).orElseThrow(() -> {
+        //            return new IllegalArgumentException("유저를 찾을 수 없습니다.");
+        //        });
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         User user = principalDetails.getUser();

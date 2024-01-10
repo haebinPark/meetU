@@ -27,12 +27,12 @@ public class Mention {
     private boolean deletedByReceiver;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "senduser_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User senderUserId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "receiveuser_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User receiveUserId;
     public void deleteBySender() {

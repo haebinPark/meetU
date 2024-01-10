@@ -1,7 +1,6 @@
 package com.example.codestates.dto;
 
 import com.example.codestates.entity.Mention;
-import com.example.codestates.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

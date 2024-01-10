@@ -15,19 +15,19 @@ public class UserController {
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/users")
+    @GetMapping("/users/{userid}")
     public Response<?> findAll() {
         return new Response<>("true", "조회 성공", userService.findAll());
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/{userid}")
     public Response<?> findUser(@PathVariable("id") long id) {
         return new Response<>("true", "조회 성공", userService.findUser(id));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/auth")
+    @PostMapping("/user/signup")
     public Response<?> register(@RequestBody RegisterDto registerDto) {
         return new Response<>("true", "가입 성공", userService.register(registerDto));
     }

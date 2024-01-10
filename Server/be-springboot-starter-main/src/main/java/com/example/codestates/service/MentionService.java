@@ -100,7 +100,7 @@ public class MentionService {
         // 보낸 편지함 불러오기
         // 한 명의 유저가 받은 모든 메시지
         // 추후 JWT를 이용해서 재구현 예정
-        List<Mention> mentions = MentionRepository.findAllBySenderId(user);
+        List<Mention> mentions = MentionRepository.findAllBySenderUserId(user);
         List<MentionDto> mentionDtos = new ArrayList<>();
 
         for (Mention mention : mentions) {

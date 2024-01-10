@@ -22,9 +22,11 @@ public class Comment {
     @Column(nullable = false, length = 20)
     private String nickname;
 
-    private long bandId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "band_id")
+    private Band band;
 
-    private long userId;
+
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column(nullable = false, name="LAST_MODIFIED_AT")

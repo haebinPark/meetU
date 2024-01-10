@@ -87,7 +87,7 @@ function Join() {
         </Mobile>
         친구를 추천해 드립니다.
       </PageDescription>
-      <MemberForm handleJoin={handleJoin}>
+      <MemberForm onSubmit={handleJoin}>
         {/* 이메일 */}
         <MemberFormBlock>
           <MemberFormInput

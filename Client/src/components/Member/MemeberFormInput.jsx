@@ -22,6 +22,10 @@ const TextInput = styled.input`
   }
 `;
 
+const Text = styled.span`
+  color: var(--font-black);
+`;
+
 function MemberFormInput({
   type = "text",
   name,
@@ -31,6 +35,7 @@ function MemberFormInput({
   description,
   duplicationCheck,
   onChange,
+  emailText,
 }) {
   const id = useId();
 
@@ -45,15 +50,19 @@ function MemberFormInput({
           gap: "10px",
         }}
       >
-        <TextInput
-          type={type}
-          name={name}
-          id={id}
-          defaultValue={defaultValue}
-          placeholder={placeholder}
-          autoComplete={type === "password" ? "off" : null}
-          onChange={onChange}
-        />
+        {emailText ? (
+          <Text>{emailText}</Text>
+        ) : (
+          <TextInput
+            type={type}
+            name={name}
+            id={id}
+            defaultValue={defaultValue}
+            placeholder={placeholder}
+            autoComplete={type === "password" ? "off" : null}
+            onChange={onChange}
+          />
+        )}
         {duplicationCheck && (
           <Button type="submit" size="sm">
             중복검사

@@ -3,16 +3,18 @@ import { styled, css } from "styled-components";
 //크기 CSS
 const SIZES = {
   sm: css`
-    --button-font-size: 1rem;
-    --button-padding: 0.3125rem 1rem;
+    --button-font-size: 0.8rem;
+    --button-width: 5rem;
+    --button-height: 2.5rem;
+    --button-weight: 400;
   `,
   md: css`
-    --button-padding: 0.8125rem 3.4375rem;
-    --button-font-size: 1.25rem;
+    --button-font-size: 1.2rem;
+    --button-width: 10.625rem;
   `,
   lg: css`
-    --button-font-size: 1.5625rem;
-    --button-padding: 0.9375rem 5rem;
+    --button-font-size: 1.2rem;
+    --button-width: 14rem;
   `,
 };
 
@@ -26,20 +28,30 @@ const VARIANTS = {
     --button-bg-color: #9bbd8a;
     --button-hover-bg-color: #4f8235;
   `,
+  lightbtn: css`
+    --button-bg-color: var(--box-gray);
+    --button-hover-bg-color: var(--font-lightgray);
+    --button-color: #000;
+  `,
 };
 
 //메인 CSS
 const StyledButton = styled.button`
-  ${(p) => p.sizeStyle}
-  ${(p) => p.variantStyle}
+  ${(p) => p.$sizeStyle};
+  ${(p) => p.$variantStyle};
 
   margin: 0;
   border: none;
   cursor: pointer;
   font-family: "IBM Plex Sans KR", sans-serif;
+  width: var(--button-width, 5rem);
+  height: var(--button-height, 3rem);
   font-size: var(--button-font-size, 1rem);
-  padding: var(--button-padding, 0.75rem 1rem);
-  border-radius: var(--button-radius, 0.625rem);
+  font-weight: var(--button-weight, 500);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
   color: var(--button-color, #ffffff);
   background: var(--button-bg-color, var(--brand-color));
 
@@ -51,15 +63,16 @@ const StyledButton = styled.button`
 `;
 
 //버튼 부분
-function Button({ onClick, size, variant, children }) {
+function Button({ onClick, type, size, variant, children }) {
   const sizeStyle = SIZES[size];
   const variantStyle = VARIANTS[variant];
 
   return (
     <StyledButton
       onClick={onClick}
-      sizeStyle={sizeStyle}
-      variantStyle={variantStyle}
+      type={type}
+      $sizeStyle={sizeStyle}
+      $variantStyle={variantStyle}
     >
       {children}
     </StyledButton>

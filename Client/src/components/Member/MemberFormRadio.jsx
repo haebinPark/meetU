@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { useState } from "react";
 import InputDescription from "./InputDescription.jsx";
 
 const Fieldset = styled.fieldset`
@@ -27,7 +26,8 @@ const Ul = styled.ul`
 const Li = styled.li`
   border: 2px solid var(--brand-color);
   border-radius: 8px;
-  color: var(--brand-color);
+  background-color: ${(p) => (p.$isChecked ? "var(--brand-color)" : "white ")};
+  color: ${(p) => (p.$isChecked ? "white " : "var(--brand-color)")};
   font-size: 90%;
   font-weight: 500;
   position: relative;
@@ -72,54 +72,24 @@ const mbti = [
   { id: 16, type: "ENTJ" },
 ];
 
-const interest = [
-  { id: 1, type: "음악" },
-  { id: 2, type: "영화" },
-  { id: 3, type: "운동" },
-  { id: 4, type: "여행" },
-  { id: 5, type: "게임" },
-  { id: 6, type: "음식" },
-  { id: 7, type: "봉사활동" },
-  { id: 8, type: "미술" },
-  { id: 9, type: "독서" },
-  { id: 10, type: "패션" },
-  { id: 11, type: "코딩" },
-  { id: 12, type: "요리" },
-  { id: 13, type: "댄스" },
-  { id: 14, type: "사진" },
-  { id: 15, type: "영상" },
-  { id: 16, type: "공부" },
-];
-
-function MemberFormRadio({ groupType }) {
-  const [seletedMbti, setSelecteMbti] = useState("");
-  const [selectedInterest, setSelectedInterest] = useState("");
-
-  const group = groupType === "mbti" ? mbti : interest;
-  const description =
-    groupType === "mbti"
-      ? "MBTI를 선택해주세요."
-      : "관심사를 1 ~ 3개 선택해주세요.";
-
-  const handleMbti = (e) => setSelecteMbti(e.target.value);
-  const handleInterest = (e) => console.dir(e.target);
-
+function MemberFormRadio({ isChecked, onChange }) {
   return (
     <Fieldset>
       <Legend>MBTI</Legend>
-      <InputDescription>{description}</InputDescription>
+      <InputDescription>MBTI를 선택해주세요.</InputDescription>
       <Ul>
-        {group.map((item) => {
+        {mbti.map((item) => {
           return (
             <Li
               key={item.id}
-              onChange={item.type === "mbti" ? handleMbti : handleInterest}
+              onChange={onChange}
+              $isChecked={isChecked === item.type}
             >
               <RadioLabel htmlFor={item.type}>{item.type}</RadioLabel>
               <RadioInput
                 type="radio"
                 id={item.type}
-                name={groupType}
+                name="mbti"
                 value={item.type}
               />
             </Li>

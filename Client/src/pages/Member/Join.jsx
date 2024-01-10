@@ -8,7 +8,11 @@ import MemberFormBlock from "../../components/Member/MemberFormBlock.jsx";
 import MemberErrorText from "../../components/Member/MemberErrorText.jsx";
 import PageDescription from "../../components/Common/PageDescription.jsx";
 import MemberFormRadio from "../../components/Member/MemberFormRadio.jsx";
+import MemberFormCheckbox from "../../components/Member/MemberFormCheckbox.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
+import getNofity from "../../utils/getNotify.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Join() {
   const [formState, setFormState] = useState({
@@ -17,7 +21,7 @@ function Join() {
     passwordConfirm: "",
     nickname: "",
     mbti: "",
-    interests: "",
+    interests: ["음악", "영화", "운동"],
   });
 
   // 에러 메세지 상태
@@ -38,6 +42,37 @@ function Join() {
     errorMessage: "한글, 영문, 숫자 조합 2~6자리(특수문자 불가)",
   });
 
+  // 관심사 선택
+  const handleIntersts = (value) => {
+    const interestSet = new Set([...formState.interests]);
+    let interestArray = [];
+
+    if (interestSet.has(value)) {
+      interestSet.delete(value);
+    } else if (interestSet.size >= 3) {
+      getNofity("error", "관심사는 3개 까지만 선택 가능합니다.");
+    } else {
+      interestSet.add(value);
+    }
+    interestArray = [...interestSet];
+    return interestArray;
+  };
+
+  // input 입력
+  const handelInput = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    if (name === "interests") {
+      const addedInterests = handleIntersts(value);
+      setFormState({ ...formState, [name]: addedInterests });
+    } else {
+      setFormState({ ...formState, [name]: value });
+    }
+  };
+  console.log(formState);
+
+  // 에러 핸들링
   const handleDebounceInput = () => {};
   const handleJoin = (e) => e.preventDefault();
 
@@ -63,6 +98,7 @@ function Join() {
             placeholder="example@email.com"
             description="관심사를 1 ~ 3개 선택해주세요."
             duplicationCheck={true}
+            onChange={handelInput}
           />
           <MemberErrorText $isError={emailError.isError}>
             {emailError.errorMessage}
@@ -77,6 +113,7 @@ function Join() {
             defaultValue={formState.password}
             placeholder="비밀번호"
             duplicationCheck={false}
+            onChange={handelInput}
           />
           <MemberErrorText $isError={passwordError.isError}>
             {passwordError.errorMessage}
@@ -89,6 +126,7 @@ function Join() {
             defaultValue={formState.passwordConfirm}
             placeholder="비밀번호 확인"
             duplicationCheck={false}
+            onChange={handelInput}
           />
           {passwordConfirmError.isError && (
             <MemberErrorText $isError={passwordConfirmError.isError}>
@@ -104,6 +142,7 @@ function Join() {
             defaultValue={formState.nickname}
             placeholder="닉네임"
             duplicationCheck={true}
+            onChange={handelInput}
           />
           <MemberErrorText $isError={nicknameError.isError}>
             {nicknameError.errorMessage}
@@ -111,15 +150,19 @@ function Join() {
         </MemberFormBlock>
         {/* MBTI */}
         <MemberFormBlock>
-          <MemberFormRadio groupType="mbti" />
+          <MemberFormRadio isChecked={formState.mbti} onChange={handelInput} />
         </MemberFormBlock>
         {/* 관심사 */}
         <MemberFormBlock>
-          <MemberFormRadio groupType="interest" />
+          <MemberFormCheckbox
+            checkedList={formState.interests}
+            onChange={handelInput}
+          />
         </MemberFormBlock>
         {/* 회원가입 버튼 */}
         <MemberFormButtonBlock onClick={handleJoin} />
       </MemberForm>
+      <ToastContainer />
     </MemberLayout>
   );
 }

@@ -5,6 +5,7 @@ import com.example.codestates.comment.dto.CommentResponseDto;
 import com.example.codestates.comment.entity.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface CommentMapper {
     Comment commentPatchDtoTocomment(CommentDto.Patch requestBody);
 
     CommentResponseDto commentToCommentResponseDto(Comment comment);
-    List<CommentResponseDto> commentsToCommentResponseDtos(List<Comment> todos);
+    List<CommentResponseDto> commentsToCommentResponseDtos(List<Comment> comments);
 }

@@ -1,15 +1,20 @@
 package com.example.codestates.comment.controller;
 
 import com.example.codestates.comment.dto.CommentDto;
-import com.example.codestates.comment.entity.Band;
+import com.example.codestates.band.entitiy.Band;
+import com.example.codestates.comment.dto.CommentResponseDto;
 import com.example.codestates.comment.entity.Comment;
 import com.example.codestates.comment.mapper.CommentMapper;
-import com.example.codestates.comment.service.BandService;
+import com.example.codestates.band.service.BandService;
 import com.example.codestates.comment.service.CommentService;
+import com.example.codestates.exception.BusinessLogicException;
+import com.example.codestates.exception.ExceptionCode;
+import com.example.codestates.response.MultiResponseDto;
 import com.example.codestates.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -35,16 +40,9 @@ public class CommentController {
 
 
     @PostMapping(params = "band_id")
-    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId, @RequestBody CommentDto.Post requestBody) {
-        Band band = bandService.findById(bandId).orElse(null);
-        if(band == null){
-            return ResponseEntity.badRequest().build();
-        }
-
-        Comment comment = mapper.commentPostDtoTocomment(requestBody);
-        comment.setBand(band);
-            Comment createdComment = commentService.createComment(bandId,comment);
-            URI location = UriCreator.createUri(COMMENT_DEFAULT_URL, createdComment.getCommentId());
+    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId, @RequestBody CommentDto.Post requestBody, Authentication authentication) {
+            Comment comment = commentService.createComment(bandId,mapper.commentPostDtoTocomment(requestBody));
+            URI location = UriCreator.createUri(COMMENT_DEFAULT_URL, comment.getCommentId());
 
             return ResponseEntity.created(location).build();
 
@@ -54,35 +52,22 @@ public class CommentController {
     public ResponseEntity getComment(@RequestParam("band_id") long bandId,
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size){
-        Band band = bandService.findById(bandId).orElse(null);
-        if(band == null){
-            return ResponseEntity.badRequest().build();
-        }
 
-        Page<Comment> foundComment = commentService.findAll(page,size);
-        List<Comment> comments = pageComment.getContent();
-        return ResponseEntity.ok(new MultiResponseDto(mapper.commentsToCommentResponseDtos(comments),pageComment));
+        Page<Comment> foundComment = commentService.findComment(bandId, page-1,size);
+        List<Comment> comments = foundComment.getContent();
+        return ResponseEntity.ok(new MultiResponseDto(mapper.commentsToCommentResponseDtos(comments), foundComment));
     }
     @DeleteMapping(params = {"band_id"},value = "/{comment_id}")
     public ResponseEntity deleteComment(@RequestParam("band_id") long bandId, @PathVariable("comment_id") long commentId){
-        Band band = bandService.findById(bandId).orElse(null);
-        if(band == null){
-            return ResponseEntity.badRequest().build();
-        }
-        commentService.deleteComment(commentId);
+        commentService.deleteComment(bandId,commentId);
         return ResponseEntity.noContent().build();
     }
-    @PatchMapping(params = {"band_id","comment_id"})
+    @PatchMapping(params = {"band_id"},value = "/{comment_id}")
     public ResponseEntity patchComment(@RequestParam("band_id") long bandId,
-                                       @RequestParam("comment_id") long commentId,
+                                       @PathVariable("comment_id") long commentId,
                                       @RequestBody CommentDto.Patch requestBody ){
-        Band band = bandService.findById(bandId).orElse(null);
-        if(band == null){
-            return ResponseEntity.badRequest().build();
-        }
 
-        requestBody.addCommentId(commentId);
-        Comment updateComment = commentService.updateComment(mapper.commentPatchDtoTocomment(requestBody));
+        Comment updateComment = commentService.updateComment(bandId,commentId,mapper.commentPatchDtoTocomment(requestBody));
 
         return ResponseEntity.ok(mapper.commentToCommentResponseDto(updateComment));
     }

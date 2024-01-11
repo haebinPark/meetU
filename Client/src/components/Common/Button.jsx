@@ -9,7 +9,7 @@ const SIZES = {
     --button-weight: 400;
   `,
   md: css`
-    --button-font-size: 1.2rem;
+    --button-font-size: 1rem;
     --button-width: 10.625rem;
   `,
   lg: css`

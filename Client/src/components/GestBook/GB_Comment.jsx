@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-const CommentEntry = styled.li`
+const CommentEntry = styled.dl`
   /* 방명록 항목에 대한 스타일 */
   border-bottom: 2px solid Var(--box-gray);
   width: 90%;
@@ -15,20 +15,21 @@ const CommentEntry = styled.li`
   flex-direction: row;
 `;
 
-const CommentNameStyle = styled.span`
+const CommentNameStyle = styled.dt`
   /* 방명록 이름에 대한 스타일 */
   font-weight: 700;
   font-size: 1rem;
   flex: 0.5;
 `;
 
-const CommentStyle = styled.span`
+const CommentStyle = styled.dd`
   /* 방명록 내용에 대한 스타일 */
+  display: flex;
   flex: 1;
   font-size: 1rem;
   padding-left: 1rem;
 `;
-const CommentDateStyle = styled.span`
+const CommentDateStyle = styled.dd`
   /* 방명록 항목 내용에 대한 스타일 */
   font-size: 0.8rem;
   color: var(--font-gray);

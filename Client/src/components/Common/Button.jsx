@@ -9,7 +9,7 @@ const SIZES = {
     --button-weight: 400;
   `,
   md: css`
-    --button-font-size: 1.2rem;
+    --button-font-size: 1rem;
     --button-width: 10.625rem;
   `,
   lg: css`
@@ -40,7 +40,7 @@ const StyledButton = styled.button`
   ${(p) => p.$sizeStyle};
   ${(p) => p.$variantStyle};
 
-  margin: 0;
+  margin: ${({ $margin }) => $margin};
   border: none;
   cursor: pointer;
   font-family: "IBM Plex Sans KR", sans-serif;
@@ -63,7 +63,7 @@ const StyledButton = styled.button`
 `;
 
 //버튼 부분
-function Button({ onClick, type, size, variant, children }) {
+function Button({ onClick, type, size, variant, children, margin }) {
   const sizeStyle = SIZES[size];
   const variantStyle = VARIANTS[variant];
 
@@ -73,6 +73,7 @@ function Button({ onClick, type, size, variant, children }) {
       type={type}
       $sizeStyle={sizeStyle}
       $variantStyle={variantStyle}
+      $margin={margin}
     >
       {children}
     </StyledButton>

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import Gestcomment from "./GB_Comment.jsx";
-const GBViewStyle = styled.div`
+const GBViewStyle = styled.ul`
   margin-top: 10px;
   padding: 10px;
   border: 1px solid var(--font-lightgray);
@@ -11,7 +11,6 @@ const GBViewStyle = styled.div`
 function GestBookView() {
   return (
     <GBViewStyle>
-      <Gestcomment />
       <Gestcomment />
       <Gestcomment />
       <Gestcomment />

@@ -1,16 +1,24 @@
 package com.example.codestates.band.mapper;
 
 
-import com.example.codestates.band.entity.Bands;
-import com.example.codestates.band.dto.PostDto;
-import com.example.codestates.band.dto.ResponseDto;
+import com.example.codestates.band.dto.BandPatchDto;
+import com.example.codestates.band.dto.BandPostDto;
+import com.example.codestates.band.dto.BandResponseDto;
+import com.example.codestates.band.entity.Band;
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BandsMapper {
 
 
-    Bands productsDtoToProducts(PostDto postDto);
+    Band bandPostDtoToBand(BandPostDto bandPostDto);
 
-    ResponseDto productsToResponseDto(Bands bands);
+    Band bandPatchDtoToBand(BandPatchDto bandPatchDto);
+
+    BandResponseDto bandToBandResponseDto(Band band);
+
+    List<BandResponseDto> bandToBandResponseDtos(List<Band> bands);
+
 }

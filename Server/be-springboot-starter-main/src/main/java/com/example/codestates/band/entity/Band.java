@@ -11,19 +11,23 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Bands {
+public class Band {
 
     @Id //엔티티의 기본키임을 명시함.
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키의 자동생성을 지정하는 어노베이션.
-    private Long id;
+    private Long bandId;
 
+
+    @Column(length = 100, nullable = false)
     private String school; //학교명
 
+    @Column(length = 100, nullable = false)
     private String schoolcode; //학교등급
 
+    @Column(nullable = false)
     private int grade; //학년
 
-    @Column(length = 300, nullable = false)
+    @Column(nullable = false)
     private int bannum; //반
 
     @Column(length = 300, nullable = false)
@@ -32,8 +36,14 @@ public class Bands {
     @Column(length = 100, nullable = false)
     private String username; // 신청자 성명
 
-    @Column
-    private String status =statusUpdate.ApplicationCompleted.getStatus();// 기본값으로 신청중을 표시함
+
+    //반 신청상태에 대한 코드
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 100, nullable = false)
+    private statusUpdate status = statusUpdate.ApplicationCompleted; //기본값으로 신청완료를 나타냄.
+
+   // public void
+
 
     public enum statusUpdate  {
 
@@ -42,14 +52,13 @@ public class Bands {
         ApplicationPending("개설중"), //개설중
         SignUp("가입하기"); // 가입하기
 
-        private final String status;
+        @Getter
+        private String status;
 
         statusUpdate(String status) {
             this.status = status;
         }
-        public String getStatus() {
-            return status;
-        }
+
 
     }
 

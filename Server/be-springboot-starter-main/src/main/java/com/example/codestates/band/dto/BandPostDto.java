@@ -5,11 +5,10 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 
 @Getter
-public class BandostDto {
+public class BandPostDto {
 
     @NotBlank
     private String school;//학교명

@@ -4,7 +4,7 @@ package com.example.codestates.band.entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 //데이터베이스 생성을 위한 엔티티 작업(CREATE, READ, UPDATE, DELETE)을 수행 하기 위한 인터페이스임
-public interface BandsRepository extends JpaRepository<Bands, Long> {
+public interface BandsRepository extends JpaRepository<Band, Long> {
 
     //JpaRepository가 CREATE, READ, UPDADTE, DELETE작업을 제공함.
     //직업 SQL 파일을 삽입하여 사용할 수도 있음.

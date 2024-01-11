@@ -29,19 +29,11 @@ public class Bands {
     @Column(length = 300, nullable = false)
     private String pagepass; // 반 생성 신청에 관련한 비밀번호
 
-    @Column(length = 300, nullable = false)
-    private String joinpass; // 반 가입시 관련한 비밀번호
-
     @Column(length = 100, nullable = false)
     private String username; // 신청자 성명
 
     @Column
-    private String status =statusUpdate.ApplicationCompleted.getStatus();//// 기본값으로 신청중을 표시함
-
-
-    //@Column()
-    //@Enumerated(EnumType.STRING)
-  //  private statusUpdate progress;
+    private String status =statusUpdate.ApplicationCompleted.getStatus();// 기본값으로 신청중을 표시함
 
     public enum statusUpdate  {
 

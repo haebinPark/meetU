@@ -41,9 +41,7 @@ const StyledButton = styled.button`
   ${(p) => p.$variantStyle};
 
   margin: ${({ $margin }) => $margin};
-  border: none;
   cursor: pointer;
-  font-family: "IBM Plex Sans KR", sans-serif;
   width: var(--button-width, 5rem);
   height: var(--button-height, 3rem);
   font-size: var(--button-font-size, 1rem);

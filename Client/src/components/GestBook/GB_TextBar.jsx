@@ -12,8 +12,8 @@ const TextContainSt = styled.section`
 const TextContainer = ({ onSubmit }) => {
   return (
     <TextContainSt>
-      <TextInput />
-      <Button margin="5px 5px 0px 0px" onClick={onSubmit}>
+      <TextInput maxLength="200" />
+      <Button margin="2px 5px 0px 0px" onClick={onSubmit}>
         등록
       </Button>
     </TextContainSt>

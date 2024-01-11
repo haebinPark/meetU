@@ -1,5 +1,6 @@
 package com.example.codestates.comment.entity;
 
+import com.example.codestates.band.entitiy.Band;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

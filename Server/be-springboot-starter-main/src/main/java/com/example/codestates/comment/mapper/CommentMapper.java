@@ -5,7 +5,6 @@ import com.example.codestates.comment.dto.CommentResponseDto;
 import com.example.codestates.comment.entity.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
-import org.springframework.security.core.Authentication;
 
 import java.util.List;
 

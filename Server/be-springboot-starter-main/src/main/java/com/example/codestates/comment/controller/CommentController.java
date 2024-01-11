@@ -1,11 +1,9 @@
 package com.example.codestates.comment.controller;
 
-import com.example.codestates.comment.dto.CommentDto;
 import com.example.codestates.band.entitiy.Band;
-import com.example.codestates.comment.dto.CommentResponseDto;
+import com.example.codestates.comment.dto.CommentDto;
 import com.example.codestates.comment.entity.Comment;
 import com.example.codestates.comment.mapper.CommentMapper;
-import com.example.codestates.band.service.BandService;
 import com.example.codestates.comment.service.CommentService;
 import com.example.codestates.exception.BusinessLogicException;
 import com.example.codestates.exception.ExceptionCode;
@@ -14,7 +12,7 @@ import com.example.codestates.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -22,25 +20,23 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/comments")
+@RequestMapping("/comments")
 @Slf4j
 public class CommentController {
-    private final static String COMMENT_DEFAULT_URL = "/v1/comments";
-    private final BandService bandService;
+    private final static String COMMENT_DEFAULT_URL = "/comments";
     private final CommentService commentService;
     private final CommentMapper mapper;
 
 
-    public CommentController(BandService bandService, CommentService commentService, CommentMapper mapper) {
-        this.bandService = bandService;
+    public CommentController( CommentService commentService, CommentMapper mapper) {
         this.commentService = commentService;
         this.mapper = mapper;
-
     }
 
 
-    @PostMapping(params = "band_id")
-    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId, @RequestBody CommentDto.Post requestBody, Authentication authentication) {
+    @PostMapping(params = {"band_id"})
+    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId, @RequestBody CommentDto.Post requestBody) {
+
             Comment comment = commentService.createComment(bandId,mapper.commentPostDtoTocomment(requestBody));
             URI location = UriCreator.createUri(COMMENT_DEFAULT_URL, comment.getCommentId());
 
@@ -48,7 +44,7 @@ public class CommentController {
 
     }
 
-    @GetMapping(params = "band_id")
+    @GetMapping(params = {"band_id"})
     public ResponseEntity getComment(@RequestParam("band_id") long bandId,
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size){

@@ -25,7 +25,7 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "band_id")
-    private Band band;
+    private Band bandId;
 
 
     @Column(nullable = false)

@@ -31,7 +31,7 @@ public class CommentService {
     }
 
     public Comment createComment(long bandId, Comment comment) {
-       Band band= bandService.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+        Band band= bandService.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
         comment.setBand(band);
         return commentRepository.save(comment);
 

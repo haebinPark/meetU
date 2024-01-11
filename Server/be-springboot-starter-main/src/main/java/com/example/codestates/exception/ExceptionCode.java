@@ -10,8 +10,8 @@ public enum ExceptionCode {
     BAND_NOT_FOUND(404, "BAND not found"),
     CANNOT_CHANGE_COMMENT(403, "Comment can not change"),
     NOT_IMPLEMENTATION(501, "Not Implementation"),
-    INVALID_MEMBER_STATUS(400, "Invalid member status"),
-    TODO_NOT_FOUND(404, "Todo not found");
+    INVALID_MEMBER_STATUS(400, "Invalid member status");
+
 
     @Getter
     private int status;

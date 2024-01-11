@@ -1,4 +1,4 @@
 package com.example.codestates.band.dto;
 
-public class bandDto {
+public class BandDto {
 }

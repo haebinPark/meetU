@@ -23,4 +23,5 @@ public class Band {
 
     @OneToMany(mappedBy = "band")
     private List<Comment> comments = new ArrayList<>();
+
 }

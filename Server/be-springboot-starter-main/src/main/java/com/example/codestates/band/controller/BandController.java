@@ -8,24 +8,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 @Slf4j
 public class BandController {
-    @PostMapping
-    public ResponseEntity postBand(){
-        return null;
-    }
-    @GetMapping
-    public ResponseEntity getBands(){
-        return null;
-    }
-    @GetMapping
-    public ResponseEntity getBand(){
-        return null;
-    }
-    @PatchMapping
-    public ResponseEntity updateBand(){
-        return null;
-    }
-    @DeleteMapping
-    public ResponseEntity deleteBand(){
-        return null;
-    }
 }

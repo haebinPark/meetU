@@ -1,7 +1,7 @@
-package com.example.codestates.user.entitiy;
+package com.example.codestates.Member.entitiy;
 
 
-public enum nickNameColor {
+public enum NickNameColor {
     WHITE("#FFFFFF"), //흰색
     RED("#FF0000"), // 빨간색
     GREEN("#00FF00"), // 녹색
@@ -12,7 +12,7 @@ public enum nickNameColor {
     BLACK("#000000"); // 검정색
 
     private String code;
-    nickNameColor(String code){
+    NickNameColor(String code){
         this.code =code;
     }
     public void setCode(String code) {

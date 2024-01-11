@@ -17,7 +17,7 @@ public class BandService {
     }
 
 
-    public Optional<Band> findById(Long bandId) {
+    public Optional<Band> findById(Long bandId){
         return Optional.ofNullable(bandRepository.findById(bandId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND)));
     }

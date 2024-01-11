@@ -1,6 +1,5 @@
-package com.example.codestates.user.entitiy;
+package com.example.codestates.Member.entitiy;
 
-import com.example.codestates.band.entitiy.Band;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +10,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
     @Column(nullable = false,unique = true, length = 10)
     private String nickname;
     @Column(length = 10)
@@ -30,7 +29,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private nickNameColor styleCode = nickNameColor.WHITE; //닉네임 배경색 enum 타입
+    private NickNameColor styleCode = NickNameColor.WHITE; //닉네임 배경색 enum 타입
 
 
 

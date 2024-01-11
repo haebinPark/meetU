@@ -12,10 +12,12 @@ const TextContainSt = styled.section`
 const TextContainer = ({ onSubmit }) => {
   return (
     <TextContainSt>
-      <TextInput maxLength="200" />
-      <Button margin="2px 5px 0px 0px" onClick={onSubmit}>
-        등록
-      </Button>
+      <form onSubmit={onSubmit}>
+        <TextInput maxLength="200" />
+        <Button type="submit" margin="2px 5px 0px 0px">
+          등록
+        </Button>
+      </form>
     </TextContainSt>
   );
 };

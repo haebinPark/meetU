@@ -23,10 +23,10 @@ public class MentionService {
 
     @Transactional
     public Mention createMention(Mention Mention) {
-        MentionService.findMention(Mention.getSenderUserId().getId());
-        MentionService.findMention(Mention.getReceiveUserId().getId());
+        MentionService.findMention(Mention.getSenderUserId().getMentionId());
+        MentionService.findMention(Mention.getReceiveUserId().getMentionId());
         Mention savedMention = MentionRepository.save(Mention);
-        sseEmitters.count(Mention.getReceiveUserId().getId());
+        sseEmitters.count(Mention.getReceiveUserId().getMentionId());
         return savedMention;
     }
 
@@ -34,28 +34,28 @@ public class MentionService {
     public Mention findMention(Long MentionId) {
         Mention findMention = findVerifiedMention(MentionId);
         findMention.checkMention();
-        sseEmitters.count(findMention.getReceiveUserId().getId());
+        sseEmitters.count(findMention.getReceiveUserId().getMentionId());
         return findMention;
     }
 
-    public List<Mention> findMentions(Long Id) {
-        return MentionRepository.findByReceiverMentionId(Id);
+    public List<Mention> findMentions(Long mentionId) {
+        return MentionRepository.findByReceiveUserId(mentionId);
     }
 
     @Transactional
     public void changeMentionStatus(Long Id, boolean read) {
         Mention Mention = findVerifiedMention(Id);
         Mention.setRead(read);
-        sseEmitters.count(Mention.getReceiveUserId().getId());
+        sseEmitters.count(Mention.getReceiveUserId().getMentionId());
     }
 
     @Transactional
-    public void deleteMention(Long Id) {
-        MentionRepository.deleteById(Id);
+    public void deleteMention(Long MentionId) {
+        MentionRepository.deleteById(MentionId);
     }
 
-    private Mention findVerifiedMention(Long Id) {
-        Optional<Mention> optionalMention = MentionRepository.findById(Id);
+    private Mention findVerifiedMention(Long MentionId) {
+        Optional<Mention> optionalMention = MentionRepository.findById(MentionId);
         Mention findMention = optionalMention.orElseThrow(
             () -> new BusinessLogicException(ExceptionCode.MENTION_NOT_FOUND)
         );

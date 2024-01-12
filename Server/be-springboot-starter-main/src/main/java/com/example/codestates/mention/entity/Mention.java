@@ -15,7 +15,7 @@ import java.util.List;
 public class Mention extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long mentionId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String sendContent;

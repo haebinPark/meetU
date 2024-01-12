@@ -16,7 +16,7 @@ public interface MentionMapper {
     @Mapping(source = "receiveUserId", target = "receiverUserId")
     Mention MentionPostToMention(MentionDto.Post requestBody);
 
-    @Mapping(source = "sender.Id", target = "sender.id")
+    @Mapping(source = "sender.mentionId", target = "sender.mentionId")
     @Mapping(source = "sender.nickname", target = "sender.nickname")
     MentionDto.Response MentionToMentionResponse(Mention Mention);
 

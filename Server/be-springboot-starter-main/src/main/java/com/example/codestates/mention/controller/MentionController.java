@@ -29,20 +29,20 @@ public class MentionController {
 
     private final MentionService MentionService;
     private final MentionMapper mapper;
-//    private final SseEmitter sseEmitters;
+    private final SseEmitter sseEmitters;
 
     @PostMapping
     public ResponseEntity postMention(@RequestBody MentionDto.Post requestBody) {
         Mention Mention = mapper.MentionPostToMention(requestBody);
 
         Mention createdMention = MentionService.createMention(Mention);
-        URI location = UriCreator.createUri("/Mentions", createdMention.getId());
+        URI location = UriCreator.createUri("/Mentions", createdMention.getMentionId());
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getMention(@PathVariable("id") Long Id) {
-        Mention Mention = MentionService.findMention(Id);
+    @GetMapping("/{mention-id}")
+    public ResponseEntity getMention(@PathVariable("mention-id") Long MentionId) {
+        Mention Mention = MentionService.findMention(MentionId);
 
         return ResponseEntity.ok(
             new SingleResponseDto<>(mapper.MentionToMentionResponse(Mention))
@@ -50,36 +50,35 @@ public class MentionController {
     }
 
     @GetMapping
-    public ResponseEntity getMentions(@RequestParam("id") Long Id) {
-        List<Mention> Mentions = MentionService.findMentions(Id);
+    public ResponseEntity getMentions(@RequestParam("mention-id") Long MentionId) {
+        List<Mention> Mentions = MentionService.findMentions(MentionId);
 
         return ResponseEntity.ok(
             new SingleResponseDto<>(mapper.MentionsToMentionResponses(Mentions))
         );
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity patchMention(@PathVariable("id") Long Id,
+    @PatchMapping("/{mention-id}")
+    public ResponseEntity patchMention(@PathVariable("mention-id") Long MentionId,
                                        @RequestBody MentionDto.Patch requestBody) {
-        MentionService.changeMentionStatus(Id, requestBody.isRead());
+        MentionService.changeMentionStatus(MentionId, requestBody.isRead());
 
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteMention(@PathVariable("id") Long Id) {
-        MentionService.deleteMention(Id);
+    @DeleteMapping("/{mention-id}")
+    public ResponseEntity deleteMention(@PathVariable("mention-id") Long mentionId) {
+        MentionService.deleteMention(mentionId);
 
         return ResponseEntity.noContent().build();
     }
 
-    // ** /not-read/{id}
-    @GetMapping(value = "{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public ResponseEntity<SseEmitter> connect(@PathVariable("id") @Positive Long Id) {
+    @GetMapping(value = "not-read/{member-Id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public ResponseEntity<SseEmitter> connect(@PathVariable("member-Id") @Positive Long memberId) {
         SseEmitter emitter = new SseEmitter(10 * 1000L);
-//        오류확인 필요
-//        sseEmitters.add(Id, emitter);
-//        sseEmitters.count(Id);
+
+//        sseEmitters.add(memberId, emitter);
+//        sseEmitters.count(memberId);
         return ResponseEntity.ok(emitter);
     }
 }

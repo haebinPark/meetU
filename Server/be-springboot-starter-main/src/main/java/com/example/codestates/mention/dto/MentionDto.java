@@ -31,7 +31,7 @@ public class MentionDto {
     @Getter
     @Setter
     public static class Response {
-        private Long Id;
+        private Long mentionId;
         private String sendContent;
         private Long senderUserId;
         private String createdAt;
@@ -41,12 +41,12 @@ public class MentionDto {
         @Getter
         @Setter
         public static class Sender {
-            private Long Id;
+            private Long mentionId;
             private String nickname;
         }
 
-        public Response(Long Id, String sendContent, Long senderUserId, LocalDateTime createdAt, Boolean isRead) {
-            this.Id = Id;
+        public Response(Long mentionId, String sendContent, Long senderUserId, LocalDateTime createdAt, Boolean isRead) {
+            this.mentionId = mentionId;
             this.sendContent = sendContent;
             this.senderUserId = senderUserId;
             this.createdAt = createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

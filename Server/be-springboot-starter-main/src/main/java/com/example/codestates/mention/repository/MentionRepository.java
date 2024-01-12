@@ -1,7 +1,7 @@
-package com.example.codestates.repository;
+package com.example.codestates.mention.repository;
 
-import com.example.codestates.entity.Mention;
-import com.example.codestates.entity.User;
+import com.example.codestates.mention.entity.Mention;
+import com.example.codestates.mention.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

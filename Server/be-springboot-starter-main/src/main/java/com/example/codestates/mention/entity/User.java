@@ -1,4 +1,4 @@
-package com.example.codestates.entity;
+package com.example.codestates.mention.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.codestates.config;
+package com.example.codestates.mention.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

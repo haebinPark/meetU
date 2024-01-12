@@ -1,6 +1,6 @@
-package com.example.codestates.dto;
+package com.example.codestates.mention.dto;
 
-import com.example.codestates.entity.Mention;
+import com.example.codestates.mention.entity.Mention;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MentionDto {
+public class MentionDto extends Mention {
     private Long id;
     private String sendContent;
     private Long senderUserId;

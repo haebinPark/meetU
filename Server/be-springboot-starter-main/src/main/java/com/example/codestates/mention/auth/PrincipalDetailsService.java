@@ -1,7 +1,7 @@
-package com.example.codestates.auth;
+package com.example.codestates.mention.auth;
 
-import com.example.codestates.entity.User;
-import com.example.codestates.repository.UserRepository;
+import com.example.codestates.mention.entity.User;
+import com.example.codestates.mention.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.example.codestates.response;
+package com.example.codestates.mention.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

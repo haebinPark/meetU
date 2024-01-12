@@ -1,4 +1,4 @@
-package com.example.codestates.dto;
+package com.example.codestates.mention.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

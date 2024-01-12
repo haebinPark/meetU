@@ -1,10 +1,10 @@
-package com.example.codestates.handler;
+package com.example.codestates.mention.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import com.example.codestates.response.Response;
+import com.example.codestates.mention.response.Response;
 
 @RestControllerAdvice
 public class ExceptionAdvice {

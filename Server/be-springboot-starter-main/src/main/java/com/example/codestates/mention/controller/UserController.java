@@ -1,8 +1,8 @@
-package com.example.codestates.controller;
+package com.example.codestates.mention.controller;
 
-import com.example.codestates.dto.RegisterDto;
-import com.example.codestates.response.Response;
-import com.example.codestates.service.UserService;
+import com.example.codestates.mention.dto.RegisterDto;
+import com.example.codestates.mention.response.Response;
+import com.example.codestates.mention.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

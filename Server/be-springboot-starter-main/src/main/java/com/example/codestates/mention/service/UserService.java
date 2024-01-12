@@ -1,8 +1,8 @@
-package com.example.codestates.service;
+package com.example.codestates.mention.service;
 
-import com.example.codestates.dto.RegisterDto;
-import com.example.codestates.entity.User;
-import com.example.codestates.repository.UserRepository;
+import com.example.codestates.mention.dto.RegisterDto;
+import com.example.codestates.mention.entity.User;
+import com.example.codestates.mention.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.example.codestates.auth;
+package com.example.codestates.mention.auth;
 
-import com.example.codestates.entity.User;
+import com.example.codestates.mention.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

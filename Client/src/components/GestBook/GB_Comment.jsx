@@ -43,12 +43,18 @@ const CommentDateStyle = styled.dd`
   grid-area: date;
 `;
 
-const GuestComment = () => {
+const GuestComment = ({ id, name, comment, date, onEdit, onDelete }) => {
+  const ComHanldeEdit = () => {
+    onEdit(id);
+  };
+  const ComHandleDelete = () => {
+    onDelete(id);
+  };
   return (
     <CommentEntry>
       <CommentNameStyle> 오우예씨몬 </CommentNameStyle>
-      <CommentStyle>마치고 피방ㄱ?</CommentStyle>
-      <CommentDateStyle>2024.03.04.10:36</CommentDateStyle>
+      <CommentStyle>마치고 피방 ㄱ?</CommentStyle>
+      <CommentDateStyle>오늘</CommentDateStyle>
     </CommentEntry>
   );
 };

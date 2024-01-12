@@ -5,7 +5,7 @@ spring:
       path: /h2
   datasource:
     # MySQL 설정
-    url: jdbc:mysql://{hostname}?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/bands?serverTimezone=Asia/Seoul
     username:
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver

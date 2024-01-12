@@ -1,109 +1,64 @@
 package com.example.codestates.mention.service;
 
-import com.example.codestates.mention.dto.MentionDto;
 import com.example.codestates.mention.entity.Mention;
-import com.example.codestates.mention.entity.User;
+import com.example.codestates.mention.exception.BusinessLogicException;
+import com.example.codestates.mention.exception.ExceptionCode;
 import com.example.codestates.mention.repository.MentionRepository;
-import com.example.codestates.mention.repository.UserRepository;
+import com.example.codestates.mention.sse.SseEmitters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MentionService {
-    private final MentionRepository mentionRepository;
-    private final UserRepository userRepository;
+    private final MentionRepository MentionRepository;
+    private final MentionService MentionService;
+    private final SseEmitters sseEmitters;
 
     @Transactional
-    public MentionDto write(MentionDto mentionDto) {
-        User receiver = userRepository.findById(mentionDto.getReceiveUserId())
-                .orElseThrow(() -> new IllegalArgumentException("Receiver not found"));
-        User sender = userRepository.findById(mentionDto.getSenderUserId())
-                .orElseThrow(() -> new IllegalArgumentException("Sender not found"));
-
-        Mention mention = new Mention();
-        mention.setReceiveUserId(receiver);
-        mention.setSenderUserId(sender);
-        mention.setSendContent(mentionDto.getSendContent());
-        mention.setDeletedByReceiver(false);
-        mention.setDeletedBySender(false);
-        mentionRepository.save(mention);
-
-        return MentionDto.toDto(mention);
+    public Mention createMention(Mention Mention) {
+        MentionService.findMention(Mention.getSenderUserId().getId());
+        MentionService.findMention(Mention.getReceiveUserId().getId());
+        Mention savedMention = MentionRepository.save(Mention);
+        sseEmitters.count(Mention.getReceiveUserId().getId());
+        return savedMention;
     }
 
-    @Transactional(readOnly = true)
-    public MentionDto findMentionById(User user) {
-        Mention mention = mentionRepository.findById(user.getId()).orElseThrow(() -> {
-            return new IllegalArgumentException("메시지를 찾을 수 없습니다.");
-        });
-
-        return MentionDto.toDto(mention);
-    }
-
-    @Transactional(readOnly = true)
-    public List<MentionDto> receivedMentions(User user) {
-        // 받은 편지함 불러오기
-        // 한 명의 유저가 받은 모든 메시지
-        // 추후 JWT를 이용해서 재구현 예정
-        List<Mention> mentions = mentionRepository.findBySenderUserId(user);
-        List<MentionDto> mentionDtos = new ArrayList<>();
-
-        for (Mention mention : mentions) {
-            // mention 에서 받은 편지함에서 삭제하지 않았으면 보낼 때 추가해서 보내줌
-            if (!mention.isDeletedByReceiver()) {
-                mentionDtos.add(MentionDto.toDto(mention));
-            }
-        }
-        return mentionDtos;
-    }
-
-    // 받은 편지 삭제
     @Transactional
-    public Object deleteMentionByReceiver(MentionDto mentionDto, User user) {
-
-        Mention mention = mentionRepository.findById(mentionDto.getId()).get();
-        mention.deleteByReceiver(); // 받은 사람에게 메시지 삭제
-        if (mention.isDeleted()) {
-            // 받은사람과 보낸 사람 모두 삭제했으면, 데이터베이스에서 삭제요청
-            mentionRepository.delete(mention);
-            return "양쪽 모두 삭제";
-        }
-        return "한쪽만 삭제";
+    public Mention findMention(Long MentionId) {
+        Mention findMention = findVerifiedMention(MentionId);
+        findMention.checkMention();
+        sseEmitters.count(findMention.getReceiveUserId().getId());
+        return findMention;
     }
 
-
-    @Transactional(readOnly = true)
-    public List<MentionDto> sendMention(User user) {
-        // 보낸 편지함 불러오기
-        // 한 명의 유저가 받은 모든 메시지
-        // 추후 JWT를 이용해서 재구현 예정
-        List<Mention> mentions = MentionRepository.findAllBySenderUserId(user);
-        List<MentionDto> mentionDtos = new ArrayList<>();
-
-        for (Mention mention : mentions) {
-            // mention 에서 받은 편지함에서 삭제하지 않았으면 보낼 때 추가해서 보내줌
-            if (!mention.isDeletedBySender()) {
-                mentionDtos.add(MentionDto.toDto(mention));
-            }
-        }
-        return mentionDtos;
+    public List<Mention> findMentions(Long Id) {
+        return MentionRepository.findByReceiverMentionId(Id);
     }
 
-    // 보낸 편지 삭제
     @Transactional
-    public Object deleteMentionBySender(MentionDto mentionDto, User user) {
-        Mention mention = mentionRepository.findById(mentionDto.getId()).get();
-        mention.deleteBySender(); // 받은 사람에게 메시지 삭제
-        if (mention.isDeleted()) {
-            // 받은사람과 보낸 사람 모두 삭제했으면, 데이터베이스에서 삭제요청
-            mentionRepository.delete(mention);
-            return "양쪽 모두 삭제";
-        }
-        return "한쪽만 삭제";
+    public void changeMentionStatus(Long Id, boolean read) {
+        Mention Mention = findVerifiedMention(Id);
+        Mention.setRead(read);
+        sseEmitters.count(Mention.getReceiveUserId().getId());
+    }
+
+    @Transactional
+    public void deleteMention(Long Id) {
+        MentionRepository.deleteById(Id);
+    }
+
+    private Mention findVerifiedMention(Long Id) {
+        Optional<Mention> optionalMention = MentionRepository.findById(Id);
+        Mention findMention = optionalMention.orElseThrow(
+            () -> new BusinessLogicException(ExceptionCode.MENTION_NOT_FOUND)
+        );
+        return findMention;
     }
 }

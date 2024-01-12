@@ -1,49 +1,43 @@
 package com.example.codestates.mention.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Getter;
+import lombok.Setter;
+import com.example.codestates.mention.audit.Auditable;
+
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-public class Mention {
+@Getter
+@Setter
+public class Mention extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String sendContent;
 
-    @Column(nullable = false)
-    private boolean deletedBySender;
-
-    @Column(nullable = false)
-    private boolean deletedByReceiver;
+    private boolean isRead;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "senduser_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private User senderUserId;
+    private Mention senderUserId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiveuser_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private User receiveUserId;
-    public void deleteBySender() {
-        this.deletedBySender = true;
+    private Mention receiveUserId;
+
+    public boolean getIsRead() {
+        return isRead;
     }
 
-    public void deleteByReceiver() {
-        this.deletedByReceiver = true;
+    public void checkMention() {
+        this.isRead = true;
     }
 
-    public boolean isDeleted() {
-        return isDeletedBySender() && isDeletedByReceiver();
-    }
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Mention> mentions = new ArrayList<>();
 }

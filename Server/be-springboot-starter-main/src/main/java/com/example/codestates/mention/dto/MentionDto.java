@@ -1,26 +1,63 @@
 package com.example.codestates.mention.dto;
 
-import com.example.codestates.mention.entity.Mention;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class MentionDto extends Mention {
-    private Long id;
-    private String sendContent;
-    private Long senderUserId;
-    private Long receiveUserId;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-
-    public static MentionDto toDto(Mention mention) {
-        return new MentionDto(
-                mention.getId(),
-                mention.getSendContent(),
-                mention.getSenderUserId().getId(),
-                mention.getReceiveUserId().getId()
-        );
+public class MentionDto {
+    @Getter
+    @AllArgsConstructor
+    public static class Post {
+        @NotEmpty
+        private String sendContent;
+        @Positive
+        private Long senderUserId;
+        @Positive
+        private Long receiverUserId;
     }
+
+    @Getter
+    @Setter
+    public static class Patch {
+        private boolean read;
+    }
+
+
+    @Getter
+    @Setter
+    public static class Response {
+        private Long Id;
+        private String sendContent;
+        private Long senderUserId;
+        private String createdAt;
+        private boolean isRead;
+
+        @AllArgsConstructor
+        @Getter
+        @Setter
+        public static class Sender {
+            private Long Id;
+            private String nickname;
+        }
+
+        public Response(Long Id, String sendContent, Long senderUserId, LocalDateTime createdAt, Boolean isRead) {
+            this.Id = Id;
+            this.sendContent = sendContent;
+            this.senderUserId = senderUserId;
+            this.createdAt = createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            this.isRead = isRead;
+        }
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public static class NotReadResponse {
+        private Long notReadCount;
+    }
+
 }

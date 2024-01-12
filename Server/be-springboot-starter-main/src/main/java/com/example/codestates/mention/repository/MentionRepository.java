@@ -1,17 +1,19 @@
 package com.example.codestates.mention.repository;
 
 import com.example.codestates.mention.entity.Mention;
-import com.example.codestates.mention.entity.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+
 import java.util.List;
+import java.util.Optional;
 
 public interface MentionRepository extends JpaRepository<Mention, Long> {
-//    List<Mention> findAllByReceiveUserId(User findAllByReceiveUserId);
+    @EntityGraph(attributePaths = {"receiver", "sender"})
+    List<Mention> findByReceiverMentionId(Long receiverId);
 
-    static List<Mention> findAllBySenderUserId(User findAllBySenderUserId) {
-        return null;
-    }
+    @EntityGraph(attributePaths = {"sender"})
+    Optional<Mention> findById(Long MentionId);
 
-    List<Mention> findBySenderUserId(User findAllBySenderUserId);
+    Long countByReceiverMentionIdAndIsReadFalse(Long receiverId);
 }

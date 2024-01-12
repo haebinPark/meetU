@@ -24,6 +24,7 @@ function NavButton({ openNavList, className }) {
     <StyledNavButton
       onClick={openNavList}
       className={className ? className : ""}
+      aria-label="네비게이션"
     />
   );
 }

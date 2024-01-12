@@ -15,6 +15,7 @@ public class CommentDto {
     }
     @Getter
     public static class Patch{
+        private Long commentId;
         private String context;
 
         public void setContext(Long commentId){

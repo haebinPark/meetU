@@ -62,7 +62,6 @@ function Join() {
   // input 입력
   const handelInput = (e) => {
     const { name, value } = e.target;
-    console.log(value);
 
     if (name === "interests") {
       const addedInterests = handleIntersts(value);
@@ -71,7 +70,6 @@ function Join() {
       setFormState({ ...formState, [name]: value });
     }
   };
-  console.log(formState);
 
   // 에러 핸들링
   const handleDebounceInput = () => {};
@@ -100,6 +98,7 @@ function Join() {
             duplicationCheck={true}
             onChange={handelInput}
           />
+          <span>{formState.email}</span>
           <MemberErrorText $isError={emailError.isError}>
             {emailError.errorMessage}
           </MemberErrorText>

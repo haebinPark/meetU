@@ -60,7 +60,6 @@ function Membership() {
   // input 입력
   const handelInput = (e) => {
     const { name, value } = e.target;
-    console.log(value);
 
     if (name === "interests") {
       const addedInterests = handleIntersts(value);

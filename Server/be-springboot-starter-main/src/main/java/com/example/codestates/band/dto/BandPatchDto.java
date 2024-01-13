@@ -1,14 +1,39 @@
 package com.example.codestates.band.dto;
 
+import com.example.codestates.band.entity.Band;
+import lombok.Getter;
+import lombok.NonNull;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotBlank;
+
+@Getter
 public class BandPatchDto {
 
 
-    /*
-    (2024-01-11)
-    Band 엔터티와 관련된 정보를 업데이트하거나 패치하기 위한 데이터 전송 객체(DTO)임.
-    생성 입력 기능만 존재하며, 별도의 신청자, 또는 어드민계정의 운영자가 수정,삭제하는 기능 개발하지 않는다고 하기에 공백으로 남겨둠.
-    현재 생성에 관한 설정은 가입자가 신청서를 넣고, 운영자가 이를 승인하는 구조이기 때문에 상태가 신청완료 -생성중 -가입하기
-    3단계이나, 어드민계정 구현하지 아니하므로, 어드민계정관련 코드 작성하지 아니함. 추후 설정에 변화가 있다면 추가하겠음.
+    private long BandId;
 
-     */
+    @NotBlank
+    //@Pattern() 학교명 XX초등학교? 아니면 XX만?? 글자수 제한 넣을지 프론트랑 상의예정 (1/11)
+    private String school;//학교명
+
+    @NotBlank
+    private String schoolcode;//학교코드 1. 초등학교 2.중학교 3.고등학교
+
+    @NonNull
+    @Range(min=1, max = 6)
+    private int grade; //학년 초등학교 선택시 1~6까지만.7이상 불가. 중고등학교 선택시 1~3학년까지만 4이상불가.
+
+    @NonNull
+    @Range(min=1, max = 99) // 1~99반까지 생성가능.
+    private int bannum;//반
+
+    @NotBlank
+    //@Pattern() 현재 미설정
+    private String joinpass; //반 가입 신청시 비밀번호
+
+    private Band.statusUpdate statusUpdate;
+
+    public void setBandId(long bandId) {this.BandId = bandId;}
+
 }

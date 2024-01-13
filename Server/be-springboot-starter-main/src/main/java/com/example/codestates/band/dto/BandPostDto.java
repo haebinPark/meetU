@@ -17,7 +17,7 @@ public class BandPostDto {
     private String school;//학교명
 
     @NotBlank
-    private String schoolcode;//학교코드 1. 초등학교 2.중학교 3.고등학교
+    private String schoolcode;// 초등학교, 중학교, 고등학교
 
     @NonNull
     @Range(min=1, max = 6)
@@ -37,4 +37,6 @@ public class BandPostDto {
     //  @NotBlank는 문자열 타입.. integer에 붙이면 에러남.
 
 
-}
+    }//postDto
+
+

@@ -49,7 +49,6 @@ public class Band extends Auditable {
 
     public enum statusUpdate  {
 
-
         ApplicationCompleted("신청완료"), //신청완료
         ApplicationPending("개설중"), //개설중
         SignUp("가입하기"); // 가입하기

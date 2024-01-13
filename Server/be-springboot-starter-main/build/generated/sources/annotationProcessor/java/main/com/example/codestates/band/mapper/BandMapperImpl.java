@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-12T14:43:26+0900",
+    date = "2024-01-13T18:34:33+0900",
     comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 11.0.14.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -42,6 +42,13 @@ public class BandMapperImpl implements BandMapper {
         }
 
         Band band = new Band();
+
+        band.setBandId( bandPatchDto.getBandId() );
+        band.setSchool( bandPatchDto.getSchool() );
+        band.setSchoolcode( bandPatchDto.getSchoolcode() );
+        band.setGrade( bandPatchDto.getGrade() );
+        band.setBannum( bandPatchDto.getBannum() );
+        band.setJoinpass( bandPatchDto.getJoinpass() );
 
         return band;
     }

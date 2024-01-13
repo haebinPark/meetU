@@ -1,5 +1,6 @@
 package com.example.codestates.band.controller;
 
+import com.example.codestates.band.dto.BandPatchDto;
 import com.example.codestates.band.dto.BandPostDto;
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.band.mapper.BandMapper;
@@ -34,25 +35,32 @@ public class BandController {
     }
 
     //생성관련
-
-
-
+    //Valid로 유효성 검사 @RequestBody로 요청데이터를 POSTDTO 객체로 매핑함.
+    // createBands 매서드는 coffeePostDto를 입력받아 실제 객체를 생성하고 데이터베이스에 저장하는 로직임.
    @PostMapping
-  public ResponseEntity postBands(@Valid @RequestBody BandPostDto bandPostDto) {
+  public ResponseEntity postBand(@Valid @RequestBody BandPostDto bandPostDto) {
+
+
         Band band = bandService.createBand(bandMapper.bandPostDtoToBand(bandPostDto));
         URI location = UriCreator.createUri(BAND_DEFAULT_URL, band.getBandId());
 
         return ResponseEntity.created(location).build();
 
    }
-    //Valid로 유효성 검사 @RequestBody로 요청데이터를 POSTDTO 객체로 매핑함.
-    // createBands 매서드는 coffeePostDto를 입력받아 실제 객체를 생성하고 데이터베이스에 저장하는 로직임.
 
-//수정관련
-    //@PatchMapping
-    // public ResponseEntity patchBands{
-        //기능 구현 아니함.
-    //}
+
+
+    //수정관련
+    @PatchMapping("/{band-id}")
+    public ResponseEntity patchBand(@PathVariable("band-id") @Positive long bandId, @Valid @RequestBody BandPatchDto
+            bandPatchDto){
+        bandPatchDto.setBandId(bandId);
+        Band band = bandService.updateBand(bandMapper.bandPatchDtoToBand(bandPatchDto));
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(bandMapper.bandToBandResponseDto(band)),
+                HttpStatus.OK);
+    }
 
 
     //조회관련
@@ -65,10 +73,12 @@ public class BandController {
                 new SingleResponseDto<>(bandMapper.bandToBandResponseDto(band)),
                 HttpStatus.OK);
 
-    } */
+    밴드 ID에 해당하는 밴드정보를 조회하고, 조회된 밴드의 정보를 응답으로 반환} */
 
-    @GetMapping("/{band-id}")
-    public ResponseEntity getBand(@PathVariable("band-id")String school){
+
+    //밴드 학교이름에 해당하는 밴드정보를 조회하고, 조회된 밴드의 정보를 응답으로 반환
+    @GetMapping("/{band-school}")
+    public ResponseEntity getBand(@PathVariable("band-school")String school){
 
         Band band = bandService.findBand(school);
 
@@ -78,6 +88,8 @@ public class BandController {
 
     }
 
+
+    //주어진 페이지 및 크기에 해당하는 밴드 목록을 조회하고, 조회된 밴드 목록과 페이지 정보를 응답으로 반환합니다.
     @GetMapping
     public ResponseEntity getBands(@Positive @RequestParam int page,
                                    @Positive @RequestParam int size){
@@ -94,8 +106,10 @@ public class BandController {
     }
 
     //삭제관련
+    //밴드ID에 해당하는 밴드를 삭제하고, 삭제성공시 이를 알리는 응답을 반환함.
     @DeleteMapping("/bands/{band-id}")
     public ResponseEntity deleteBand(@PathVariable("band-id") long bandId){
+
         bandService.deleteBands(bandId);
 
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);

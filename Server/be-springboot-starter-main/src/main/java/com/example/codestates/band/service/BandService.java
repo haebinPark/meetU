@@ -4,7 +4,6 @@ package com.example.codestates.band.service;
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.band.repository.BandRepository;
 import com.example.codestates.exception.BusinessLogicException;
-import com.example.codestates.exception.Exception;
 import com.example.codestates.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,24 +19,49 @@ public class BandService {
 
     public BandService(BandRepository bandRepository){this.bandRepository = bandRepository;}
 
+
+    //생성 관련
     public Band createBand(Band band) {
 
         String school = band.getSchool();
+        int grade = band.getGrade();
+        int bannum = band.getBannum();
 
-        verifyExistBand(school);
+
+        verifyExistBand(school, grade, bannum );
         band.setSchool(school);
-        //이미 등록된 학교인지 확인하는 코드. 학교중복되어도 상관없는데..억지로 만든거임..
+        band.setGrade(grade);
+        band.setBannum(bannum);
+        //학교명, 학년, 반이 중복인지 조회하는 코드
 
 
-    return bandRepository.save(band);
+        String schoolcode = band.getSchoolcode();
+
+        if ("중학교".equals(schoolcode) || "고등학교".equals(schoolcode)) {
+            if (grade>3){
+                throw new IllegalArgumentException("중학교 또는 고등학교의 경우 4학년을 초과 입력 할 수 없습니다.");
+            }//if
+        }else {
+            throw  new IllegalArgumentException("유효하지 않은 학교코드명입니다.");
+        }
+        // 중학교, 고등학교의 경우 4학년 이상 입력할 수 없게 하는 코드. 초등학교의 경우 이미 PostDto @Range로 입력범위를
+        // 1~6까지로 제한하고 있기 때문에 조건문의 조건으로서 상정하지 않았다.
+
+        return bandRepository.save(band);
+
 
    }
 
-    private void verifyExistBand(String school) {
-        Optional<Band> band = bandRepository.findBySchool(school);
+
+    private void verifyExistBand(String school, int grade, int bannum) {
+        Optional<Band> band = bandRepository.findBySchoolAndGradeAndBannum(school,grade,bannum);
         if(band.isPresent())
-            throw new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND);
+            throw new BusinessLogicException(ExceptionCode.BAND_ALREADY_EXIST);
     }
+
+    /* 반 가입신청시, 해당학교명, 학년, 반이 이미 등록되어 있는지 확인하는 코드입니다. 학교, 학년, 반이 하나라도
+       겹치지 않을 경우 데이터베이스에 정상적으로 등록 될 것이며, 학교, 학년, 반이 모두 중복일 경우 에러코드 409와 함께 Band already exist
+       라는 메세지를 송출합니다. */
 
 
 
@@ -105,9 +129,9 @@ public class BandService {
                         new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
 
         return findSchool;
-    }
+    } //학교명으로 검색을 함. 학교명으로 검색하여 결과가 잡히지 않을 시, 예외코드 출력.
 
-        /*
+    /*
     private Band findVerifiedBandByQuery(long bandId){
         Optional<Band> optionalBand = bandRepository.findByBand(bandId);
         Band findBand = optionalBand.orElseThrow(() ->

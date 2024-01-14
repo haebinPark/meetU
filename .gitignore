@@ -1,0 +1,4 @@
+# Project exclude paths
+/abc02_001-BEuser/Server/be-springboot-starter-main/.gradle/
+/abc02_001-BEuser/Server/be-springboot-starter-main/build/
+/abc02_001-BEuser/Server/be-springboot-starter-main/build/classes/java/main/

@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charest: UTF-8
+      enabled: true
+      force: true
+
+# database 연동 설정
+spring:
+# h2:
+#    console:
+#      enabled: true
+#      path: /h2
+  datasource:
+    # MySQL 설정
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/japring?useSSL=false&serverTimezone=Asia/Seoul
+    username: dasomi
+    password: 0000
+
+    mvc:
+      view:
+        prefix: /templates/
+        suffix: .mustache
+
+    jpa:
+      hibernate:
+        ddl-auto: update #create update none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      show-sql: true
+
+#    # MySQL 설정
+#    url: jdbc:mysql://localhost:3306/japring?useSSL=false&serverTimezone=Asia/Seoul
+#    username: dasomi
+#    password: 0000
+#    thymeleaf:
+#      cache: false
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect

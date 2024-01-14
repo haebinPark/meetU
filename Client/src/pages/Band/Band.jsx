@@ -1,3 +1,4 @@
+import BandList from "../../components/Band/BandList.jsx";
 import BandSearch from "../../components/Band/BandSearch.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 
@@ -10,6 +11,7 @@ function Band() {
       </section>
       <section>
         <PageTitle pageTitle="반 목록" />
+        <BandList />
       </section>
     </>
   );

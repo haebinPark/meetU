@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +22,8 @@ public class Member {
     private String password;
     @Column(nullable = false,updatable = false, unique = true)
     private String email;
+    @Column(nullable = false)
+    private String role = "USER";
 
     @Enumerated(value = EnumType.STRING)
     private Mbit mbti;

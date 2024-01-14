@@ -1,12 +1,13 @@
 import { styled } from "styled-components";
 import BandJoin from "./BandJoin.jsx";
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 `;
 
 const TableHeader = styled.th`
-  border: 1px solid #ddd;
+  border: 1px solid var(--brand-color);
   padding: 8px;
   text-align: left;
   background-color: #f2f2f2;
@@ -19,7 +20,7 @@ const TableRow = styled.tr`
 `;
 
 const TableCell = styled.td`
-  border: 1px solid #ddd;
+  border: 1px solid var(--brand-color);
   padding: 8px;
 `;
 
@@ -35,14 +36,16 @@ const BandList = ({ bands }) => {
         </TableRow>
       </thead>
       <tbody>
-        <TableRow>
-          <TableCell>미츄고등학교</TableCell>
-          <TableCell>2학년</TableCell>
-          <TableCell>1반</TableCell>
-          <TableCell>
-            <BandJoin />
-          </TableCell>
-        </TableRow>
+        {bands.map((band, index) => (
+          <TableRow key={index}>
+            <TableCell>{band.schoolName}</TableCell>
+            <TableCell>{band.grade}</TableCell>
+            <TableCell>{band.class}</TableCell>
+            <TableCell>
+              <BandJoin band={band} />
+            </TableCell>
+          </TableRow>
+        ))}
       </tbody>
     </Table>
   );

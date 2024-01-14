@@ -1,4 +1,4 @@
-package com.example.codestates.user.dto;
+package com.example.codestates.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetStyleDto {
+public class MemberResponseDto {
     private Long userId;
     private String nickName;
     private String styleCode;

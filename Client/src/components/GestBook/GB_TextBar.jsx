@@ -10,12 +10,11 @@ const TextContainSt = styled.section`
   text-align: end;
 `;
 
-const TextContainer = ({ onSubmit }) => {
+const TextContainer = () => {
   const [text, setText] = useState("");
 
   const ComHandleSumbmit = (event) => {
     event.preventDefult();
-    onSubmit(text);
     setText("");
   };
   const ComHandleChange = (event) => {

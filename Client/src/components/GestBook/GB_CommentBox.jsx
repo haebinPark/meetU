@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Gestcomment from "./GB_Comment.jsx";
-const GBViewStyle = styled.ul`
+import Pagination from "../Common/Pagination.jsx";
+const GBViewStyle = styled.section`
   margin-top: 10px;
   padding: 10px;
   border: 1px solid var(--font-lightgray);
@@ -21,6 +22,7 @@ function GestBookView() {
       <Gestcomment />
       <Gestcomment />
       <Gestcomment />
+      <Pagination />
     </GBViewStyle>
   );
 }

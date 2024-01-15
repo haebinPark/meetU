@@ -7,10 +7,11 @@ const Table = styled.table`
 `;
 
 const TableHeader = styled.th`
-  border: 1px solid var(--brand-color);
+  border: 1px solid #fff;
   padding: 8px;
-  text-align: left;
-  background-color: #f2f2f2;
+  text-align: center;
+  color: #fff;
+  background-color: var(--brand-color);
 `;
 
 const TableRow = styled.tr`
@@ -29,23 +30,17 @@ const BandList = ({ bands }) => {
     <Table>
       <thead>
         <TableRow>
-          <TableHeader>학교명</TableHeader>
-          <TableHeader>학년</TableHeader>
-          <TableHeader>반</TableHeader>
-          <TableHeader>가입상태</TableHeader>
+          <TableHeader>검색결과</TableHeader>
+          <TableHeader>개설상태</TableHeader>
         </TableRow>
       </thead>
       <tbody>
-        {bands.map((band, index) => (
-          <TableRow key={index}>
-            <TableCell>{band.schoolName}</TableCell>
-            <TableCell>{band.grade}</TableCell>
-            <TableCell>{band.class}</TableCell>
-            <TableCell>
-              <BandJoin band={band} />
-            </TableCell>
-          </TableRow>
-        ))}
+        <TableRow>
+          <TableCell>미츄고등학교 3학년 1반 </TableCell>
+          <TableCell>
+            <BandJoin />
+          </TableCell>
+        </TableRow>
       </tbody>
     </Table>
   );

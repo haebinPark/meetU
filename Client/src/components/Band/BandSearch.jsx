@@ -17,6 +17,8 @@ const SearchSchoolInput = styled.input`
   margin-left: 10px;
   padding: 5px;
   width: 50%;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const SearchInput = styled.input`
@@ -38,6 +40,7 @@ const BandSearch = () => {
   const [gradeInput, setGradeInput] = useState("");
   const [classInput, setClassInput] = useState("");
   const [schoolType, setSchoolType] = useState("초등학교");
+  const [searchResult, setSearchResult] = useState([]);
 
   const handleSearchClick = () => {
     // 검색 버튼 클릭 시 로직

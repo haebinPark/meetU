@@ -1,33 +1,30 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
+import getNotify from "../../utils/getNotify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../Common/Button.jsx";
-
-toast.configure();
 
 const BandJoin = ({ band }) => {
   const [classJoined, setClassJoined] = useState(false); // 반 가입 상태
 
   const handleJoinClick = () => {
     setClassJoined(true); // 반 가입 버튼 클릭 시 상태를 true로 변경
-    toast.success("반 가입이 완료되었습니다.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+    getNotify("success", "반 가입이 완료되었습니다.", {
+      position: "bottom-right",
     });
   };
 
   const handleCreateClick = () => {
-    createBand(band); // 반 생성 함수 호출 (API컴포넌트 만들기)
-    toast.success("반 생성이 완료되었습니다.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+    //createBand(band); // 반 생성 함수 호출 (API컴포넌트 만들기)
+    getNotify("success", "반 생성이 완료되었습니다.", {
+      position: "bottom-right",
     });
   };
 
   return (
     band && (
       <>
-        <p>{`${band.schoolName} ${band.grade}학년 ${band.class}반 검색 완료`}</p>
         {band.status === "개설중" && <Button disabled>반 개설중</Button>}
-        {band.status === "생성해야함" && (
+        {band.status === "생성필요" && (
           <Button onClick={handleCreateClick}>반 생성하기</Button>
         )}
         {band.status === "가입가능" &&

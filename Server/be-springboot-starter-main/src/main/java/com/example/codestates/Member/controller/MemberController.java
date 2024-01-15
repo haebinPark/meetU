@@ -4,6 +4,7 @@ import com.example.codestates.Member.dto.MemberDto;
 import com.example.codestates.Member.entitiy.Member;
 import com.example.codestates.Member.mapper.MemberMapper;
 import com.example.codestates.Member.service.MemberService;
+import com.example.codestates.comment.mapper.CommentMapper;
 import com.example.codestates.response.MultiResponseDto;
 import com.example.codestates.response.SingleResponseDto;
 import com.example.codestates.utils.UriCreator;
@@ -24,10 +25,12 @@ public class MemberController {
     private final static String MEMBER_DEFAULT_URL = "/users";
     private final MemberService memberService;
     private final MemberMapper mapper;
+    private final CommentMapper commentMapper;
 
-    public MemberController(MemberService memberService, MemberMapper mapper) {
+    public MemberController(MemberService memberService, MemberMapper mapper, CommentMapper commentMapper) {
         this.memberService = memberService;
         this.mapper = mapper;
+        this.commentMapper = commentMapper;
     }
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody){

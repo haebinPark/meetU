@@ -6,12 +6,11 @@ import com.example.codestates.Member.entitiy.Member;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-12T14:30:35+0900",
+    date = "2024-01-15T14:53:13+0900",
     comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 11.0.21 (Azul Systems, Inc.)"
 )
 @Component
@@ -30,6 +29,7 @@ public class MemberMapperImpl implements MemberMapper {
         member.setEmail( requestBody.getEmail() );
         member.setMbti( requestBody.getMbti() );
         member.setInteresting( requestBody.getInteresting() );
+        member.setStyleCode( requestBody.getStyleCode() );
 
         return member;
     }
@@ -42,6 +42,7 @@ public class MemberMapperImpl implements MemberMapper {
 
         Member member = new Member();
 
+        member.setMemberId( requestBody.getMemberId() );
         member.setNickname( requestBody.getNickname() );
         member.setMbti( requestBody.getMbti() );
         member.setInteresting( requestBody.getInteresting() );

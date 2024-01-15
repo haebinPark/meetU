@@ -12,7 +12,7 @@ const CurrentPage = styled.span`
   font-size: 16px;
 `;
 
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const handlePrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
@@ -38,4 +38,5 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       </Button>
     </PaginationWrapper>
   );
-}
+};
+export default Pagination;

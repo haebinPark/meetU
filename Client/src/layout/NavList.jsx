@@ -6,6 +6,7 @@ const StyledNavList = styled.ul`
   align-items: center;
   gap: 1.5rem;
   background-color: white;
+  z-index: 1;
 
   /* 모바일 버전 */
   @media screen and (max-width: 767px) {

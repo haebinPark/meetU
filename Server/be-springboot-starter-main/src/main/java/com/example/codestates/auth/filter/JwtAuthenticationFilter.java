@@ -1,6 +1,6 @@
 package com.example.codestates.auth.filter;
 
-import com.example.codestates.Member.entitiy.Member;
+import com.example.codestates.member.entitiy.Member;
 import com.example.codestates.auth.dto.LoginDto;
 import com.example.codestates.auth.jwt.JwtTokenizer;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,12 +1,10 @@
-package com.example.codestates.Member.entitiy;
+package com.example.codestates.member.entitiy;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

@@ -1,7 +1,7 @@
-package com.example.codestates.Member.service;
+package com.example.codestates.member.service;
 
-import com.example.codestates.Member.repository.MemberRepository;
-import com.example.codestates.Member.entitiy.Member;
+import com.example.codestates.member.repository.MemberRepository;
+import com.example.codestates.member.entitiy.Member;
 import com.example.codestates.auth.utils.CustomAuthorityUtils;
 import com.example.codestates.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
-import java.util.List;
 
 @Service
 @Transactional

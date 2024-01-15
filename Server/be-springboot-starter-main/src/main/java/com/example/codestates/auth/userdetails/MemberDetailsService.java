@@ -1,7 +1,7 @@
 package com.example.codestates.auth.userdetails;
 
-import com.example.codestates.Member.entitiy.Member;
-import com.example.codestates.Member.repository.MemberRepository;
+import com.example.codestates.member.entitiy.Member;
+import com.example.codestates.member.repository.MemberRepository;
 import com.example.codestates.auth.utils.CustomAuthorityUtils;
 import com.example.codestates.exception.BusinessLogicException;
 import com.example.codestates.exception.ExceptionCode;

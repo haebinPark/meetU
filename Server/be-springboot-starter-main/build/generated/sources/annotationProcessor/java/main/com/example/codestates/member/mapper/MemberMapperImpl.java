@@ -1,8 +1,8 @@
-package com.example.codestates.Member.mapper;
+package com.example.codestates.member.mapper;
 
-import com.example.codestates.Member.dto.MemberDto;
-import com.example.codestates.Member.dto.MemberResponseDto;
-import com.example.codestates.Member.entitiy.Member;
+import com.example.codestates.member.dto.MemberDto;
+import com.example.codestates.member.dto.MemberResponseDto;
+import com.example.codestates.member.entitiy.Member;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

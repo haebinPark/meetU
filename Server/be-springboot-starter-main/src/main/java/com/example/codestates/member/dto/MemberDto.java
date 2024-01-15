@@ -1,14 +1,9 @@
-package com.example.codestates.Member.dto;
+package com.example.codestates.member.dto;
 
-import com.example.codestates.Member.entitiy.Interesting;
-import com.example.codestates.Member.entitiy.Mbit;
+import com.example.codestates.member.entitiy.Interesting;
+import com.example.codestates.member.entitiy.Mbit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotNull;
 
 public class MemberDto {
     @Getter

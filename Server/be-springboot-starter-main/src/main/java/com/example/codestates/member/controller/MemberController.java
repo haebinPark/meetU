@@ -1,9 +1,9 @@
-package com.example.codestates.Member.controller;
+package com.example.codestates.member.controller;
 
-import com.example.codestates.Member.dto.MemberDto;
-import com.example.codestates.Member.entitiy.Member;
-import com.example.codestates.Member.mapper.MemberMapper;
-import com.example.codestates.Member.service.MemberService;
+import com.example.codestates.member.dto.MemberDto;
+import com.example.codestates.member.entitiy.Member;
+import com.example.codestates.member.mapper.MemberMapper;
+import com.example.codestates.member.service.MemberService;
 import com.example.codestates.response.MultiResponseDto;
 import com.example.codestates.response.SingleResponseDto;
 import com.example.codestates.utils.UriCreator;

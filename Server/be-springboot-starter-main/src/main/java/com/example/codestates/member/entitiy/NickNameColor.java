@@ -1,4 +1,4 @@
-package com.example.codestates.Member.entitiy;
+package com.example.codestates.member.entitiy;
 
 
 public enum NickNameColor {

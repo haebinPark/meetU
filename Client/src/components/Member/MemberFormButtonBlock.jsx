@@ -8,6 +8,7 @@ const MemberFormButtonBlock = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-direction: ${({ $flexDirection }) => $flexDirection};
 `;
 
 export default MemberFormButtonBlock;

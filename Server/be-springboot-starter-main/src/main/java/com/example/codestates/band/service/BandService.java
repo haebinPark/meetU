@@ -70,20 +70,28 @@ public class BandService {
 
 
 
-    //조회관련
-
+    //수정관련
     public Band updateBand(Band band){
 
-        Band findBand = findVerifiedBand(band.getSchool());
+        Band findBand = findVerifiedBandId(band.getBandId());
+
+        Optional.ofNullable(band.getSchool()).ifPresent(school ->
+                findBand.setSchool(school));
 
         Optional.ofNullable(band.getSchoolcode()).ifPresent(schoolcode ->
                 findBand.setSchoolcode(schoolcode));
 
-        Optional.ofNullable(band.getGradeAndBannum()).ifPresent(gradeAndBannum ->
-                findBand.setGradeAndBannum(gradeAndBannum));
+        Optional.ofNullable(band.getGrade()).ifPresent(grade ->
+                findBand.setGrade(grade));
 
-        Optional.ofNullable(band.getStatus()).ifPresent(status ->
-                findBand.setStatus(status));
+        Optional.ofNullable(band.getBannum()).ifPresent(bannum ->
+                findBand.setBannum(bannum));
+
+        Optional.ofNullable(band.getJoinpass()).ifPresent(joinpass ->
+                findBand.setJoinpass(joinpass));
+
+        Optional.ofNullable(band.getStatusUpdate()).ifPresent(statusUpdate ->
+                findBand.setStatusUpdate(statusUpdate));
 
         return bandRepository.save(findBand);
 
@@ -91,39 +99,20 @@ public class BandService {
     }
 
 
-    public Band findVerifiedBand(String school){
-
-        Optional<Band> optionalBand = bandRepository.findBySchool(school);
-        Band findSchool = optionalBand.orElseThrow(() ->
-                                    new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+    public Band findBand(Long bandId) {
+        return findVerifiedBandId(bandId); }
 
 
-        return findSchool;
-    }
-
-    public Band findVerifiedBandId(Long bandId){
-
-        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
-        Band findBandId = optionalBand.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
-
-
-        return findBandId;
+    public Band findSchool(String school) {
+        return findVerifiedBandByQuery(school);
     }
 
 
-
-    public Band findBand(String school) { return findVerifiedBandByQuery(school); }
-
-
-    public Page<Band> findBands(int page, int size){
+    public Page<Band> findSchools(int page, int size){
         return bandRepository.findAll(PageRequest.of(page,size, Sort.by("school").descending()));
         //school를 기준으로 내림차순으로 조회함.
 
     }
-
-
-
 
 
 
@@ -158,6 +147,28 @@ public class BandService {
      음..가능할까?
 
      */
+
+
+    public Band findVerifiedBandSchool(String school){
+
+        Optional<Band> optionalBand = bandRepository.findBySchool(school);
+        Band findSchool = optionalBand.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.CANT_FIND_SCHOOL));
+
+
+        return findSchool;
+    }//검색관련
+
+    public Band findVerifiedBandId(Long bandId){
+
+        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
+        Band findBandId = optionalBand.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.BAND_NOT_EXIST));
+
+
+        return findBandId;
+    }
+
 
 
 

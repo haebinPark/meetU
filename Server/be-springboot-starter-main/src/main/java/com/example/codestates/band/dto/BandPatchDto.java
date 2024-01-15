@@ -32,8 +32,9 @@ public class BandPatchDto {
     //@Pattern() 현재 미설정
     private String joinpass; //반 가입 신청시 비밀번호
 
-    private Band.statusUpdate statusUpdate;
+    private Band.StatusUpdate statusUpdate;
 
     public void setBandId(long bandId) {this.BandId = bandId;}
+
 
 }

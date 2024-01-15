@@ -80,14 +80,13 @@ public class BandController {
     @GetMapping("/{band-school}")
     public ResponseEntity getBand(@PathVariable("band-school")String school){
 
-        Band band = bandService.findBand(school);
+        Band band = bandService.findSchool(school);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(bandMapper.bandToBandResponseDto(band)),
                 HttpStatus.OK);
 
     }
-
 
     //주어진 페이지 및 크기에 해당하는 밴드 목록을 조회하고, 조회된 밴드 목록과 페이지 정보를 응답으로 반환합니다.
     @GetMapping
@@ -96,7 +95,7 @@ public class BandController {
         // @Positive @RequestParam int page 페이지번호 1이상의 양수값이어야함.
         // @Positive @RequestParam int size 페이지크키 1이상의 양수값이어야함.
 
-        Page<Band> pageBands = bandService.findBands(page -1, size);
+        Page<Band> pageBands = bandService.findSchools(page -1, size);
         List<Band> bands = pageBands.getContent();
 
         return new ResponseEntity<>(

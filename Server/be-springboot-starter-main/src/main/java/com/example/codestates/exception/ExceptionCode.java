@@ -12,7 +12,11 @@ public enum ExceptionCode {
     NOT_IMPLEMENTATION(501, "Not Implementation"),
     INVALID_MEMBER_STATUS(400, "Invalid member status"),
     TODO_NOT_FOUND(404, "Todo not found"),
-    BAND_ALREADY_EXIST(409,"Band already exist" ); //추가
+    BAND_ALREADY_EXIST(409,"Band already exist" ), //추가
+    CANT_FIND_SCHOOL(404," Can't find school"),
+
+    BAND_NOT_EXIST(404," not exist ");//추가//추가
+
 
     @Getter
     private int status;

@@ -15,7 +15,7 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     //그러나 현 프로젝트는 배운것을 최대한 복습하는 것이므로, 직접 SQL입력은 지양하며, 최대한 spring DATA SPA를 사용하도록함.
     //특별한 경우에만 직접 SQL을 사용해야 한다면 해당 내용을 주석으로 추가.
 
-    Optional<Band> findByStatus(String status); //status값을 기준으로 조회
+    Optional<Band> findByStatusUpdate(String status); //status값을 기준으로 조회
     Optional<Band> findByBandId(long bandId); //밴드Id를 기준으로 조회
 
     Optional<Band> findBySchoolAndSchoolcodeAndGradeAndBannum(String school, String schoolcode, int grade, int bannum);

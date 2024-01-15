@@ -1,32 +1,13 @@
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 import Button from "../Common/Button.jsx";
 import StyleCodePalette from "./StyleCodePalette.jsx";
+import ButtonStyleLink from "./ButtonStyleLink.jsx";
 
 const Ul = styled.ul`
   display: flex;
   justify-content: center;
   gap: 1rem;
   position: relative;
-`;
-
-const ButtonStyleLink = styled(Link)`
-  display: block;
-  width: 7rem;
-  height: 3rem;
-  font-weight: 500;
-  color: var(--font-white);
-  background-color: var(--brand-color);
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  border-radius: 8px;
-  text-align: center;
-  line-height: 3rem;
-
-  &:hover {
-    background-color: var(--brand-sub-color);
-  }
 `;
 
 function MyPageChangeInfo({

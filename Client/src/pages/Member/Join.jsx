@@ -77,7 +77,7 @@ function Join() {
 
   return (
     <MemberLayout>
-      <PageTitle pageTitle="회원가입" />
+      <PageTitle>회원가입</PageTitle>
       <PageDescription>
         닉네임과 이메일로 미츄를 시작하세요! <br />
         MBTI와 관심사를 설정하시면

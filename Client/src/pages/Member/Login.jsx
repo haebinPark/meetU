@@ -29,7 +29,7 @@ function Login() {
 
   return (
     <MemberLayout>
-      <PageTitle pageTitle="로그인" />
+      <PageTitle>로그인</PageTitle>
       <PageDescription>
         로그인을 하시려면 <br /> 이메일과 비밀번호를 입력해주세요.
       </PageDescription>

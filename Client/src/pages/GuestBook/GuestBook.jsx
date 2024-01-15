@@ -4,7 +4,7 @@ import GestBookView from "../../components/GestBook/GB_CommentBox.jsx";
 function GuestBook() {
   return (
     <main>
-      <PageTitle pageTitle="방명록" />
+      <PageTitle>방명록</PageTitle>
       <TextInput />
       <GestBookView />
     </main>

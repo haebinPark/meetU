@@ -93,7 +93,7 @@ function MyPage() {
 
   return (
     <MemberLayout>
-      <PageTitle pageTitle="마이페이지" />
+      <PageTitle>마이페이지</PageTitle>
       {/* 프로필 */}
       <MyPageSection sectionTite="프로필">
         <MyPageProfile userInfo={userInfo} styleCode={styleCode} />

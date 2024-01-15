@@ -75,7 +75,7 @@ function Membership() {
 
   return (
     <MemberLayout>
-      <PageTitle pageTitle="회원 정보" />
+      <PageTitle>회원정보 수정</PageTitle>
       <MemberForm onSubmit={handleJoin}>
         {/* 이메일 */}
         <MemberFormBlock>

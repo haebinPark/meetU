@@ -2,7 +2,6 @@ package com.example.codestates.Member.dto;
 
 import com.example.codestates.Member.entitiy.Interesting;
 import com.example.codestates.Member.entitiy.Mbit;
-import com.example.codestates.Member.entitiy.NickNameColor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,8 +19,6 @@ public class MemberDto {
         private String email;
         private Mbit mbti;
         private Interesting interesting;
-        private NickNameColor styleCode;
-
     }
     @Getter
     public static class Patch{

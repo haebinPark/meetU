@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .antMatchers(HttpMethod.GET,"/*/comments/**").hasRole("USER")
                         .antMatchers(HttpMethod.PATCH,"/*/comments/**").hasRole("USER")
                         .antMatchers(HttpMethod.DELETE,"/*/comments/**").hasRole("USER")
-                        .anyRequest().permitAll())//mention은 나중에
+                        .anyRequest().permitAll())
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/users/logout"))
                 .logoutSuccessUrl("/");

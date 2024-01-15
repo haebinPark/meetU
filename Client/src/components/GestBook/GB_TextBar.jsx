@@ -4,6 +4,7 @@ import TextInput from "./GB_TextBox.jsx";
 import { useState } from "react";
 
 const TextContainSt = styled.section`
+  margin-top: 10px;
   width: 100%;
   border: 2px solid var(--box-gray);
   background: #ebf1e6;

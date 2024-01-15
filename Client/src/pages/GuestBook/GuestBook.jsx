@@ -5,8 +5,10 @@ import PageDescription from "../../components/Common/PageDescription.jsx";
 function GuestBook() {
   return (
     <main>
-      <PageTitle pageTitle="방명록" />
-      <PageDescription> 짧은 글로 반 친구들과 소통해보세요! </PageDescription>
+      <div style={{ textAlign: "center" }}>
+        <PageTitle pageTitle="방명록" />
+        <PageDescription> 짧은 글로 반 친구들과 소통해보세요! </PageDescription>
+      </div>
       <TextContainer />
       <GestBookView />
     </main>

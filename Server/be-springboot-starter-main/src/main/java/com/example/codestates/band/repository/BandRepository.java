@@ -22,6 +22,6 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     //쿼리문 없어도, school, grade, bannum dmf 기반으로한 쿼리를 자동생성함(Spring Data JPA)
 
 
-    @Query(value = "SELECT c FROM Band c WHERE c.school = :school")
+    //Query(value = "SELECT c FROM Band c WHERE c.school = :school")
     Optional<Band> findBySchool(String school); //학교이름을 기준으로 조회
 }

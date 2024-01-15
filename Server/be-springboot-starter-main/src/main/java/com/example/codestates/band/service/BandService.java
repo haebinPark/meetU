@@ -101,14 +101,24 @@ public class BandService {
         return findSchool;
     }
 
+    public Band findVerifiedBandId(Long bandId){
+
+        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
+        Band findBandId = optionalBand.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+
+
+        return findBandId;
+    }
+
 
 
     public Band findBand(String school) { return findVerifiedBandByQuery(school); }
 
 
     public Page<Band> findBands(int page, int size){
-        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("bandId").descending()));
-        //bandId를 기준으로 내림차순으로 조회함.
+        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("school").descending()));
+        //school를 기준으로 내림차순으로 조회함.
 
     }
 
@@ -120,7 +130,8 @@ public class BandService {
     //삭제관련
     public void deleteBands(long bandId){
 
-
+        Band band = findVerifiedBandId(bandId);
+        bandRepository.delete(band);
 
     }
 
@@ -132,6 +143,7 @@ public class BandService {
                         new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
 
         return findSchool;
+
     } //학교명으로 검색을 함. 학교명으로 검색하여 결과가 잡히지 않을 시, 예외코드 출력.
 
     /*

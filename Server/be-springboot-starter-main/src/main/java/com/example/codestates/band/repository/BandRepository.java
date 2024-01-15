@@ -18,7 +18,7 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     Optional<Band> findByStatus(String status); //status값을 기준으로 조회
     Optional<Band> findByBandId(long bandId); //밴드Id를 기준으로 조회
 
-    Optional<Band> findBySchoolAndGradeAndBannum(String school, int grade, int bannum);
+    Optional<Band> findBySchoolAndSchoolcodeAndGradeAndBannum(String school, String schoolcode, int grade, int bannum);
     //쿼리문 없어도, school, grade, bannum dmf 기반으로한 쿼리를 자동생성함(Spring Data JPA)
 
 

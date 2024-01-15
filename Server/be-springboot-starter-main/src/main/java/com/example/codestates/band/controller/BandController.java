@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/bands")
+@RequestMapping("/band")
 @RestController
 @Validated
 public class BandController {
@@ -107,7 +107,7 @@ public class BandController {
 
     //삭제관련
     //밴드ID에 해당하는 밴드를 삭제하고, 삭제성공시 이를 알리는 응답을 반환함.
-    @DeleteMapping("/bands/{band-id}")
+    @DeleteMapping("/band/{band-id}")
     public ResponseEntity deleteBand(@PathVariable("band-id") long bandId){
 
         bandService.deleteBands(bandId);

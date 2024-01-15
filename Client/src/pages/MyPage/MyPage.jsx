@@ -1,15 +1,75 @@
-import { styled } from "styled-components";
 import { useState } from "react";
 import MemberLayout from "../../layout/MemberLayout.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import MyPageSection from "../../components/MyPage/MyPageSection.jsx";
 import MyPageProfile from "../../components/MyPage/MyPageProfile.jsx";
 import MyPageChangeInfo from "../../components/MyPage/MyPageChangeInfo.jsx";
+import DivisionLine from "../../components/MyPage/DivisionLine.jsx";
+import MyPageRecommend from "../../components/MyPage/MyPageRecommend.jsx";
+import MyPageFriendList from "../../components/MyPage/MyPageFriendList.jsx";
 
-const DivisionLine = styled.hr`
-  width: 100%;
-  border: 1px solid var(--box-gray);
-`;
+const friendsList = [
+  {
+    userId: "useId01",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te31",
+    styleCode: "#f4eeee",
+  },
+  {
+    userId: "useId02",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄22",
+    styleCode: "#faebdd",
+  },
+  {
+    userId: "useId03",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄",
+    styleCode: "#fbf3db",
+  },
+  {
+    userId: "useId04",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te40",
+    styleCode: "#edf3ec",
+  },
+  {
+    userId: "useId05",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te56",
+    styleCode: "#e7f3f8",
+  },
+  {
+    userId: "useId06",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te72",
+    styleCode: "#f6f3f9",
+  },
+  {
+    userId: "useId07",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te85",
+    styleCode: "#faf1f5",
+  },
+  {
+    userId: "useId08",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te99",
+    styleCode: "#faf1f5",
+  },
+  {
+    userId: "useId09",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄T106",
+    styleCode: "#fdebec",
+  },
+  {
+    userId: "useId10",
+    interests: ["SOCCER", "CODING", "MUSIC"],
+    nickName: "미츄Te11",
+    styleCode: "#f6f3f9",
+  },
+];
 
 function MyPage() {
   const [userInfo, setUserInfo] = useState({
@@ -53,7 +113,14 @@ function MyPage() {
       <DivisionLine />
 
       {/* 친구추천 */}
-      <MyPageSection sectionTite="친구 추천"></MyPageSection>
+      <MyPageSection sectionTite="친구 추천">
+        <MyPageRecommend>
+          <MyPageFriendList interest="MBTI" friendsList={friendsList} />
+          <MyPageFriendList interest="코딩" friendsList={friendsList} />
+          <MyPageFriendList interest="봉사활동" friendsList={friendsList} />
+          <MyPageFriendList interest="음악" friendsList={friendsList} />
+        </MyPageRecommend>
+      </MyPageSection>
     </MemberLayout>
   );
 }

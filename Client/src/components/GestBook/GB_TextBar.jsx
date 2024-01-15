@@ -23,7 +23,12 @@ const TextContainer = () => {
   return (
     <TextContainSt>
       <form onSubmit={ComHandleSumbmit}>
-        <TextInput maxLength="200" onChange={ComHandleChange} value={text} />
+        <TextInput
+          border="1px solid var(--brand-color)"
+          maxLength="200"
+          onChange={ComHandleChange}
+          value={text}
+        />
         <Button type="submit" margin="2px 5px 0px 0px">
           등록
         </Button>

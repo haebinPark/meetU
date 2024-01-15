@@ -1,4 +1,8 @@
 import { styled } from "styled-components";
+import getNotify from "../../utils/getNotify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 const CommentEntry = styled.ul`
   /* 방명록 항목에 대한 스타일 */
@@ -64,24 +68,34 @@ const DeleteButton = styled.button`
   margin-left: 10px;
 `;
 
-const GuestComment = ({ id, nickName, comment, date, onEdit, onDelete }) => {
+const GuestComment = ({ id, nickName, contexts, date, onEdit, onDelete }) => {
+  const [isSelected, setIsSelected] = useState(false);
+
   const parsedDate = new Date(date).toLocaleDateString("ko-kr");
+
   const ComHanldeEdit = () => {
+    setIsSelected(true);
     onEdit(id);
   };
   const ComHandleDelete = () => {
     onDelete(id);
+    getNotify("success", "삭제되었습니다!");
   };
   return (
-    <CommentEntry>
-      <CommentNameStyle> 고추냉이생일{nickName} </CommentNameStyle>
-      <CommentStyle> 마치고 피방 ㄱ?{comment}</CommentStyle>
-      <ButtonStyle>
-        <EditButton onClick={ComHanldeEdit}>Edit</EditButton>
-        <DeleteButton onClick={ComHandleDelete}>x</DeleteButton>
-      </ButtonStyle>
-      <CommentDateStyle>{parsedDate}</CommentDateStyle>
-    </CommentEntry>
+    <>
+      <CommentEntry
+        style={{ backgroundColor: isSelected ? "lightgray" : "white" }}
+      >
+        <CommentNameStyle> {nickName} </CommentNameStyle>
+        <CommentStyle> {contexts}</CommentStyle>
+        <ButtonStyle>
+          <EditButton onClick={ComHanldeEdit}>Edit</EditButton>
+          <DeleteButton onClick={ComHandleDelete}>x</DeleteButton>
+        </ButtonStyle>
+        <CommentDateStyle>{parsedDate}</CommentDateStyle>
+      </CommentEntry>
+      <ToastContainer />
+    </>
   );
 };
 

@@ -42,7 +42,7 @@ const StyledButton = styled.button`
 
   margin: ${({ $margin }) => $margin};
   cursor: pointer;
-  width: var(--button-width, 5rem);
+  width: ${({ $width }) => $width || "var(--button-width, 5rem)"};
   height: var(--button-height, 3rem);
   font-size: var(--button-font-size, 1rem);
   font-weight: var(--button-weight, 500);
@@ -54,14 +54,13 @@ const StyledButton = styled.button`
   background: var(--button-bg-color, var(--brand-color));
 
   &:active,
-  &:hover,
-  &:focus {
+  &:hover {
     background: var(--button-hover-bg-color, var(--brand-sub-color));
   }
 `;
 
 //버튼 부분
-function Button({ onClick, type, size, variant, children, margin }) {
+function Button({ onClick, type, size, variant, children, margin, width }) {
   const sizeStyle = SIZES[size];
   const variantStyle = VARIANTS[variant];
 
@@ -72,6 +71,7 @@ function Button({ onClick, type, size, variant, children, margin }) {
       $sizeStyle={sizeStyle}
       $variantStyle={variantStyle}
       $margin={margin}
+      $width={width}
     >
       {children}
     </StyledButton>

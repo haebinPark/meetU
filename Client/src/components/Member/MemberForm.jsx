@@ -7,8 +7,8 @@ const Form = styled.form`
   margin-right: auto;
 `;
 
-function MemberForm({ children, handleJoin }) {
-  return <Form onSubmit={handleJoin}>{children}</Form>;
+function MemberForm({ children, onSubmit }) {
+  return <Form onSubmit={onSubmit}>{children}</Form>;
 }
 
 export default MemberForm;

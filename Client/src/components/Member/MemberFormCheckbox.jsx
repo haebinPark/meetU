@@ -76,7 +76,7 @@ const interests = [
 function MemberFormCheckbox({ checkedList, onChange }) {
   return (
     <Fieldset>
-      <Legend>MBTI</Legend>
+      <Legend>관심사</Legend>
       <InputDescription>관심사를 1 ~ 3개 선택해주세요.</InputDescription>
       <Ul>
         {interests.map((item) => {

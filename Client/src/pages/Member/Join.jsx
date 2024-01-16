@@ -10,6 +10,7 @@ import PageDescription from "../../components/Common/PageDescription.jsx";
 import MemberFormRadio from "../../components/Member/MemberFormRadio.jsx";
 import MemberFormCheckbox from "../../components/Member/MemberFormCheckbox.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
+import Button from "../../components/Common/Button.jsx";
 import getNofity from "../../utils/getNotify.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,7 +62,6 @@ function Join() {
   // input 입력
   const handelInput = (e) => {
     const { name, value } = e.target;
-    console.log(value);
 
     if (name === "interests") {
       const addedInterests = handleIntersts(value);
@@ -70,7 +70,6 @@ function Join() {
       setFormState({ ...formState, [name]: value });
     }
   };
-  console.log(formState);
 
   // 에러 핸들링
   const handleDebounceInput = () => {};
@@ -78,7 +77,7 @@ function Join() {
 
   return (
     <MemberLayout>
-      <PageTitle pageTitle="회원가입" />
+      <PageTitle>회원가입</PageTitle>
       <PageDescription>
         닉네임과 이메일로 미츄를 시작하세요! <br />
         MBTI와 관심사를 설정하시면
@@ -87,7 +86,7 @@ function Join() {
         </Mobile>
         친구를 추천해 드립니다.
       </PageDescription>
-      <MemberForm handleJoin={handleJoin}>
+      <MemberForm onSubmit={handleJoin}>
         {/* 이메일 */}
         <MemberFormBlock>
           <MemberFormInput
@@ -96,10 +95,10 @@ function Join() {
             label="이메일"
             defaultValue={formState.email}
             placeholder="example@email.com"
-            description="관심사를 1 ~ 3개 선택해주세요."
             duplicationCheck={true}
             onChange={handelInput}
           />
+          <span>{formState.email}</span>
           <MemberErrorText $isError={emailError.isError}>
             {emailError.errorMessage}
           </MemberErrorText>
@@ -160,7 +159,11 @@ function Join() {
           />
         </MemberFormBlock>
         {/* 회원가입 버튼 */}
-        <MemberFormButtonBlock onClick={handleJoin} />
+        <MemberFormButtonBlock name="회원가입" onClick={handleJoin}>
+          <Button type="submit" size="lg" onClick={handleJoin}>
+            회원가입
+          </Button>
+        </MemberFormButtonBlock>
       </MemberForm>
       <ToastContainer />
     </MemberLayout>

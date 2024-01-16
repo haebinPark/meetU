@@ -1,20 +1,14 @@
 import { styled } from "styled-components";
-import Button from "../../components/Common/Button.jsx";
 
-const ButtonBlock = styled.div`
+const MemberFormButtonBlock = styled.div`
   text-align: center;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom};
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: ${({ $flexDirection }) => $flexDirection};
 `;
-
-function MemberFormButtonBlock({ onClick }) {
-  return (
-    <ButtonBlock>
-      <Button type="submit" size="lg" onClick={onClick}>
-        회원가입
-      </Button>
-    </ButtonBlock>
-  );
-}
 
 export default MemberFormButtonBlock;

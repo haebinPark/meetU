@@ -1,5 +1,12 @@
 package com.example.codestates.member.service;
 
+
+
+
+
+
+
+
 import com.example.codestates.member.repository.MemberRepository;
 import com.example.codestates.member.entitiy.Member;
 import com.example.codestates.auth.utils.CustomAuthorityUtils;
@@ -37,6 +44,12 @@ public class MemberService {
 
         return null;
     }
+      //회원 내 정보 수정(배경색 수정)v
+    public Member updateUserStyle(Long userId, Member.NickNameColor nickNameColor) {
+        Member findMember = findVerifiedMember(userId);
+        findMember.setStyleCode(nickNameColor);
+        return memberRepository.save(findMember);
+    }
 
     public Member updateMember(Member member){
 
@@ -48,5 +61,6 @@ public class MemberService {
 
     public Page<Member> findMembers(String type, int page, int size) {
         return null;
+
     }
 }

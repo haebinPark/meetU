@@ -15,4 +15,5 @@ public interface MemberMapper {
 
     MemberResponseDto memberToMemberResponseDto(Member Member);
     List<MemberResponseDto> membersToMemberResponseDtos(List<Member> Members);
+
 }

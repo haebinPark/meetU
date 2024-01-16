@@ -66,7 +66,9 @@ public class MemberService {
 
     //회원 삭제
     public void deleteMember(@Positive long memberId) {
-        memberRepository.deleteById(memberId);
+        Member foundMember = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        memberRepository.delete(foundMember);
     }
 
     public Page<Member> findMembers(String type, int page, int size) {

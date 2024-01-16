@@ -43,11 +43,11 @@ public class Band extends Auditable {
 
     //반 신청 상태에 대한 코드
     @Enumerated(value = EnumType.STRING)
-    @Column(length = 100, nullable = false)
-    private statusUpdate status = statusUpdate.ApplicationCompleted; //기본값으로 신청완료를 나타냄.
+    @Column(length = 200, nullable = false)
+    private StatusUpdate statusUpdate = StatusUpdate.ApplicationCompleted; //기본값으로 신청완료를 나타냄.
 
 
-    public enum statusUpdate  {
+    public enum StatusUpdate  {
 
         ApplicationCompleted("신청완료"), //신청완료
         ApplicationPending("개설중"), //개설중
@@ -56,7 +56,7 @@ public class Band extends Auditable {
         @Getter
         private String status;
 
-        statusUpdate(String status) {
+        StatusUpdate(String status) {
             this.status = status;
         }
 

@@ -1,6 +1,7 @@
 package com.example.codestates.band.dto;
 
 
+import com.example.codestates.band.entity.Band;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Builder
 public class BandResponseDto {
 
+
     public long bandId;
     private String school;//학교명
     private String schoolcode;//학교코드 1. 초등학교 2.중학교 3.고등학교
@@ -17,7 +19,8 @@ public class BandResponseDto {
     private int bannum;//반
     private String joinpass; //반 가입 신청시 비밀번호
     private String username; //신청자 닉네임.
-    private String status;
+    private Band.StatusUpdate statusUpdate; // 신청중인 상태를 나타냄
+
 
 
 }

@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class Pageinfo {
+public class PageInfo {
     private int page;
     private int size;
     private long totalElements;
-    private int toalPages;
+    private int totalPages;
 }

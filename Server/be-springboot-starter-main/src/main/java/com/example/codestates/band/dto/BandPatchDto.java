@@ -11,14 +11,13 @@ import javax.validation.constraints.NotBlank;
 public class BandPatchDto {
 
 
-    private long BandId;
+    private long bandId;
 
     @NotBlank
-    //@Pattern() 학교명 XX초등학교? 아니면 XX만?? 글자수 제한 넣을지 프론트랑 상의예정 (1/11)
     private String school;//학교명
 
     @NotBlank
-    private String schoolcode;//학교코드 1. 초등학교 2.중학교 3.고등학교
+    private String schoolcode;// 초등학교, 중학교, 고등학교 선택
 
     @NonNull
     @Range(min=1, max = 6)
@@ -32,8 +31,10 @@ public class BandPatchDto {
     //@Pattern() 현재 미설정
     private String joinpass; //반 가입 신청시 비밀번호
 
-    private Band.statusUpdate statusUpdate;
+    private Band.StatusUpdate statusUpdate;
 
-    public void setBandId(long bandId) {this.BandId = bandId;}
+    public void setBandId(long bandId) {
+        this.bandId = bandId; }
+
 
 }

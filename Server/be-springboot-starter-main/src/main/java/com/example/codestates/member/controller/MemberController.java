@@ -1,65 +1,75 @@
 package com.example.codestates.member.controller;
 
-import com.example.codestates.member.dto.MemberPatchDto;
-import com.example.codestates.member.dto.MemberResponseDto;
-import com.example.codestates.member.entity.Member;
+import com.example.codestates.member.dto.MemberDto;
+import com.example.codestates.member.entitiy.Member;
 import com.example.codestates.member.mapper.MemberMapper;
 import com.example.codestates.member.service.MemberService;
+import com.example.codestates.response.MultiResponseDto;
+import com.example.codestates.response.SingleResponseDto;
+import com.example.codestates.utils.UriCreator;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/users") //공용 url 설정
-public class MemberController { //mapper로 엔티티 -> dto변경 반환
+@RequestMapping(value = "/users")
+@Slf4j
+public class MemberController {
+    private final static String MEMBER_DEFAULT_URL = "/users";
+    private final MemberService memberService;
+    private final MemberMapper mapper;
 
-    private MemberService memberService;
-    private MemberMapper memberMapper;
-
-    public MemberController(MemberService memberService,MemberMapper memberMapper) {
+    public MemberController(MemberService memberService, MemberMapper mapper) {
         this.memberService = memberService;
-        this.memberMapper = memberMapper;
+        this.mapper = mapper;
     }
+    @PostMapping
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody){
+        Member member = mapper.memberPostDtoToMember(requestBody);
+        Member createMember = memberService.createMember(member);
 
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getMemberId());
 
-    //회원의 내 정보 조회(배경색 포함)
-    @GetMapping("/users{userId}")
-    public ResponseEntity getMemberStyle(@PathVariable Long userId) {
-        Member member = memberService.findMember(userId);
-        MemberResponseDto memberResponseDto = memberMapper.memberToMemberResponseDto(member);
-        return ResponseEntity.ok(memberResponseDto);
-    }
-
-    @PatchMapping("users/{userId}") ////회원 내 정보 수정(배경색 수정)v
-    public ResponseEntity patchUserStyle(@PathVariable Long userId,
-                                         @RequestBody MemberPatchDto memberPatchDtopatchDto) {
-        // 클라이언트로부터 받아온 스타일 코드 정보를 이용하여 회원의 스타일 코드를 업데이트
-        Member member = memberService.updateUserStyle(userId, Member.NickNameColor.valueOf(memberPatchDtopatchDto.getStyleCode()));
-        // 업데이트된 회원 정보를 MemberResponseDto로 변환
-        MemberResponseDto memberResponseDto = memberMapper.memberToMemberResponseDto(member);
-        // 업데이트된 회원 정보를 클라이언트에게 반환
-        return ResponseEntity.ok(memberResponseDto);
-    }
-
-    // HTTP GET 요청을 / 경로로 매핑
-    @GetMapping("/") //사용자 배경색 리스트 조회
-    public ResponseEntity getMemberStyles() {
-
-        return null;
-        }
+        return ResponseEntity.created(location).build();
 
     }
+    @GetMapping(params = {"mbtitype"})
+    public ResponseEntity getMbtiMembers(@RequestParam("mbtitype") String mbtitype,
+                                     @Positive @RequestParam int page,
+                                     @Positive @RequestParam int size){
+       Page<Member> pageMbtiMembers= memberService.findMembers(mbtitype,page-1,size);
+       List<Member> mbtiMembers = pageMbtiMembers.getContent();
 
-//사용자 닉네임 색 조회 => 유저 정보 조회에서 가져올 수 있어서 필요x, 사용하려면 메퍼사용 및 수정 필요
-//    @GetMapping("users/{userId}") //사용자 닉네임 배경색 조회
-//    public ResponseEntity<GetStyleDto> getUserStyle(@PathVariable Long userId) {
-//        GetStyleDto getStyleDto = userService.getUserStyle(userId);  // UserService를 통해 스타일 정보를 가져옴
-//        return ResponseEntity.ok(getStyleDto); // 가져온 스타일 정보를 HTTP 응답으로 반환
-//    }
+        return ResponseEntity.ok(new MultiResponseDto(mapper.membersToMemberResponseDtos(mbtiMembers),pageMbtiMembers));
+    }
+    @GetMapping(params = {"interestingtype"})
+    public ResponseEntity getInterestingMembers(@RequestParam("interestingtype")String interestingtype,
+                                                @Positive @RequestParam int page,
+                                                @Positive @RequestParam int size){
+        Page<Member> pageInterestingMembers = memberService.findMembers(interestingtype,page-1,size);
+        List<Member> interestingMembers = pageInterestingMembers.getContent();
+        return ResponseEntity.ok(new MultiResponseDto(mapper.membersToMemberResponseDtos(interestingMembers),pageInterestingMembers));
 
+    }
+    @PatchMapping(value = "/{member_id}")
+    public ResponseEntity patchMember(@PathVariable("member_id") @Positive long memberId,
+                                      @Valid @RequestBody MemberDto.Patch requestBody){
+        requestBody.setMemberId(memberId);
+        Member member =
+                memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
+        return ResponseEntity.ok(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)));
+    }
+    @DeleteMapping(value = "/{member_id}")
+    public ResponseEntity deleteMember(@PathVariable("member_id")@Positive long memberId){
+        memberService.deleteMember(memberId);
 
-
+        return ResponseEntity.noContent().build();
+    }
 
 }

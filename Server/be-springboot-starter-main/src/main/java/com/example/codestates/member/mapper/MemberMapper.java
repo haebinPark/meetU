@@ -1,14 +1,19 @@
 package com.example.codestates.member.mapper;
 
-import com.example.codestates.member.dto.MemberPatchDto;
-import com.example.codestates.member.dto.MemberPostDto;
+import com.example.codestates.member.dto.MemberDto;
 import com.example.codestates.member.dto.MemberResponseDto;
-import com.example.codestates.member.entity.Member;
+import com.example.codestates.member.entitiy.Member;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MemberMapper {
-    Member memberPostDtoToMember(MemberPostDto memberPostDto);
-    Member memberPatchDtoToMember(MemberPatchDto memberPatchDto);
-    MemberResponseDto memberToMemberResponseDto(Member member);
+    Member memberPostDtoToMember(MemberDto.Post requestBody);
+    Member memberPatchDtoToMember(MemberDto.Patch requestBody);
+
+    MemberResponseDto memberToMemberResponseDto(Member Member);
+    List<MemberResponseDto> membersToMemberResponseDtos(List<Member> Members);
+
 }

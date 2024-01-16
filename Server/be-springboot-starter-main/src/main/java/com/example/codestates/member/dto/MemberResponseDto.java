@@ -1,16 +1,16 @@
 package com.example.codestates.member.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+import com.example.codestates.member.entitiy.Interesting;
+import com.example.codestates.member.entitiy.Mbit;
+import com.example.codestates.member.entitiy.NickNameColor;
+
 public class MemberResponseDto {
-    private Long userId;
-    private String nickName;
-    private String styleCode;
+    private Long memberId;
+    private String nickname;
+    private Mbit mbti;
+    private Interesting interesting;
+    private NickNameColor styleCode;
+
+
 }

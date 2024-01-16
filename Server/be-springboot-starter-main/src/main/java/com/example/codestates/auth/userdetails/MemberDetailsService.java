@@ -47,7 +47,7 @@ public class MemberDetailsService implements UserDetailsService {
         }
 
 
-        //갑자기 이게 안넣어지면 오류가 뜬다 왜?
+        //갑자기 이게 안넣어지면 오류가 뜬다 왜?-> 명칭이 달라서 그런거ㅇㅇ
         @Override
         public String getPassword() {
             return getPassWord();

@@ -1,6 +1,6 @@
 package com.example.codestates.auth.filter;
 
-import com.example.codestates.member.entitiy.Member;
+import com.example.codestates.member.entity.Member;
 import com.example.codestates.auth.dto.LoginDto;
 import com.example.codestates.auth.jwt.JwtTokenizer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //여기에 토큰에 넣을 정보를 작성 하는 것 인가?
     private String delegateAccessToken(Member member){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("memberId",member.getMemberId());
+        claims.put("memberId",member.getUserId());
         claims.put("username",member.getEmail());
         claims.put("role",member.getRole());
 

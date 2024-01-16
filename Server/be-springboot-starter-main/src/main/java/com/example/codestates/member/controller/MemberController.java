@@ -1,7 +1,7 @@
 package com.example.codestates.member.controller;
 
 import com.example.codestates.member.dto.MemberDto;
-import com.example.codestates.member.entitiy.Member;
+import com.example.codestates.member.entity.Member;
 import com.example.codestates.member.mapper.MemberMapper;
 import com.example.codestates.member.service.MemberService;
 import com.example.codestates.response.MultiResponseDto;
@@ -34,7 +34,7 @@ public class MemberController {
         Member member = mapper.memberPostDtoToMember(requestBody);
         Member createMember = memberService.createMember(member);
 
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getMemberId());
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getUserId());
 
         return ResponseEntity.created(location).build();
 
@@ -62,7 +62,7 @@ public class MemberController {
                                       @Valid @RequestBody MemberDto.Patch requestBody){
         requestBody.setMemberId(memberId);
         Member member =
-                memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
+                memberService.updateMember(mapper.memberPatchDtoToMember(requestBody),memberId);
         return ResponseEntity.ok(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)));
     }
     @DeleteMapping(value = "/{member_id}")

@@ -1,6 +1,6 @@
 package com.example.codestates.auth.userdetails;
 
-import com.example.codestates.member.entitiy.Member;
+import com.example.codestates.member.entity.Member;
 import com.example.codestates.member.repository.MemberRepository;
 import com.example.codestates.auth.utils.CustomAuthorityUtils;
 import com.example.codestates.exception.BusinessLogicException;
@@ -35,15 +35,22 @@ public class MemberDetailsService implements UserDetailsService {
     private final class MemberDetails extends Member implements UserDetails {
         //여기도 추가 멤버 정보 넣어야하나?
         public MemberDetails(Member member) {
-            setMemberId(member.getMemberId());
+            setUserId(member.getUserId());
             setEmail(member.getEmail());
-            setPassword(member.getPassword());
+            setPassWord(member.getPassWord());
             setRole(member.getRole());
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return authorityUtils.createAuthorities(this.getRole());
+        }
+
+
+        //갑자기 이게 안넣어지면 오류가 뜬다 왜?
+        @Override
+        public String getPassword() {
+            return getPassWord();
         }
 
         @Override

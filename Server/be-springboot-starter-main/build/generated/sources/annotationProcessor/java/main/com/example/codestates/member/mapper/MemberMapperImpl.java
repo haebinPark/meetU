@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
+import com.example.codestates.member.entity.Member;
 import org.springframework.stereotype.Component;
 
 @Generated(

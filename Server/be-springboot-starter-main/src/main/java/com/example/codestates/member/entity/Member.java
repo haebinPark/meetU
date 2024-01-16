@@ -26,6 +26,8 @@ public class Member {
     @Column(nullable = false)
     private String passWord;
 
+    private String role = "USER";
+
     @Email
     @Column(nullable = false, unique = true)
     private String email;

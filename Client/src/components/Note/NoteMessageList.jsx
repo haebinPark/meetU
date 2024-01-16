@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { ReactComponent as MsgIcon } from "../../assets/message.svg";
+import { ReactComponent as OpenMsgIcon } from "../../assets/openMsg.svg";
 
 // MessageList 스타일 //
 const MessageListContainer = styled.section`
@@ -62,10 +64,10 @@ const MessageSelect = styled.select`
   }
 `;
 
-// 아이콘 //
-// const MessageRead = ({ unread }) => {
-//   return unread ?  : ;
-// };
+//아이콘 컴포넌트 //
+const MessageRead = ({ unread }) => {
+  return unread ? <MsgIcon /> : <OpenMsgIcon />;
+};
 
 // 쪽지목록 //
 const MessageList = ({ type }) => {
@@ -79,6 +81,7 @@ const MessageList = ({ type }) => {
   return (
     <MessageListContainer>
       <MessageItem>
+        <MessageRead />
         <MsgNameStyle>우유맛생크림</MsgNameStyle>
         <MsgStyle>쪽지 내용</MsgStyle>
         <MsgDateStyle>날짜</MsgDateStyle>

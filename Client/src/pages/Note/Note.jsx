@@ -7,9 +7,7 @@ function Note() {
     <>
       <div style={{ textAlign: "center" }}>
         <PageTitle pageTitle="쪽지함" />
-        <PageDescription>
-          반친구들과 주고받은 쪽지를 모아두었어요!
-        </PageDescription>
+        <PageDescription>주고 받은 쪽지를 모아뒀어요!</PageDescription>
       </div>
 
       <MessageBox />

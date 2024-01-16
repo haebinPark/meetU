@@ -56,13 +56,6 @@ public class BandService {
 
    }
 
-
-    private void verifyExistBand(String school, String schoolcode, int grade, int bannum) {
-        Optional<Band> band = bandRepository.findBySchoolAndSchoolcodeAndGradeAndBannum(school,schoolcode, grade,bannum);
-        if(band.isPresent())
-            throw new BusinessLogicException(ExceptionCode.BAND_ALREADY_EXIST);
-    }
-
     /* 반 가입신청시, 해당학교명, 학년, 반이 이미 등록되어 있는지 확인하는 코드입니다. 학교, 학년, 반이 하나라도
        겹치지 않을 경우 데이터베이스에 정상적으로 등록 될 것이며, 학교, 학년, 반이 모두 중복일 경우 에러코드 409와 함께 Band already exist
        라는 메세지를 송출합니다. */
@@ -99,21 +92,24 @@ public class BandService {
     }
 
 
-    public Band findBand(Long bandId) {
-        return findVerifiedBandId(bandId); }
+//    public Band findBandId(long bandId){
+//        return findVerifiedBandByQuery(bandId);
+//    }
+//
+//
+//    public Page<Band> findBandIds(int page, int size){
+//        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("bandId").descending()));
+//        //BandID를 기준으로 내림차순으로 조회함.
+//    }
 
-
-    public Band findSchool(String school) {
-        return findVerifiedBandByQuery(school);
+    public Band findSchool(String school){
+        return findVerifiedBandByQuery_S(school);
     }
-
 
     public Page<Band> findSchools(int page, int size){
         return bandRepository.findAll(PageRequest.of(page,size, Sort.by("school").descending()));
-        //school를 기준으로 내림차순으로 조회함.
-
+        //학교를 기준으로 내림차순으로 조회함.
     }
-
 
 
     //삭제관련
@@ -124,8 +120,36 @@ public class BandService {
 
     }
 
+    public Band findVerifiedBandId(Long bandId){
 
-    private Band findVerifiedBandByQuery(String school) {
+        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
+        Band findBandId = optionalBand.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+
+
+        return findBandId;
+    } //수정관련 , 삭제관련,
+
+
+    private void verifyExistBand(String school, String schoolcode, int grade, int bannum) {
+        Optional<Band> band = bandRepository.findBySchoolAndSchoolcodeAndGradeAndBannum(school,schoolcode, grade,bannum);
+        if(band.isPresent())
+            throw new BusinessLogicException(ExceptionCode.BAND_ALREADY_EXIST);
+    }
+    //중복 여부 검증 메서드
+
+
+//    private Band findVerifiedBandByQuery(long bandId) {
+//        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
+//        Band findBandId =
+//                optionalBand.orElseThrow(() ->
+//                        new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+//
+//        return findBandId;
+//
+//    } // 고유ID로 검색함.
+
+    private Band findVerifiedBandByQuery_S(String school) {
         Optional<Band> optionalBand = bandRepository.findBySchool(school);
         Band findSchool =
                 optionalBand.orElseThrow(() ->
@@ -133,41 +157,10 @@ public class BandService {
 
         return findSchool;
 
-    } //학교명으로 검색을 함. 학교명으로 검색하여 결과가 잡히지 않을 시, 예외코드 출력.
-
-    /*
-    private Band findVerifiedBandByQuery(long bandId){
-        Optional<Band> optionalBand = bandRepository.findByBand(bandId);
-        Band findBand = optionalBand.orElseThrow(() ->
-                new BusinessLoginException(ExceptionCode.BAND_NOT_FOUND));
-
-    }
-     해당값이 없을 경우, 예외처리하여 반을 찾을 수 없다는 예외코드를 뿜지만, 처음 기획의도는
-     해당반이 없을 경우, 바로 가입신청을 할 수 있도록 유도하는것.
-     음..가능할까?
-
-     */
+    } //학교로 검색함.
 
 
-    public Band findVerifiedBandSchool(String school){
 
-        Optional<Band> optionalBand = bandRepository.findBySchool(school);
-        Band findSchool = optionalBand.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.CANT_FIND_SCHOOL));
-
-
-        return findSchool;
-    }//검색관련
-
-    public Band findVerifiedBandId(Long bandId){
-
-        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
-        Band findBandId = optionalBand.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.BAND_NOT_EXIST));
-
-
-        return findBandId;
-    }
 
 
 

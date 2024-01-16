@@ -4,7 +4,9 @@ package com.example.codestates.band.repository;
 import com.example.codestates.band.entity.Band;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 //데이터베이스 생성을 위한 엔티티 작업(CREATE, READ, UPDATE, DELETE)을 수행 하기 위한 인터페이스임
@@ -22,6 +24,10 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     //쿼리문 없어도, school, grade, bannum dmf 기반으로한 쿼리를 자동생성함(Spring Data JPA)
 
 
-    //Query(value = "SELECT c FROM Band c WHERE c.school = :school")
+    //@Query(value = "SELECT c FROM Band c WHERE c.school = :school")
     Optional<Band> findBySchool(String school); //학교이름을 기준으로 조회
+    //List<Band> findBySchool(@Param("school")String school);
+
+    //List<Band> findBySchool(String school);
+
 }

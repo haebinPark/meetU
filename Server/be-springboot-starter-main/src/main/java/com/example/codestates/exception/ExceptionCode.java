@@ -11,7 +11,6 @@ public enum ExceptionCode {
     CANNOT_CHANGE_COMMENT(403, "Comment can not change"),
     NOT_IMPLEMENTATION(501, "Not Implementation"),
     INVALID_MEMBER_STATUS(400, "Invalid member status"),
-    TODO_NOT_FOUND(404, "Todo not found"),
     BAND_ALREADY_EXIST(409,"Band already exist" ); //추가
 
     @Getter
@@ -24,4 +23,8 @@ public enum ExceptionCode {
         this.status = code;
         this.message = message;
     }
+
+
+
 }
+

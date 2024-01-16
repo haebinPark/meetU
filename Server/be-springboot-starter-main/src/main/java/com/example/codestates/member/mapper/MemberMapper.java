@@ -2,7 +2,6 @@ package com.example.codestates.member.mapper;
 
 import com.example.codestates.member.dto.MemberDto;
 import com.example.codestates.member.dto.MemberResponseDto;
-import com.example.codestates.member.entitiy.Member;
 import com.example.codestates.member.entity.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

@@ -14,8 +14,12 @@ import Button from "../../components/Common/Button.jsx";
 import getNofity from "../../utils/getNotify.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { EmailReg } from "../../utils/inputValidation.js";
+import axios from "axios";
+import Spinner from "../../components/Common/Spinner.jsx";
 
 function Join() {
+  // 전제 입력 값 상태
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -43,8 +47,71 @@ function Join() {
     errorMessage: "한글, 영문, 숫자 조합 2~6자리(특수문자 불가)",
   });
 
+  // 로딩 스피너 상태
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 이메일 입력
+  const handleEmail = (e) => {
+    const { value } = e.target;
+    const deleteSpaceEmail = value.trim();
+
+    if (!EmailReg(deleteSpaceEmail) || deleteSpaceEmail === "") {
+      setEmailError({
+        ...emailError,
+        isError: true,
+        errorMessage: "이메일 형식으로 입력해주세요.",
+      });
+    } else {
+      setEmailError({
+        ...emailError,
+        isError: false,
+        errorMessage: "이메일 형식으로 입력해주세요.",
+      });
+      setFormState({ ...formState, email: deleteSpaceEmail });
+    }
+  };
+
+  // 이메일 중복 검사
+  const chekckEmailDupe = async (e) => {
+    e.preventDefault();
+
+    // 공백 입력 방지
+    if (formState.email === "") {
+      getNofity("error", "이메일 형식으로 입력해주세요.");
+      setEmailError({
+        ...emailError,
+        isError: true,
+        errorMessage: "이메일 형식으로 입력해주세요.",
+      });
+      return;
+    }
+    // 유효성 검사 미통과 시
+    if (emailError.isError) {
+      getNofity("error", emailError.errorMessage);
+      return;
+    }
+
+    // 중복 검사 요청
+    setIsLoading(true);
+    try {
+      await axios.get();
+      setIsLoading(false);
+      getNofity("success", "가입 가능한 이메일입니다.");
+    } catch (error) {
+      console.log("Join error : ", error);
+      setIsLoading(false);
+      getNofity("error", "이미 가입된 이메일입니다.");
+      setEmailError({
+        ...emailError,
+        isError: true,
+        errorMessage: "이미 가입된 이메일입니다.",
+      });
+    }
+  };
+
   // 관심사 선택
-  const handleIntersts = (value) => {
+  const handleIntersts = (e) => {
+    const { value } = e.target;
     const interestSet = new Set([...formState.interests]);
     let interestArray = [];
 
@@ -56,23 +123,16 @@ function Join() {
       interestSet.add(value);
     }
     interestArray = [...interestSet];
-    return interestArray;
+    setFormState({ ...formState, interests: interestArray });
   };
 
-  // input 입력
+  // 입력값 form 상태에 세팅
   const handelInput = (e) => {
     const { name, value } = e.target;
 
-    if (name === "interests") {
-      const addedInterests = handleIntersts(value);
-      setFormState({ ...formState, [name]: addedInterests });
-    } else {
-      setFormState({ ...formState, [name]: value });
-    }
+    setFormState({ ...formState, [name]: value });
   };
 
-  // 에러 핸들링
-  const handleDebounceInput = () => {};
   const handleJoin = (e) => e.preventDefault();
 
   return (
@@ -96,9 +156,9 @@ function Join() {
             defaultValue={formState.email}
             placeholder="example@email.com"
             duplicationCheck={true}
-            onChange={handelInput}
+            onChange={handleEmail}
+            chekckEmailDupe={chekckEmailDupe}
           />
-          <span>{formState.email}</span>
           <MemberErrorText $isError={emailError.isError}>
             {emailError.errorMessage}
           </MemberErrorText>
@@ -155,7 +215,7 @@ function Join() {
         <MemberFormBlock>
           <MemberFormCheckbox
             checkedList={formState.interests}
-            onChange={handelInput}
+            onChange={handleIntersts}
           />
         </MemberFormBlock>
         {/* 회원가입 버튼 */}
@@ -165,7 +225,10 @@ function Join() {
           </Button>
         </MemberFormButtonBlock>
       </MemberForm>
+      {/* 토스트 알림 */}
       <ToastContainer />
+      {/* 로딩 스피너 */}
+      <Spinner isOpen={isLoading} />
     </MemberLayout>
   );
 }

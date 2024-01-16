@@ -92,7 +92,7 @@ public class BandService {
     }
 
 
-//    public Band findBandId(long bandId){
+    //public Band findBandId(long bandId){
 //        return findVerifiedBandByQuery(bandId);
 //    }
 //

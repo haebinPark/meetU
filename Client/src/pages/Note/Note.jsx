@@ -6,7 +6,7 @@ function Note() {
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <PageTitle pageTitle="쪽지함" />
+        <PageTitle>쪽지함</PageTitle>
         <PageDescription>주고 받은 쪽지를 모아뒀어요!</PageDescription>
       </div>
 

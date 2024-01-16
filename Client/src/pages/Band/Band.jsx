@@ -7,12 +7,12 @@ function Band() {
   return (
     <>
       <section style={{ textAlign: "center" }}>
-        <PageTitle pageTitle="반 검색" />
+        <PageTitle>반 검색</PageTitle>
         <PageDescription> 우리 반을 찾아보세요! </PageDescription>
         <BandSearch />
       </section>
       <section>
-        <PageTitle pageTitle="반 목록" />
+        <PageTitle>반 목록</PageTitle>
         <BandList />
       </section>
     </>

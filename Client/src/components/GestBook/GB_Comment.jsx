@@ -3,6 +3,7 @@ import getNotify from "../../utils/getNotify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import SendNoteButton from "../Common/SendNoteButton.jsx";
 
 const CommentEntry = styled.ul`
   /* 방명록 항목에 대한 스타일 */
@@ -15,6 +16,7 @@ const CommentEntry = styled.ul`
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-template-areas: "name comment button date";
+  position: relative;
 
   @media screen and (max-width: 768px) {
     grid-template-areas:
@@ -70,6 +72,9 @@ const DeleteButton = styled.button`
 
 const GuestComment = ({ id, nickName, contexts, date, onEdit, onDelete }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [sendButtonOpen, setSendButtonOpen] = useState(false);
+
+  const handelSendButton = () => setSendButtonOpen(!sendButtonOpen);
 
   const parsedDate = new Date(date).toLocaleDateString("ko-kr");
 
@@ -86,7 +91,15 @@ const GuestComment = ({ id, nickName, contexts, date, onEdit, onDelete }) => {
       <CommentEntry
         style={{ backgroundColor: isSelected ? "lightgray" : "white" }}
       >
-        <CommentNameStyle> {nickName} </CommentNameStyle>
+        <CommentNameStyle onClick={handelSendButton}>
+          {" "}
+          {nickName}
+          {sendButtonOpen && (
+            <SendNoteButton $positionBottom="5px" $positionLeft="50px">
+              쪽지 보내기
+            </SendNoteButton>
+          )}
+        </CommentNameStyle>
         <CommentStyle> {contexts}</CommentStyle>
         <ButtonStyle>
           <EditButton onClick={ComHanldeEdit}>Edit</EditButton>

@@ -55,22 +55,22 @@ const CheckboxInput = styled.input`
 `;
 
 const interests = [
-  { id: 1, type: "음악" },
-  { id: 2, type: "영화" },
-  { id: 3, type: "운동" },
-  { id: 4, type: "여행" },
-  { id: 5, type: "게임" },
-  { id: 6, type: "음식" },
-  { id: 7, type: "봉사활동" },
-  { id: 8, type: "미술" },
-  { id: 9, type: "독서" },
-  { id: 10, type: "패션" },
-  { id: 11, type: "코딩" },
-  { id: 12, type: "요리" },
-  { id: 13, type: "댄스" },
-  { id: 14, type: "사진" },
-  { id: 15, type: "영상" },
-  { id: 16, type: "공부" },
+  { id: 1, kr: "음악", en: "MUSIC" },
+  { id: 2, kr: "영화", en: "MOVIE" },
+  { id: 3, kr: "운동", en: "EXERCISE" },
+  { id: 4, kr: "여행", en: "TRAVEL" },
+  { id: 5, kr: "게임", en: "GAME" },
+  { id: 6, kr: "음식", en: "FOOD" },
+  { id: 7, kr: "봉사활동", en: "VOLUNTEER" },
+  { id: 8, kr: "미술", en: "ART" },
+  { id: 9, kr: "독서", en: "READING" },
+  { id: 10, kr: "패션", en: "FASHION" },
+  { id: 11, kr: "코딩", en: "CODING" },
+  { id: 12, kr: "요리", en: "COOKING" },
+  { id: 13, kr: "댄스", en: "DANCE" },
+  { id: 14, kr: "사진", en: "PHOTO" },
+  { id: 15, kr: "영상", en: "MEDIA" },
+  { id: 16, kr: "공부", en: "STUDY" },
 ];
 
 function MemberFormCheckbox({ checkedList, onChange }) {
@@ -83,15 +83,15 @@ function MemberFormCheckbox({ checkedList, onChange }) {
           return (
             <Li key={item.id}>
               <CheckboxLabel
-                htmlFor={item.type}
-                $isChecked={checkedList?.includes(item.type)}
+                htmlFor={item.en}
+                $isChecked={checkedList?.includes(item.en)}
               >
-                {item.type}
+                {item.kr}
                 <CheckboxInput
                   type="checkbox"
-                  id={item.type}
+                  id={item.en}
                   name="interests"
-                  value={item.type}
+                  value={item.en}
                   onChange={onChange}
                 />
               </CheckboxLabel>

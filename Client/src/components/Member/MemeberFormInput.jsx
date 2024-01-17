@@ -37,6 +37,7 @@ function MemberFormInput({
   onChange,
   emailText,
   chekckEmailDupe,
+  checkNicknameDupe,
 }) {
   const id = useId();
 
@@ -65,7 +66,11 @@ function MemberFormInput({
           />
         )}
         {duplicationCheck && (
-          <Button type="submit" size="sm" onClick={chekckEmailDupe}>
+          <Button
+            type="submit"
+            size="sm"
+            onClick={name === "email" ? chekckEmailDupe : checkNicknameDupe}
+          >
             중복검사
           </Button>
         )}

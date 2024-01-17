@@ -26,6 +26,9 @@ const TableCell = styled.td`
 `;
 
 const BandList = ({ bands }) => {
+  if (!Array.isArray(bands)) {
+    return <p>데이터가 없습니다.</p>;
+  }
   return (
     <Table>
       <thead>
@@ -35,12 +38,14 @@ const BandList = ({ bands }) => {
         </TableRow>
       </thead>
       <tbody>
-        <TableRow>
-          <TableCell>미츄고등학교 3학년 1반 </TableCell>
-          <TableCell>
-            <BandJoin />
-          </TableCell>
-        </TableRow>
+        {bands.map((band) => (
+          <TableRow key={band.id}>
+            <TableCell>{`${band.schoolName}${band.schoolType} ${band.grade}학년 ${band.class}반`}</TableCell>
+            <TableCell>
+              <BandJoin />
+            </TableCell>
+          </TableRow>
+        ))}
       </tbody>
     </Table>
   );

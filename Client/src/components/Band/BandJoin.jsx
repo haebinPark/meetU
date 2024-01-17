@@ -8,16 +8,12 @@ const BandJoin = ({ band }) => {
 
   const handleJoinClick = () => {
     setClassJoined(true); // 반 가입 버튼 클릭 시 상태를 true로 변경
-    getNotify("success", "반 가입이 완료되었습니다.", {
-      position: "bottom-right",
-    });
+    getNotify("success", "반 가입이 완료되었습니다.");
   };
 
   const handleCreateClick = () => {
     //createBand(band); // 반 생성 함수 호출 (API컴포넌트 만들기)
-    getNotify("success", "반 생성이 완료되었습니다.", {
-      position: "bottom-right",
-    });
+    getNotify("success", "반 생성이 완료되었습니다.");
   };
 
   return (

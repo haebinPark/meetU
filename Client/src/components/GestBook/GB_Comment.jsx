@@ -64,7 +64,6 @@ const DeleteButton = styled.button`
 `;
 
 function GuestComment({ id, nickName, contexts, createdAt, onDelete }) {
-  //console.log(contexts);
   const [sendButtonOpen, setSendButtonOpen] = useState(false);
 
   const handelSendButton = () => setSendButtonOpen(!sendButtonOpen);

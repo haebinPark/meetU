@@ -36,7 +36,6 @@ const CommentStyle = styled.p`
   /* 방명록 내용에 대한 스타일 */
   font-size: 1rem;
   padding-left: 1rem;
-  color : #000
   grid-area: comment;
 `;
 

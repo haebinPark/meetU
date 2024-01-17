@@ -1,5 +1,4 @@
-import { Mobile } from "../../layout/MediaQuery.jsx";
-import { useState } from "react";
+// 마크업 컴포넌트
 import MemberLayout from "../../layout/MemberLayout.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import MemberForm from "../../components/Member/MemberForm.jsx";
@@ -11,22 +10,35 @@ import MemberFormRadio from "../../components/Member/MemberFormRadio.jsx";
 import MemberFormCheckbox from "../../components/Member/MemberFormCheckbox.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
 import Button from "../../components/Common/Button.jsx";
-import getNofity from "../../utils/getNotify.js";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { EmailReg } from "../../utils/inputValidation.js";
-import axios from "axios";
 import Spinner from "../../components/Common/Spinner.jsx";
+// 훅, 유틸
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  EmailReg,
+  PasswordReg,
+  NicknameReg,
+} from "../../utils/inputValidation.js";
+import { DB_API } from "../../utils/constance.js";
+
+// 라이브러리
+import { Mobile } from "../../layout/MediaQuery.jsx";
+
+import "react-toastify/dist/ReactToastify.css";
+import getNofity from "../../utils/getNotify.js";
+import axios from "axios";
 
 function Join() {
-  // 전제 입력 값 상태
+  const navigate = useNavigate();
+
+  // 전제 입력값 상태
   const [formState, setFormState] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
-    nickname: "",
+    nickName: "",
     mbti: "",
-    interests: ["음악", "영화", "운동"],
+    interests: [],
   });
 
   // 에러 메세지 상태
@@ -74,6 +86,8 @@ function Join() {
   // 이메일 중복 검사
   const chekckEmailDupe = async (e) => {
     e.preventDefault();
+    console.log("이메일 중복 검사");
+    /*
 
     // 공백 입력 방지
     if (formState.email === "") {
@@ -107,6 +121,58 @@ function Join() {
         errorMessage: "이미 가입된 이메일입니다.",
       });
     }
+         */
+  };
+
+  // 비밀번호 입력
+  const handlePassword = (e) => {
+    const { value } = e.target;
+    const deletedSpacePassword = value.trim();
+    if (!PasswordReg(deletedSpacePassword)) {
+      setPasswordError({ ...passwordError, isError: true });
+      return;
+    }
+    setPasswordError({ ...passwordError, isError: false });
+    setFormState({ ...formState, password: deletedSpacePassword });
+  };
+
+  // 비밀번호확인 입력
+  const handlePasswordConfirm = (e) => {
+    const { value } = e.target;
+    const deletedSpaceValue = value.trim();
+    if (formState.password !== deletedSpaceValue) {
+      setPasswordConfirmError({ ...passwordConfirmError, isError: true });
+      return;
+    }
+    setPasswordConfirmError({ ...passwordConfirmError, isError: false });
+    setFormState({
+      ...formState,
+      passwordConfirm: deletedSpaceValue,
+    });
+  };
+
+  // 닉네임 입력
+  const handleNickname = (e) => {
+    const { value } = e.target;
+    const deletedSpaceValue = value.trim();
+    if (!NicknameReg(deletedSpaceValue)) {
+      SetNicknameError({ ...nicknameError, isError: true });
+      return;
+    }
+    SetNicknameError({ ...nicknameError, isError: false });
+    setFormState({ ...formState, nickName: deletedSpaceValue });
+  };
+
+  // 닉네임 중복 검사
+  const checkNicknameDupe = (e) => {
+    e.preventDefault();
+    console.log("닉네임 중복 검사");
+  };
+
+  // MBTI 선택
+  const handleMbti = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
   };
 
   // 관심사 선택
@@ -126,14 +192,20 @@ function Join() {
     setFormState({ ...formState, interests: interestArray });
   };
 
-  // 입력값 form 상태에 세팅
-  const handelInput = (e) => {
-    const { name, value } = e.target;
-
-    setFormState({ ...formState, [name]: value });
+  const handleJoin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await axios.post(DB_API + "/collections/users/records", formState);
+      getNofity("success", "회원가입이 완료되었습니다.");
+      setIsLoading(false);
+      navigate("/login");
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      getNofity("error", "오류가 발생했습니다.");
+    }
   };
-
-  const handleJoin = (e) => e.preventDefault();
 
   return (
     <MemberLayout>
@@ -172,7 +244,7 @@ function Join() {
             defaultValue={formState.password}
             placeholder="비밀번호"
             duplicationCheck={false}
-            onChange={handelInput}
+            onChange={handlePassword}
           />
           <MemberErrorText $isError={passwordError.isError}>
             {passwordError.errorMessage}
@@ -180,12 +252,13 @@ function Join() {
 
           {/* 비밀번호 확인*/}
           <MemberFormInput
+            type="password"
             name="passwordConfirm"
             label="비밀번호확인"
             defaultValue={formState.passwordConfirm}
             placeholder="비밀번호 확인"
             duplicationCheck={false}
-            onChange={handelInput}
+            onChange={handlePasswordConfirm}
           />
           {passwordConfirmError.isError && (
             <MemberErrorText $isError={passwordConfirmError.isError}>
@@ -201,7 +274,8 @@ function Join() {
             defaultValue={formState.nickname}
             placeholder="닉네임"
             duplicationCheck={true}
-            onChange={handelInput}
+            onChange={handleNickname}
+            checkNicknameDupe={checkNicknameDupe}
           />
           <MemberErrorText $isError={nicknameError.isError}>
             {nicknameError.errorMessage}
@@ -209,7 +283,7 @@ function Join() {
         </MemberFormBlock>
         {/* MBTI */}
         <MemberFormBlock>
-          <MemberFormRadio isChecked={formState.mbti} onChange={handelInput} />
+          <MemberFormRadio isChecked={formState.mbti} onChange={handleMbti} />
         </MemberFormBlock>
         {/* 관심사 */}
         <MemberFormBlock>
@@ -225,8 +299,6 @@ function Join() {
           </Button>
         </MemberFormButtonBlock>
       </MemberForm>
-      {/* 토스트 알림 */}
-      <ToastContainer />
       {/* 로딩 스피너 */}
       <Spinner isOpen={isLoading} />
     </MemberLayout>

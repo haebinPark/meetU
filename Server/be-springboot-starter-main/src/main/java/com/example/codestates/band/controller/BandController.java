@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/band")
+@RequestMapping("/bands")
 @RestController
 @Validated
 public class BandController {

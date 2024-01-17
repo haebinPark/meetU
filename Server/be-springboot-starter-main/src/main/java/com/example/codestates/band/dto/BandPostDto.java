@@ -1,11 +1,13 @@
 package com.example.codestates.band.dto;
 
 
+import com.example.codestates.member.dto.MemberDto;
 import lombok.Getter;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
+
 
 
 
@@ -29,7 +31,9 @@ public class BandPostDto {
     //@Pattern() 현재 미설정
     private String joinPass; //반 가입 신청시 비밀번호
 
-    private String userName; // 신청자 성명
+    private String nickName;
+
+//    private String userName; // 신청자 성명
 
 
     //  @NotBlank는 문자열 타입.. integer에 붙이면 에러남.

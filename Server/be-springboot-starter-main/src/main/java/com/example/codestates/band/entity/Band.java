@@ -36,8 +36,8 @@ public class Band extends Auditable {
     @Column(length = 300, nullable = false)
     private String joinPass; // 반 가입 신청에 관련한 비밀번호
 
-    @Column(length = 100, nullable = false)
-    private String userName; // 신청자 성명
+//    @Column(length = 100, nullable = false)
+//    private String userName; // 신청자 성명
 
 
     @ManyToOne

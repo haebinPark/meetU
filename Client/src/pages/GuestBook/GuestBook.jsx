@@ -70,7 +70,7 @@ function GuestBook() {
       <section>
         {/* 방명록 작성부분 */}
         <TextContainSt>
-          <form>
+          <form onSubmit={ComHandleSumbmit}>
             <TextInput
               border="1px solid var(--brand-color)"
               maxLength="200"
@@ -80,7 +80,7 @@ function GuestBook() {
             <Button
               type="submit"
               margin="2px 5px 0px 0px"
-              onChange={ComHandleSumbmit}
+              onClick={ComHandleSumbmit}
             >
               등록
             </Button>

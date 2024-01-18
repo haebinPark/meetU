@@ -19,14 +19,12 @@ import {
   PasswordReg,
   NicknameReg,
 } from "../../utils/inputValidation.js";
-import { DB_API } from "../../utils/constance.js";
+import { DB_URL } from "../../utils/constance.js";
 
 // 라이브러리
 import { Mobile } from "../../layout/MediaQuery.jsx";
-
-import "react-toastify/dist/ReactToastify.css";
 import getNofity from "../../utils/getNotify.js";
-import axios from "axios";
+import { axiosPost } from "../../utils/axios.js";
 
 function Join() {
   const navigate = useNavigate();
@@ -196,7 +194,7 @@ function Join() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post(DB_API + "/collections/users/records", formState);
+      await axiosPost(DB_URL + "/collections/users/records", formState);
       getNofity("success", "회원가입이 완료되었습니다.");
       setIsLoading(false);
       navigate("/login");

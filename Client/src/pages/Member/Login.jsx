@@ -1,31 +1,43 @@
-import { useState } from "react";
-
 import MemberLayout from "../../layout/MemberLayout.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import PageDescription from "../../components/Common/PageDescription.jsx";
 import MemberForm from "../../components/Member/MemberForm.jsx";
 import MemberFormBlock from "../../components/Member/MemberFormBlock.jsx";
 import MemberFormInput from "../../components/Member/MemeberFormInput.jsx";
-import MemberErrorText from "../../components/Member/MemberErrorText.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
 import Button from "../../components/Common/Button.jsx";
 import MemberQuestionBlock from "../../components/Member/MemberQuestionBlock.jsx";
+import Spinner from "../../components/Common/Spinner.jsx";
+import { useState } from "react";
+import getNofity from "../../utils/getNotify";
+import { axiosPost } from "../../utils/axios.js";
 
 function Login() {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [formState, setFormState] = useState({ identity: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
-  // 에러 메세지 상태
-  const [emailError, setEmailError] = useState({
-    isError: false,
-    errorMessage: "이메일은 반드시 입력해야합니다.",
-  });
-  const [passwordError, setPasswordError] = useState({
-    isError: false,
-    errorMessage: "비밀번호는 반드시 입력해야합니다.",
-  });
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
 
-  const handleInput = () => {};
-  const handleLogin = () => {};
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const res = await axiosPost(
+        "/collections/users/auth-with-password",
+        formState,
+      );
+      localStorage.setItem("token", res.data.token);
+      getNofity("success", "로그인에 성공하였습니다.");
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      getNofity("error", "로그인에 실패하였습니다.");
+      setIsLoading(false);
+    }
+  };
 
   return (
     <MemberLayout>
@@ -38,17 +50,12 @@ function Login() {
         <MemberFormBlock $minHeight="7rem" $marginBottom="1rem">
           <MemberFormInput
             type="email"
-            name="email"
+            name="identity"
             label="이메일"
-            defaultValue={formState.email}
+            defaultValue={formState.identity}
             placeholder="example@email.com"
             onChange={handleInput}
           />
-          {emailError.isError && (
-            <MemberErrorText $isError={emailError.isError}>
-              {emailError.errorMessage}
-            </MemberErrorText>
-          )}
         </MemberFormBlock>
 
         {/* 비밀번호 */}
@@ -62,11 +69,6 @@ function Login() {
             duplicationCheck={false}
             onChange={handleInput}
           />
-          {passwordError.isError && (
-            <MemberErrorText $isError={passwordError.isError}>
-              {passwordError.errorMessage}
-            </MemberErrorText>
-          )}
         </MemberFormBlock>
 
         {/* 로그인 버튼 */}
@@ -80,7 +82,7 @@ function Login() {
         <MemberQuestionBlock
           question="비밀번호를 잊어버리셨나요?"
           linkText="비밀번호 찾기"
-          link="/mypage"
+          link="#"
         />
         {/* 회원가입 하기 링크 */}
         <MemberQuestionBlock
@@ -90,6 +92,7 @@ function Login() {
           marginBottom="8rem"
         />
       </MemberForm>
+      <Spinner isOpen={isLoading} />
     </MemberLayout>
   );
 }

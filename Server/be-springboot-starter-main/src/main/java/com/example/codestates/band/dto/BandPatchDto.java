@@ -17,19 +17,17 @@ public class BandPatchDto {
     private String school;//학교명
 
     @NotBlank
-    private String schoolcode;// 초등학교, 중학교, 고등학교 선택
+    private String schoolCode;// 초등학교, 중학교, 고등학교 선택
 
-    @NonNull
     @Range(min=1, max = 6)
     private int grade; //학년 초등학교 선택시 1~6까지만.7이상 불가. 중고등학교 선택시 1~3학년까지만 4이상불가.
 
-    @NonNull
     @Range(min=1, max = 99) // 1~99반까지 생성가능.
-    private int bannum;//반
+    private int banNumber;//반
 
     @NotBlank
     //@Pattern() 현재 미설정
-    private String joinpass; //반 가입 신청시 비밀번호
+    private String joinPass; //반 가입 신청시 비밀번호
 
     private Band.StatusUpdate statusUpdate;
 

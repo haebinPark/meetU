@@ -35,8 +35,8 @@ public class MemberService {
     public Member createMember(Member member) {
         verifyExistEmail(member.getEmail());
         verifyExistNickName(member.getNickName());
-        String encryptedPassword = passwordEncoder.encode(member.getPassWord());
-        member.setPassWord(encryptedPassword);
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
 
         // 추가: DB에 User Role 저장
         String role = authorityUtils.createRoles(member.getEmail());
@@ -79,14 +79,14 @@ public class MemberService {
 
     // 유효성 검사
     private void verifyExistEmail(String email) {
-        Optional<Member> existingemail = memberRepository.findByEmail(email);
-        if (existingemail.isPresent()) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if (member.isPresent()) {
             throw new IllegalArgumentException("Email already exists");
         }
     }
-        private void verifyExistNickName(String nickname) {
-            Optional<Member> existingnickname = memberRepository.findByNickname(nickname);
-            if (existingnickname.isPresent()) {
+        private void verifyExistNickName(String nickName) {
+            Optional<Member> member = memberRepository.findByNickName(nickName);
+            if (member.isPresent()) {
                 throw new IllegalArgumentException("Nickname already exists");
             }
         }

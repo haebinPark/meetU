@@ -1,9 +1,13 @@
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
   datasource:
     # MySQL 설정
-    url: jdbc:mysql://127.0.0.1:3306/?user=root?useSSL=false&serverTimezone=Asia/Seoul
-    username: root
-    password: tjdal@132454
+    url: jdbc:mysql://localhost:3306/bands?serverTimezone=Asia/Seoul
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

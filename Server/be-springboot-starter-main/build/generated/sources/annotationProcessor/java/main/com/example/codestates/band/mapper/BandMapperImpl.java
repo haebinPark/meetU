@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-17T14:22:58+0900",
+    date = "2024-01-18T11:07:47+0900",
     comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 11.0.21 (Azul Systems, Inc.)"
 )
 @Component
@@ -26,7 +26,10 @@ public class BandMapperImpl implements BandMapper {
         Band band = new Band();
 
         band.setSchool( bandPostDto.getSchool() );
+        band.setSchoolCode( bandPostDto.getSchoolCode() );
         band.setGrade( bandPostDto.getGrade() );
+        band.setBanNumber( bandPostDto.getBanNumber() );
+        band.setJoinPass( bandPostDto.getJoinPass() );
 
         return band;
     }
@@ -41,7 +44,10 @@ public class BandMapperImpl implements BandMapper {
 
         band.setBandId( bandPatchDto.getBandId() );
         band.setSchool( bandPatchDto.getSchool() );
+        band.setSchoolCode( bandPatchDto.getSchoolCode() );
         band.setGrade( bandPatchDto.getGrade() );
+        band.setBanNumber( bandPatchDto.getBanNumber() );
+        band.setJoinPass( bandPatchDto.getJoinPass() );
         band.setStatusUpdate( bandPatchDto.getStatusUpdate() );
 
         return band;
@@ -59,7 +65,11 @@ public class BandMapperImpl implements BandMapper {
             bandResponseDto.bandId( band.getBandId() );
         }
         bandResponseDto.school( band.getSchool() );
+        bandResponseDto.schoolCode( band.getSchoolCode() );
         bandResponseDto.grade( band.getGrade() );
+        bandResponseDto.banNumber( band.getBanNumber() );
+        bandResponseDto.joinPass( band.getJoinPass() );
+        bandResponseDto.statusUpdate( band.getStatusUpdate() );
 
         return bandResponseDto.build();
     }

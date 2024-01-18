@@ -1,6 +1,6 @@
 package com.example.codestates.comment.controller;
 
-
+import com.example.codestates.band.entity.Band;
 import com.example.codestates.comment.dto.CommentDto;
 import com.example.codestates.comment.entity.Comment;
 import com.example.codestates.comment.mapper.CommentMapper;

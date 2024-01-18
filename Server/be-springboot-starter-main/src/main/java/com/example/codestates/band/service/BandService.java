@@ -24,25 +24,25 @@ public class BandService {
     public Band createBand(Band band) {
 
         String school = band.getSchool();
-        String schoolcode = band.getSchoolCode();
+        String schoolCode = band.getSchoolCode();
         int grade = band.getGrade();
-        int bannum = band.getBanNumber();
+        int banNumber = band.getBanNumber();
 
 
 
-        verifyExistBand(school, schoolcode, grade, bannum );
+        verifyExistBand(school, schoolCode, grade, banNumber);
         band.setSchool(school);
         band.setGrade(grade);
-        band.setBanNumber(bannum);
-        band.setSchoolCode(schoolcode);
+        band.setBanNumber(banNumber);
+        band.setSchoolCode(schoolCode);
         //학교명, 학년, 반이 중복인지 조회하는 코드
 
 
-        if("초등학교".equals(schoolcode)){
+        if("초등학교".equals(schoolCode)){
             if (grade > 6) {
                 throw new IllegalArgumentException("초등학교의 경우 1학년부터 6학년까지만 선택이 가능합니다.");
             }//if
-        } else if ("중학교".equals(schoolcode) || "고등학교".equals(schoolcode)) {
+        } else if ("중학교".equals(schoolCode) || "고등학교".equals(schoolCode)) {
             if (grade>3){
                 throw new IllegalArgumentException("중학교 또는 고등학교의 경우 4학년을 초과 입력 할 수 없습니다.");
             }//if
@@ -54,7 +54,7 @@ public class BandService {
         return bandRepository.save(band);
 
 
-    }
+   }
 
     /* 반 가입신청시, 해당학교명, 학년, 반이 이미 등록되어 있는지 확인하는 코드입니다. 학교, 학년, 반이 하나라도
        겹치지 않을 경우 데이터베이스에 정상적으로 등록 될 것이며, 학교, 학년, 반이 모두 중복일 경우 에러코드 409와 함께 Band already exist
@@ -71,17 +71,17 @@ public class BandService {
         Optional.ofNullable(band.getSchool()).ifPresent(school ->
                 findBand.setSchool(school));
 
-        Optional.ofNullable(band.getSchoolCode()).ifPresent(schoolcode ->
-                findBand.setSchoolCode(schoolcode));
+        Optional.ofNullable(band.getSchoolCode()).ifPresent(schoolCode ->
+                findBand.setSchoolCode(schoolCode));
 
         Optional.ofNullable(band.getGrade()).ifPresent(grade ->
                 findBand.setGrade(grade));
 
-        Optional.ofNullable(band.getBanNumber()).ifPresent(bannum ->
-                findBand.setBanNumber(bannum));
+        Optional.ofNullable(band.getBanNumber()).ifPresent(banNumber ->
+                findBand.setBanNumber(banNumber));
 
-        Optional.ofNullable(band.getJoinPass()).ifPresent(joinpass ->
-                findBand.setJoinPass(joinpass));
+        Optional.ofNullable(band.getJoinPass()).ifPresent(joinPass ->
+                findBand.setJoinPass(joinPass));
 
         Optional.ofNullable(band.getStatusUpdate()).ifPresent(statusUpdate ->
                 findBand.setStatusUpdate(statusUpdate));
@@ -131,8 +131,8 @@ public class BandService {
     } //수정관련 , 삭제관련,
 
 
-    private void verifyExistBand(String school, String schoolcode, int grade, int bannum) {
-        Optional<Band> band = bandRepository.findBySchoolAndSchoolcodeAndGradeAndBannum(school,schoolcode, grade,bannum);
+    private void verifyExistBand(String school, String schoolCode,  int grade, int banNumber) {
+        Optional<Band> band = bandRepository.findBySchoolAndSchoolCodeAndGradeAndBanNumber(school,schoolCode, grade, banNumber);
         if(band.isPresent())
             throw new BusinessLogicException(ExceptionCode.BAND_ALREADY_EXIST);
     }

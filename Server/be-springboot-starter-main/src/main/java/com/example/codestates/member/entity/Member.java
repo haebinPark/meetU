@@ -14,23 +14,20 @@ import javax.validation.constraints.Email;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name="UERS")
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long userId;
 
     @Column(nullable = false, length = 6, unique = true)
     private String nickName;
 
     @Column(nullable = false)
-    private String passWord;
+    private String password;
 
     private String role = "USER";
-
-    @ManyToOne
-    private Mbti mbti;
 
     @Email
     @Column(nullable = false, unique = true)
@@ -39,6 +36,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private NickNameColor styleCode = NickNameColor.BROWN; //닉네임 배경색 enum 타입, 기본 갈색
+
+    @ManyToOne
+    private Mbti mbti;
 
     public enum NickNameColor { // 프론트 {"RED": "#faebdd"..다른색:값} 형식으로 줘야함
         BROWN("#f4eeee"), //갈색

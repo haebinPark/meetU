@@ -54,10 +54,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.getSuccessHandler().onAuthenticationSuccess(request,response,authResult);
     }
 
-//여기에 토큰에 넣을 정보를 작성 하는 것 인가?
+    //여기에 토큰에 넣을 정보를 작성 하는 것 인가?
     private String delegateAccessToken(Member member){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("memberId",member.getUserId());
+        claims.put("memberId",member.getMemberId());
         claims.put("username",member.getEmail());
         claims.put("role",member.getRole());
 

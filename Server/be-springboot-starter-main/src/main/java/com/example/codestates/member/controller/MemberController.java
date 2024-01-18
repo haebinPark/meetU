@@ -34,7 +34,7 @@ public class MemberController {
         Member member = mapper.memberPostDtoToMember(requestBody);
         Member createMember = memberService.createMember(member);
 
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getUserId());
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getMemberId());
 
         return ResponseEntity.created(location).build();
 

@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/band")
+@RequestMapping("/bands")
 @RestController
 @Validated
 public class BandController {
@@ -37,8 +37,8 @@ public class BandController {
     //생성관련
     //Valid로 유효성 검사 @RequestBody로 요청데이터를 POSTDTO 객체로 매핑함.
     // createBands 매서드는 coffeePostDto를 입력받아 실제 객체를 생성하고 데이터베이스에 저장하는 로직임.
-   @PostMapping
-  public ResponseEntity postBand(@Valid @RequestBody BandPostDto bandPostDto) {
+    @PostMapping
+    public ResponseEntity postBand(@Valid @RequestBody BandPostDto bandPostDto) {
 
 
         Band band = bandService.createBand(bandMapper.bandPostDtoToBand(bandPostDto));
@@ -46,7 +46,7 @@ public class BandController {
 
         return ResponseEntity.created(location).build();
 
-   }
+    }
 
 
 

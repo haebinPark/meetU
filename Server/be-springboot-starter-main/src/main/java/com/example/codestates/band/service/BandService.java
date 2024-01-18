@@ -24,17 +24,17 @@ public class BandService {
     public Band createBand(Band band) {
 
         String school = band.getSchool();
-        String schoolcode = band.getSchoolcode();
+        String schoolcode = band.getSchoolCode();
         int grade = band.getGrade();
-        int bannum = band.getBannum();
+        int bannum = band.getBanNumber();
 
 
 
         verifyExistBand(school, schoolcode, grade, bannum );
         band.setSchool(school);
         band.setGrade(grade);
-        band.setBannum(bannum);
-        band.setSchoolcode(schoolcode);
+        band.setBanNumber(bannum);
+        band.setSchoolCode(schoolcode);
         //학교명, 학년, 반이 중복인지 조회하는 코드
 
 
@@ -54,7 +54,7 @@ public class BandService {
         return bandRepository.save(band);
 
 
-   }
+    }
 
     /* 반 가입신청시, 해당학교명, 학년, 반이 이미 등록되어 있는지 확인하는 코드입니다. 학교, 학년, 반이 하나라도
        겹치지 않을 경우 데이터베이스에 정상적으로 등록 될 것이며, 학교, 학년, 반이 모두 중복일 경우 에러코드 409와 함께 Band already exist
@@ -71,17 +71,17 @@ public class BandService {
         Optional.ofNullable(band.getSchool()).ifPresent(school ->
                 findBand.setSchool(school));
 
-        Optional.ofNullable(band.getSchoolcode()).ifPresent(schoolcode ->
-                findBand.setSchoolcode(schoolcode));
+        Optional.ofNullable(band.getSchoolCode()).ifPresent(schoolcode ->
+                findBand.setSchoolCode(schoolcode));
 
         Optional.ofNullable(band.getGrade()).ifPresent(grade ->
                 findBand.setGrade(grade));
 
-        Optional.ofNullable(band.getBannum()).ifPresent(bannum ->
-                findBand.setBannum(bannum));
+        Optional.ofNullable(band.getBanNumber()).ifPresent(bannum ->
+                findBand.setBanNumber(bannum));
 
-        Optional.ofNullable(band.getJoinpass()).ifPresent(joinpass ->
-                findBand.setJoinpass(joinpass));
+        Optional.ofNullable(band.getJoinPass()).ifPresent(joinpass ->
+                findBand.setJoinPass(joinpass));
 
         Optional.ofNullable(band.getStatusUpdate()).ifPresent(statusUpdate ->
                 findBand.setStatusUpdate(statusUpdate));

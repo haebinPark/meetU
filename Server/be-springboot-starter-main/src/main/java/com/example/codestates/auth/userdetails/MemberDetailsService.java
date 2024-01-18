@@ -35,7 +35,7 @@ public class MemberDetailsService implements UserDetailsService {
     private final class MemberDetails extends Member implements UserDetails {
         //여기도 추가 멤버 정보 넣어야하나?
         public MemberDetails(Member member) {
-            setUserId(member.getUserId());
+            setMemberId(member.getMemberId());
             setEmail(member.getEmail());
             setPassWord(member.getPassWord());
             setRole(member.getRole());

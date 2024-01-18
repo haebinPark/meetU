@@ -1,11 +1,13 @@
 package com.example.codestates.band.entity;
 
 import com.example.codestates.audit.Auditable;
+import com.example.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,22 +25,28 @@ public class Band extends Auditable {
     private String school; //학교명
 
     @Column(length = 100, nullable = false)
-    private String schoolcode; //학교등급
+    private String schoolCode; //학교등급
 
     @Column(nullable = false)
     private int grade; //학년
 
     @Column(nullable = false)
-    private int bannum; //반
-
-    @Transient
-    private String gradeAndBannum;
+    private int banNumber; //반
 
     @Column(length = 300, nullable = false)
-    private String joinpass; // 반 가입 신청에 관련한 비밀번호
+    private String joinPass; // 반 가입 신청에 관련한 비밀번호
 
-    @Column(length = 100, nullable = false)
-    private String username; // 신청자 성명
+//    @Column(length = 100, nullable = false)
+//    private String userName; // 신청자 성명
+
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_NICKNAME") // Member 테이블에서 참조할 외래키의 이름
+    private Member member;
+
+
+    @OneToMany(mappedBy = "band", cascade = CascadeType.PERSIST)
+    private List<BandJoinList> bandJoinLists = new ArrayList<>();
 
 
     //반 신청 상태에 대한 코드

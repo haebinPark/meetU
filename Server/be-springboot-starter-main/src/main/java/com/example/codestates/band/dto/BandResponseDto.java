@@ -19,7 +19,7 @@ public class BandResponseDto {
     private int bannum;//반
     private String joinpass; //반 가입 신청시 비밀번호
     private String username; //신청자 닉네임.
-    private Band.StatusUpdate statusUpdate; // 신청중인 상태를 나타냄
+    private Band.StatusUpdate status_update; // 신청중인 상태를 나타냄
 
 
 

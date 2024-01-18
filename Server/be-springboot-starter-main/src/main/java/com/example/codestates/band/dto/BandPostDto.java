@@ -37,6 +37,6 @@ public class BandPostDto {
     //  @NotBlank는 문자열 타입.. integer에 붙이면 에러남.
 
 
-    }//postDto
+}//postDto
 
 

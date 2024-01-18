@@ -1,5 +1,6 @@
 package com.example.codestates.member.entity;
 
+import com.example.codestates.mbti.entity.Mbti;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +14,12 @@ import javax.validation.constraints.Email;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="UERS")
+@Table
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
 
     @Column(nullable = false, length = 6, unique = true)
     private String nickName;
@@ -27,6 +28,9 @@ public class Member {
     private String passWord;
 
     private String role = "USER";
+
+    @ManyToOne
+    private Mbti mbti;
 
     @Email
     @Column(nullable = false, unique = true)

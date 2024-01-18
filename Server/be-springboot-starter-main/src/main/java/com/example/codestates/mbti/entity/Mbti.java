@@ -28,7 +28,7 @@ public class Mbti {
     @Column(nullable = false)
     private String mbtiColor; //색상값 가져와서 적용해야하는데 방법 알아봐야함
 
-    @OneToMany(mappedBy = "mbtis")
+    @OneToMany(mappedBy = "mbti")
     private List<Member> members = new ArrayList<>();
 
     public enum MbtiType {

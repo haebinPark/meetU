@@ -1,11 +1,10 @@
 spring:
   datasource:
     # MySQL 설정
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test1?createDatabaseIfNotExist=true
+    url: jdbc:mysql://127.0.0.1:3306/?user=root?useSSL=false&serverTimezone=Asia/Seoul
     username: root
-    password: {비밀번호}
-
+    password: tjdal@132454
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     show-sql=true:

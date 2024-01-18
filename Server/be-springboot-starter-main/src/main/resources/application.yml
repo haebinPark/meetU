@@ -1,9 +1,9 @@
 spring:
   datasource:
     # MySQL 설정
-    url: jdbc:mysql://{hostname}?useSSL=false&serverTimezone=Asia/Seoul
-    username: { 계정명 }
-    password: { 비밀번호 }
+    url: jdbc:mysql://127.0.0.1:3306/?user=root?useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: tjdal@132454
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

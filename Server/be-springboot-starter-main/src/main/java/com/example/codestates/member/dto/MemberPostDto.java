@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,4 +14,6 @@ import lombok.Setter;
 public class MemberPostDto {
     private String nickName;
     private String styleCode;
+    @NotBlank
+    private String password;
 }

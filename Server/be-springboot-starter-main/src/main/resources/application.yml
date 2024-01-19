@@ -1,3 +1,4 @@
+# 애플리케이션 실행에 상관없는 정보들
 spring:
   h2:
     console:
@@ -5,9 +6,9 @@ spring:
       path: /h2
   datasource:
     # MySQL 설정
-    url: jdbc:mysql://localhost:3306/bands?serverTimezone=Asia/Seoul
-    username:
-    password:
+    url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Seoul
+    username: root
+    password: tjdal@132454
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

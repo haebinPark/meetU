@@ -17,6 +17,9 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    //AuthenticationEntryPoint를 구현한 MemberAuthenticationEntryPoint
+    //MemberAuthenticationEntryPoint 클래스는 인증 과정에서 AuthenticationException 이 발생할 경우 호출
+    //처리하고자 하는 로직을 commence() 메서드에 구현하면 됩니다.
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         Exception exception =(Exception) request.getAttribute("exception");

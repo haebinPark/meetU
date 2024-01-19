@@ -24,6 +24,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
 
+    //생성자 DI용 파리미터 추가
     public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
@@ -35,6 +36,7 @@ public class MemberService {
     public Member createMember(Member member) {
         verifyExistEmail(member.getEmail());
         verifyExistNickName(member.getNickName());
+        //패스워드 암호화
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ErrorResponder {
+    //ErrorResponder 클래스는 ErrorResponse를 출력 스트림으로 생성하는 역할을 합니다.
     public static void sendErrorResponse(HttpServletResponse response, HttpStatus status) throws IOException {
         Gson gson = new Gson();
         ErrorResponse errorResponse = ErrorResponse.of(status);

@@ -32,29 +32,62 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity(debug = true)
+/*Spring Security Configuration을 적용하면 우리가 원하는 인증 방식과 웹 페이지에 대한 접근 권한을 설정
+* 기본 구조는 심플하다 @configuration만 추가해 주는 것이 전부*/
 public class SecurityConfig {
     private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils; //추가
 
 
     public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
     }
+    /*@Bean
+    * public UserDetailsManager userDetailsService(){
+    * UserDetails userDetails = >인증된 사용자의 핵심 정보를 포함,
+    * User.withDefaultPasswordEncoder()>디폴트 패스워드 인코더를 이용해 사용자 패스워드를 암호화 password("1111")암호화
+    * .username("kevin@gmail.com")>사용자의 username을 설정:고유한 사용자를 식별할 수 있는 사용자 아이디 값
+    * .password("1111")>password설정
+    * .rols("USER")>역할 지정하는 메서드
+    * .build();
+    * return new InMemoryUserDetailsManager(userDetails);>>Spring Security에서는 사용자의 핵심 정보를 관리하는 UserDetailsManger라는 인터페이스 제공
+    * 여기서는 InMemoryUserDetailsManager라는 구현체를 사용>사용자 정보 고정 하면 안좋음 테스트나 데모 환경에서만 사용
+    * -> 애플리케이션이 실행된 상태에서 사용자 인증을 위한 계정 정보를 메모리상 고정된 겂으로 설정 한 예}*/
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        //http security를 통해 HTTP 요청에 대한 보안 설정을 구성하는 핵심 클래스. Bean으로 등록해서 보안설정 구성하는 방식 권장
         http
-                .headers().frameOptions().sameOrigin()
+                .headers().frameOptions().sameOrigin()//frameOptions()>>html 태그중 frame이나 iframe, object 태그에서 페이지를 렌더링 할지의 여부를 결정 기본적으로 deny
+                //.frameOptions().sameOrigin() 동일 추처로부터 들어오는 request만 페이지 렌더링을 허용
                 .and()
-                .csrf().disable()
+                .csrf().disable()//CSRF 공격에 대한 스프링 시큐리티 설정을 비활성화 CSRF token 검증 x
                 .cors(withDefaults())
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//(1) 세션을 생성하지 않도록 설정 "Always"는 항상 세션 생성, NEVER 생성X 있다면 사용, IF Required 필요한 경우 생성
                 .and()
-                .formLogin().disable()
-                .httpBasic().disable()
+                .formLogin().disable()//기본적인 인증 방법을 폼 로그인 방식으로 지정> CSR은 지정 안함
+                //.loginPage("/auths/login-form) 미리 프로젝트에 만들어둔 커스텀 로그인 페이지를 사용하도록 설정 "/auths/login-form"은 AuthController 의 loginFormm()메서드에 요청 전송
+                //.loginProcessingUrl("/process_login") 로그인 인증 요청을 수행할 요청 url을 지정"/process_login"은 우리가 만들어 둔 login.html에서 form 태그의 action 속성에 지정하는 URL과 일치
+                //.failureUrl("/auths/login-form?error") 로그인 인증에 실패할 경우 어떤 화면으로 리다이렉트 할 것인가 지정
+                //.and() 스프링 시큐리티 보안 설정을 메서드 체인 형태로 구성하는 메서드
+                //.logout() 로그아웃 메서드 호출, logoutConfigurer를 리턴
+                //.logoutUrl("/logout") 로그아웃 수행을 위한 request url 지정
+                //.logoutSuccessUrl("/") 로그아웃 성공 후 리다이렉트 할 url 지정
+                // >>>.authorizeHttpRequests() 클라이언트의 요청이 블어오면 접근 권한을 확인하겠다는 정의
+                //.anyRequest()
+                //>>>.permitAll();클라이언트의 모든 요청에 대해 접근을 허용
+                //>>>exceptionHandling()>exception처리.accessDeniedPage 404 에러 발생시 파라미터로 지정한 url로 리다이렉트 ("/auths/access-denied") 권한이 없는 사용자가 특정 리퀘스트url에 접근 할 경우 발생하는 403 에러를 처리하기 위한 페이지 설정
+                //            .and()
+                //            .authorizeHttpRequests(authorize -> authorize    람다 표현식을 통해 request url에 대한 접근 권한을 부여
+                //                    .antMatchers("/orders/**").hasRole("ADMIN")  ant라는 빌드 툴에서 사용되는 path pattern을 이용해서 매치되는 url 표현 /orders/** /orders로 시작하는 모든 url 접근 가능 /orders/*는 하위 url depth가 1인 것만 포함
+                //                    .antMatchers("/members/my-page").hasRole("USER")
+                //                    .antMatchers("⁄**").permitAll() ->순서 바뀌면 모든 접근 혀용해버림 많은 접근 권한은 맨 마지막에 넣기
+                .httpBasic().disable() //request를 전송할 때마다 username/password 정보를 http header에 실어 인증을 하는 방식 >지금은 사용안함 비활성화
                 .exceptionHandling()
                 .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
                 .accessDeniedHandler(new MemberAccessDeniedHandler())
+                .and()
+                .apply(new CustomFilterConfigurer())// custom Configurer를 추가해 커스터마이징된 configuration을 추가할 수 있다.
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST,"/*/users").permitAll()
@@ -71,39 +104,64 @@ public class SecurityConfig {
                         .anyRequest().permitAll())
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/users/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and();
+
         return http.build();
     }
+    //(10)스프링 시큐리티에서 제공하는 패스워드 암호화 기능을 제공 컴포넌트 디폴트는 bcrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+    // (11)
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(userDetailsService());
+//        provider.setPasswordEncoder(passwordEncoder());
+//        return provider;
+//    } 인메모리 유저에게 필요한 AuthenticationProvider bean object를 Spring 컨테이너에 등록하기 위한 설정
 
+
+    //구체적인 CORS 정책을 설정
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH","DELETE"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",configuration);
+        configuration.setAllowedOrigins(Arrays.asList("*")); //모든 출저에 대해 스크립트 기반의 HTTP 통신을 허용하도록 설정, 운영 서버 환경 요구사항에 맞게 변경 가능
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH","DELETE")); //파라미터로 지정한 HTTP Method에 대한 HTTP 통신 허용
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); // CorsConfigurationSource 인터페이스의 구현 클래스인 UrlBasedCorsConfigurationSource 클래스의 객체를 생성
+        source.registerCorsConfiguration("/**",configuration); //모든 url에 앞에서 구성한 CORS 정책을 적용
         return source;
     }
 
-    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer,HttpSecurity>{
+
+    //(2) JwtAuthenticationFilter를 등록하는 역할
+    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer,HttpSecurity>{ //2-1 AbstractHttpConfigurer Custom configurer 구현할 수있다
+        //AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity>와 같이 AbstractHttpConfigurer를 상속하는 타입과 HttpSecurityBuilder를 상속하는 타입을 제너릭 타입으로 지정할 수 있다
+
         @Override
-        public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+        public void configure(HttpSecurity builder) throws Exception { //2-2 Configuration을 커스터마이징 할 수 있다
+            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class); //2-3 AuthenticationManager의 객체를 얻을 수 있다.
+            //getSharedObject를 통해 스프링 시큐리티의 설정을 구성하는 SecurityConfigurer간에 공유되는 객체를 얻을 수 있다
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer); //2-4 JwtAuthenticationFilter를 생성하면서 JwtAuthenticationFilter에서 사용되는 AuthenticationManager와 JwtTokenizer를 DI
+            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login"); //2-5 디폴트 request URL인 /login을 /users/login으로 변경
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());//successHandler 추가
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());//FailureHandler 추가
+            /*
+            AuthenticationSuccessHandler와 AuthenticationFailureHandler 인터페이스의 구현 클래스가 다른 Security Filter에서 사용이 된다면 ApplicationContext에 Bean으로 등록해서 DI 받는 게 맞습니다.
+            하지만 일반적으로 인증을 위한 Security Filter마다 AuthenticationSuccessHandler와 AuthenticationFailureHandler의 구현 클래스를 각각 생성할 것이므로 new 키워드를 사용해서 객체를 생성해도 무방합니다.
+             */
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
-            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
-
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer,authorityUtils);
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer,authorityUtils);//(2)추가JwtVerificationFilter의 인스턴스를 생성하면서 JwtVerificationFilter에서 사용되는 객체들을 생성자로 DI
 
             builder
-                    .addFilter(jwtAuthenticationFilter)
+                    .addFilter(jwtAuthenticationFilter) //2-6 addFilter를 통해 JwtAuthenticationFilter를 Spring Security Filter Chain에 추가합니다.
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
+            //(3)추가 JwtVerificationFilter를 JwtAuthenticationFilter 뒤에 추가합니다.
+            //JwtVerificationFilter는 JwtAuthenticationFilter에서 로그인 인증에 성공한 후
+            // 발급받은 JWT가 클라이언트의 request header(Authorization 헤더)에 포함되어 있을 경우에만 동작합니다.
+
         }
     }
 }

@@ -57,6 +57,12 @@ public class MemberController {
         return ResponseEntity.ok(new MultiResponseDto(mapper.membersToMemberResponseDtos(interestingMembers),pageInterestingMembers));
 
     }
+    @GetMapping
+    public ResponseEntity getMemberinfo(){
+
+        return null;
+    }
+
     @PatchMapping(value = "/{member_id}")
     public ResponseEntity patchMember(@PathVariable("member_id") @Positive long memberId,
                                       @Valid @RequestBody MemberDto.Patch requestBody){

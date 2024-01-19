@@ -1,5 +1,6 @@
 package com.example.codestates.member.entity;
 
+import com.example.codestates.band.entity.Band;
 import com.example.codestates.mbti.entity.Mbti;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,13 +22,17 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
 
     @Column(nullable = false, length = 6, unique = true)
     private String nickName;
 
     @Column(nullable = false)
     private String password;
+
+    // (2) 추가
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    private List<String> roles = new ArrayList<>();
 
     private String role = "USER";
 
@@ -39,6 +46,7 @@ public class Member {
 
     @ManyToOne
     private Mbti mbti;
+
 
     public enum NickNameColor { // 프론트 {"RED": "#faebdd"..다른색:값} 형식으로 줘야함
         BROWN("#f4eeee"), //갈색
@@ -59,6 +67,8 @@ public class Member {
         public String getCode() {
             return code;
         }
+
+
 
     }
 }

@@ -1,9 +1,9 @@
 import axios from "axios";
-import { DB_URL } from "./constance";
+import { BASE_URL } from "./constance";
 
 // axios 인스턴스
 const axiosInstance = axios.create({
-  baseURL: DB_URL,
+  baseURL: BASE_URL,
 });
 
 // axios 인스턴스 API

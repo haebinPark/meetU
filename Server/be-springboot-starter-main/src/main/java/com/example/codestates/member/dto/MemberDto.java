@@ -26,7 +26,7 @@ public class MemberDto {
         private String nickname;
         private String password;
         private String email;
-
+        private String bgColorName;  // 사용자가 선택한 배경색의 이름
     }
     @Getter
     public static class Patch{

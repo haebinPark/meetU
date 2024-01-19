@@ -1,5 +1,6 @@
 package com.example.codestates.member.dto;
 
+import com.example.codestates.bgcolor.entity.BgColor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,5 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberPatchDto {
-    private String styleCode;
+
+    private Long memberId;
+
+    private String nickName;
+
+    private BgColor bgColor;
 }

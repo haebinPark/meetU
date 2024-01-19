@@ -1,9 +1,10 @@
 package com.example.codestates.member.service;
 
+import com.example.codestates.bgcolor.entity.BgColor;
+import com.example.codestates.bgcolor.service.BgColorService;
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.exception.BusinessLogicException;
 import com.example.codestates.exception.ExceptionCode;
-import com.example.codestates.member.dto.MemberDto;
 import com.example.codestates.member.repository.MemberRepository;
 import com.example.codestates.member.entity.Member;
 import com.example.codestates.auth.utils.CustomAuthorityUtils;
@@ -21,24 +22,29 @@ import java.util.Optional;
 @Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final BgColorService bgColorService; // BgColorService를 주입
     private final CustomBeanUtils<Member> beanUtils;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
 
     //생성자 DI용 파리미터 추가
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
+    public MemberService(MemberRepository memberRepository, BgColorService bgColorService, BgColorService bgColorService1, CustomBeanUtils<Member> beanUtils, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
+        this.bgColorService = bgColorService1;
         this.beanUtils = beanUtils;
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
     }
 
-    //회원 생성
+    // 회원 생성
     public Member createMember(Member member) {
 
           String email = member.getEmail();
           String nickname = member.getNickname();
 
+        // 추가: 기본 배경색 설정
+        BgColor defaultColor = bgColorService.getDefaultBgColor();
+        member.setBgColor(defaultColor);
           verifyExistEmail(email);
           verifyExistNickName(nickname);
 
@@ -65,16 +71,10 @@ public class MemberService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 정보 업데이트
-        Member updatedMember = beanUtils.copyNonNullProperties(member,foundMember );
+        Member updatedMember = beanUtils.copyNonNullProperties(member, foundMember);
         return memberRepository.save(updatedMember);
     }
 
-      /*//회원 내 정보 수정(배경색 수정) 수정 및 병합 필요 일단 무시
-    public Member updateUserStyle(Long userId, Member.NickNameColor nickNameColor) {
-        Member findMember = findVerifiedMember(userId);
-        findMember.setStyleCode(nickNameColor);
-        return memberRepository.save(findMember);
-    }*/
 
     //회원 삭제
     public void deleteMember(@Positive long memberId) {
@@ -97,6 +97,7 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
         }
     }
+
         private void verifyExistNickName(String nickname) {
             Optional<Member> member = memberRepository.findByNickname(nickname);
             if (member.isPresent()) {

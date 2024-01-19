@@ -1,5 +1,6 @@
 package com.example.codestates.auth.userdetails;
 
+import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.mbti.entity.Mbti;
 import com.example.codestates.member.entity.Member;
 import com.example.codestates.member.repository.MemberRepository;
@@ -66,7 +67,7 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
             setRole(member.getRole());//member에 데이트 베이스에서 조회한 role을 전달
             setMbti(member.getMbti());
             setNickname(member.getNickname());
-            setStyleCode(member.getStyleCode());
+            setBgColor(member.getBgColor());
 //          setBandId(member.getBandId());
 //          //bandID들고와서 설정하기
             //setInteresting(member.getInteresing()); //이건 리스트로 받아와야함
@@ -96,7 +97,7 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         public Long getMemberId(){return super.getMemberId();}
         public Mbti getMbti(){return super.getMbti();}
         public String getNickname(){return super.getNickname();}
-        public NickNameColor getNickNameColor(){return super.getStyleCode();}
+        public BgColor getBgColor(){return super.getBgColor();}
 
         @Override
         public boolean isAccountNonExpired() {

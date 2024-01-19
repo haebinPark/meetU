@@ -2,7 +2,6 @@ package com.example.codestates.comment.service;
 
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.band.repository.BandRepository;
-import com.example.codestates.band.service.BandService;
 import com.example.codestates.comment.entity.Comment;
 import com.example.codestates.comment.mapper.CommentMapper;
 import com.example.codestates.comment.repository.CommentRepository;
@@ -13,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Service
@@ -54,9 +55,9 @@ public class CommentService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND));
     }
 
-    public Page<Comment> findComment(long bandId,int page, int size) {
+    public Page<Comment> findComment(long bandId, int page, int size) {
         bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
-        return commentRepository.findAll(PageRequest.of(page - 1, size));
+        return commentRepository.findAllByBandId(bandId,PageRequest.of(page - 1, size));
     }
 
     public void deleteComment(long bandId,long commentId) {

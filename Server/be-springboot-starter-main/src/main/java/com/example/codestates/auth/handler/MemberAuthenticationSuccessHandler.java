@@ -76,7 +76,7 @@ public class MemberAuthenticationSuccessHandler implements AuthenticationSuccess
         //responseData.put("bandID",userDetails.getBandId());
         responseData.put("mbti",((MemberDetailsService.MemberDetails) userDetails).getMbti());
         //responseData.put("interests",userDetails.getInterests());
-        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getStyleCode());
+        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getBgColor());
 
         //아니면 responsdto로 작성해서 확인해야함
 

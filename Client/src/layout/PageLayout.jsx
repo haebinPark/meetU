@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
+import Navigation from "./Navigation.jsx";
 
 const Main = styled.main`
   // 모바일(기본) 레이아웃
@@ -20,7 +21,9 @@ const Main = styled.main`
 function PageLayout({ children }) {
   return (
     <>
-      <Header />
+      <Header>
+        <Navigation />
+      </Header>
       <Main>{children}</Main>
       <Footer />
     </>

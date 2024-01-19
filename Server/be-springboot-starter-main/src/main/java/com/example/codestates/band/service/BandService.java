@@ -160,6 +160,14 @@ public class BandService {
     } //학교로 검색함.
 
 
+    public Band saveBand(Band band){
+
+        return bandRepository.save(band);
+
+    }//더미데이터 생성 관련
+
+
+
 
 
 

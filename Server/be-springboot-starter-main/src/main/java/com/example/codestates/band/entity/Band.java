@@ -52,7 +52,7 @@ public class Band extends Auditable {
     //반 신청 상태에 대한 코드
     @Enumerated(value = EnumType.STRING)
     @Column(length = 200, nullable = false)
-    private StatusUpdate statusUpdate = StatusUpdate.ApplicationCompleted; //기본값으로 신청완료를 나타냄.
+    private StatusUpdate statusUpdate = StatusUpdate.SignUp; //기본값으로 신청완료를 나타냄.
 
 
     public enum StatusUpdate  {
@@ -63,7 +63,6 @@ public class Band extends Auditable {
 
         @Getter
         private String status;
-
         StatusUpdate(String status) {
             this.status = status;
         }
@@ -71,6 +70,20 @@ public class Band extends Auditable {
 
     }
 
+
+    public Band(String school, String schoolCode, int grade, int banNumber, String joinPass, StatusUpdate statusUpdate){
+
+        this.school = school;
+        this.schoolCode = schoolCode;
+        this.grade = grade;
+        this.banNumber = banNumber;
+        this.joinPass = joinPass;
+        //this.userName = userName;
+        //this.member = member;
+        this.statusUpdate = statusUpdate;
+
+
+    }//더미데이터 생성관련
 
 
 }

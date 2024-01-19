@@ -1,6 +1,7 @@
 package com.example.codestates.member.entity;
 
 import com.example.codestates.band.entity.Band;
+import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.mbti.entity.Mbti;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

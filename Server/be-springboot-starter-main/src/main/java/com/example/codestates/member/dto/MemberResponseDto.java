@@ -1,5 +1,6 @@
 package com.example.codestates.member.dto;
 
+import com.example.codestates.bgcolor.entity.BgColor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

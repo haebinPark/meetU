@@ -16,8 +16,10 @@ public class BgColorInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        // 배경색을 저장합니다
+        BgColor defaultColor = new BgColor("BROWN", "#f4eeee");
+        bgColorService.saveBgColor(defaultColor);
 
-        bgColorService.saveBgColor(new BgColor("BROWN", "#f4eeee"));
         bgColorService.saveBgColor(new BgColor("ORANGE", "#faebdd"));
         bgColorService.saveBgColor(new BgColor("YELLOW", "#fbf3db"));
         bgColorService.saveBgColor(new BgColor("GREEN", "#edf3ec"));
@@ -26,5 +28,7 @@ public class BgColorInitializer implements ApplicationRunner {
         bgColorService.saveBgColor(new BgColor("PINK", "#faf1f5"));
         bgColorService.saveBgColor(new BgColor("RED", "#fdebec"));
 
+        // 기본 배경색을 설정합니다.
+        bgColorService.setDefaultBgColor(defaultColor);
     }
 }

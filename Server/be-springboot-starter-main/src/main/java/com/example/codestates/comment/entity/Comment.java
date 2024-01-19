@@ -2,6 +2,7 @@ package com.example.codestates.comment.entity;
 
 
 import com.example.codestates.band.entity.Band;
+import com.example.codestates.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,10 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "band_id")
     private Band band;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="member_nickname")
+    private Member member;
 
 
     @Column(nullable = false)

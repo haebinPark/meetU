@@ -2,6 +2,7 @@ package com.example.codestates.member.service;
 
 import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.bgcolor.service.BgColorService;
+import com.example.codestates.band.entity.Band;
 import com.example.codestates.exception.BusinessLogicException;
 import com.example.codestates.exception.ExceptionCode;
 import com.example.codestates.member.repository.MemberRepository;
@@ -37,21 +38,30 @@ public class MemberService {
 
     // 회원 생성
     public Member createMember(Member member) {
-        verifyExistEmail(member.getEmail());
-        verifyExistNickName(member.getNickname());
-        //패스워드 암호화
-        String encryptedPassword = passwordEncoder.encode(member.getPassword());
-        member.setPassword(encryptedPassword);
 
-        // 추가: DB에 User Role 저장
-        String role = authorityUtils.createRoles(member.getEmail());
-        member.setRole(role);
+          String email = member.getEmail();
+          String nickname = member.getNickname();
 
         // 추가: 기본 배경색 설정
         BgColor defaultColor = bgColorService.getDefaultBgColor();
         member.setBgColor(defaultColor);
+          verifyExistEmail(email);
+          verifyExistNickName(nickname);
 
-        return memberRepository.save(member);
+          member.setEmail(email);
+          member.setNickname(nickname);
+//        verifyExistEmail(member.getEmail());
+//        verifyExistNickName(member.getNickname());
+       //패스워드 암호화
+       String encryptedPassword = passwordEncoder.encode(member.getPassword());
+       member.setPassword(encryptedPassword);
+//
+       // 추가: DB에 User Role 저장
+        String role = authorityUtils.createRoles(member.getEmail());
+       member.setRole(role);
+//
+//
+       return memberRepository.save(member);
     }
 
     //회원 정보 수정
@@ -84,14 +94,16 @@ public class MemberService {
     private void verifyExistEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent()) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
         }
     }
 
-    private void verifyExistNickName(String nickname) {
-        Optional<Member> member = memberRepository.findByNickname(nickname);
-        if (member.isPresent()) {
-            throw new IllegalArgumentException("Nickname already exists");
+        private void verifyExistNickName(String nickname) {
+            Optional<Member> member = memberRepository.findByNickname(nickname);
+            if (member.isPresent()) {
+                throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
+            }
         }
+
+
     }
-}

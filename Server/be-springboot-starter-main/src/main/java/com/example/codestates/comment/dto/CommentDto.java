@@ -2,6 +2,7 @@ package com.example.codestates.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,13 +15,10 @@ public class CommentDto {
         private String nickname;
     }
     @Getter
-    public static class Patch{
+    @Setter
+    public static class Patch {
         private Long commentId;
         private String context;
-
-        public void setContext(Long commentId){
-            this.context =context;
-        }
     }
 
 }

@@ -62,7 +62,7 @@ public class CommentController {
     public ResponseEntity patchComment(@RequestParam("band_id") long bandId,
                                        @PathVariable("comment_id") long commentId,
                                       @RequestBody CommentDto.Patch requestBody ){
-
+        requestBody.setCommentId(commentId);
         Comment updateComment = commentService.updateComment(bandId,commentId,mapper.commentPatchDtoTocomment(requestBody));
 
         return ResponseEntity.ok(mapper.commentToCommentResponseDto(updateComment));

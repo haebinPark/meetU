@@ -45,5 +45,6 @@ public class Member {
     private BgColor bgColor;    //닉네임 배경색
 
     @ManyToOne
+    @JoinColumn(name = "mbti_id")
     private Mbti mbti;
 }

@@ -18,24 +18,22 @@ import java.util.Optional;
 
 @Service
 @Transactional
-
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final CustomBeanUtils<Comment> beanUtils;
-    private final CommentMapper commentMapper;
     private final BandRepository bandRepository;
 
-    public CommentService(CommentRepository commentRepository, CustomBeanUtils<Comment> beanUtils, CommentMapper commentMapper, BandRepository bandRepository) {
+    public CommentService(CommentRepository commentRepository, CustomBeanUtils<Comment> beanUtils, BandRepository bandRepository) {
         this.commentRepository = commentRepository;
         this.beanUtils = beanUtils;
-        this.commentMapper = commentMapper;
+
         this.bandRepository = bandRepository;
     }
 
     public Comment createComment(long bandId, Comment comment) {
         Band band= bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
-        comment.setBand(band);
+        //comment.setBand(band);
         return commentRepository.save(comment);
 
     }
@@ -57,7 +55,8 @@ public class CommentService {
 
     public Page<Comment> findComment(long bandId, int page, int size) {
         bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
-        return commentRepository.findAllByBandId(bandId,PageRequest.of(page - 1, size));
+
+        return commentRepository.findAll(PageRequest.of(page - 1, size));
     }
 
     public void deleteComment(long bandId,long commentId) {

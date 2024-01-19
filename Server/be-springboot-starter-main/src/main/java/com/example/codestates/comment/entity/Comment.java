@@ -12,9 +12,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@NoArgsConstructor
 @Setter
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
     @Id
@@ -28,10 +28,10 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "band_id")
     private Band band;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="member_nickname")
-    private Member member;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name ="member_nickname")
+//    private Member member;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

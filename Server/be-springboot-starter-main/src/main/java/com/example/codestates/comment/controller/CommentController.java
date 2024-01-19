@@ -19,9 +19,9 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/comments")
-@Slf4j
 public class CommentController {
     private final static String COMMENT_DEFAULT_URL = "/comments";
     private final CommentService commentService;
@@ -62,7 +62,6 @@ public class CommentController {
     public ResponseEntity patchComment(@RequestParam("band_id") long bandId,
                                        @PathVariable("comment_id") long commentId,
                                       @RequestBody CommentDto.Patch requestBody ){
-        requestBody.setCommentId(commentId);
         Comment updateComment = commentService.updateComment(bandId,commentId,mapper.commentPatchDtoTocomment(requestBody));
 
         return ResponseEntity.ok(mapper.commentToCommentResponseDto(updateComment));

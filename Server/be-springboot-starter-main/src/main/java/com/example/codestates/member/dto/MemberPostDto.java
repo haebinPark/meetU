@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class MemberPostDto {
     private String nickName;
-    private String styleCode;
+    private String bgColorName;  // 사용자가 선택한 배경색의 이름
     @NotBlank
     private String password;
 }

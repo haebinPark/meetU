@@ -29,15 +29,25 @@ public class MemberController {
         this.memberService = memberService;
         this.mapper = mapper;
     }
+    // 회원 가입 요청을 처리합니다.
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody){
+        // MemberDto.Post를 Member로 변환합니다.
         Member member = mapper.memberPostDtoToMember(requestBody);
-        Member createMember = memberService.createMember(member);
 
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createMember.getMemberId());
+        // 사용자가 선택한 배경색을 조회하고, Member 객체에 설정합니다.
+        String bgColorName = requestBody.getBgColorName();
+        BgColor chosenBgColor = bgColorService.getBgColorByName(bgColorName);
+        member.setBgColor(chosenBgColor);
 
+        // Member 객체를 저장하고, 그 결과를 반환합니다.
+        Member createdMember = memberService.createMember(member);
+
+        // 생성된 Member의 ID를 이용하여 URI를 생성합니다.
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
+
+        // 생성된 Member의 위치를 나타내는 URI를 반환합니다.
         return ResponseEntity.created(location).build();
-
     }
     @GetMapping(params = {"mbtitype"})
     public ResponseEntity getMbtiMembers(@RequestParam("mbtitype") String mbtitype,

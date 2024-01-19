@@ -10,5 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberPatchDto {
-    private String styleCode;
+
+    private Long memberId;
+
+    private String nickName;
+
+    private BgColor bgColor;
 }

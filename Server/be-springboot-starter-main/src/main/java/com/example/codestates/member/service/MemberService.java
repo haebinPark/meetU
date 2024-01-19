@@ -36,6 +36,7 @@ public class MemberService {
     public Member createMember(Member member) {
         verifyExistEmail(member.getEmail());
         verifyExistNickName(member.getNickname());
+
         //패스워드 암호화
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
@@ -44,6 +45,10 @@ public class MemberService {
         String role = authorityUtils.createRoles(member.getEmail());
         member.setRole(role);
 
+
+        // 사용자가 선택한 배경색을 조회하고, Member 객체에 설정합니다.
+        BgColor chosenBgColor = bgColorService.getBgColorByName(bgColorName);
+        member.setBgColor(chosenBgColor);
 
         return memberRepository.save(member);
     }
@@ -55,16 +60,10 @@ public class MemberService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 정보 업데이트
-        Member updatedMember = beanUtils.copyNonNullProperties(member,foundMember );
+        Member updatedMember = beanUtils.copyNonNullProperties(member, foundMember);
         return memberRepository.save(updatedMember);
     }
 
-      /*//회원 내 정보 수정(배경색 수정) 수정 및 병합 필요 일단 무시
-    public Member updateUserStyle(Long userId, Member.NickNameColor nickNameColor) {
-        Member findMember = findVerifiedMember(userId);
-        findMember.setStyleCode(nickNameColor);
-        return memberRepository.save(findMember);
-    }*/
 
     //회원 삭제
     public void deleteMember(@Positive long memberId) {
@@ -87,10 +86,11 @@ public class MemberService {
             throw new IllegalArgumentException("Email already exists");
         }
     }
-        private void verifyExistNickName(String nickname) {
-            Optional<Member> member = memberRepository.findByNickname(nickname);
-            if (member.isPresent()) {
-                throw new IllegalArgumentException("Nickname already exists");
-            }
+
+    private void verifyExistNickName(String nickname) {
+        Optional<Member> member = memberRepository.findByNickname(nickname);
+        if (member.isPresent()) {
+            throw new IllegalArgumentException("Nickname already exists");
         }
     }
+}

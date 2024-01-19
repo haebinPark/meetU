@@ -19,12 +19,12 @@ import {
   PasswordReg,
   NicknameReg,
 } from "../../utils/inputValidation.js";
-import { DB_URL } from "../../utils/constance.js";
+import { BASE_URL, DB_URL } from "../../utils/constance.js";
 
 // 라이브러리
 import { Mobile } from "../../layout/MediaQuery.jsx";
 import getNofity from "../../utils/getNotify.js";
-import { axiosPost } from "../../utils/axios.js";
+import { axiosGet, axiosPost } from "../../utils/axios.js";
 
 function Join() {
   const navigate = useNavigate();
@@ -84,42 +84,31 @@ function Join() {
   // 이메일 중복 검사
   const chekckEmailDupe = async (e) => {
     e.preventDefault();
-    console.log("이메일 중복 검사");
-    /*
-
-    // 공백 입력 방지
-    if (formState.email === "") {
-      getNofity("error", "이메일 형식으로 입력해주세요.");
-      setEmailError({
-        ...emailError,
-        isError: true,
-        errorMessage: "이메일 형식으로 입력해주세요.",
-      });
-      return;
-    }
-    // 유효성 검사 미통과 시
-    if (emailError.isError) {
-      getNofity("error", emailError.errorMessage);
-      return;
-    }
-
-    // 중복 검사 요청
     setIsLoading(true);
     try {
-      await axios.get();
+      const response = await axiosGet(
+        BASE_URL + `/members/type=checkemail?email=${formState.email}`,
+      );
+      if (!response.data.isEmailAvailable) {
+        setEmailError({
+          ...emailError,
+          isError: true,
+          errorMessage: "이미 가입된 이메일입니다.",
+        });
+        getNofity("error", "이미 가입된 이메일입니다.");
+      } else {
+        setEmailError({
+          ...emailError,
+          isError: false,
+          errorMessage: "사용 가능한 이메일입니다.",
+        });
+        getNofity("success", "사용 가능한 이메일입니다.");
+      }
       setIsLoading(false);
-      getNofity("success", "가입 가능한 이메일입니다.");
     } catch (error) {
-      console.log("Join error : ", error);
+      console.log(error);
       setIsLoading(false);
-      getNofity("error", "이미 가입된 이메일입니다.");
-      setEmailError({
-        ...emailError,
-        isError: true,
-        errorMessage: "이미 가입된 이메일입니다.",
-      });
     }
-         */
   };
 
   // 비밀번호 입력
@@ -162,9 +151,33 @@ function Join() {
   };
 
   // 닉네임 중복 검사
-  const checkNicknameDupe = (e) => {
+  const checkNicknameDupe = async (e) => {
     e.preventDefault();
-    console.log("닉네임 중복 검사");
+    setIsLoading(true);
+    try {
+      const response = await axiosGet(
+        BASE_URL + `/members/type=checknickname?nickname=${formState.nickName}`,
+      );
+      if (!response.data.isNicknameAvailable) {
+        SetNicknameError({
+          ...nicknameError,
+          isError: true,
+          errorMessage: "이미 가입된 닉네임입니다.",
+        });
+        getNofity("error", "이미 가입된 닉네임입니다.");
+      } else {
+        SetNicknameError({
+          ...nicknameError,
+          isError: false,
+          errorMessage: "사용 가능한 닉네임입니다.",
+        });
+        getNofity("success", "사용 가능한 닉네임입니다.");
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   // MBTI 선택
@@ -192,9 +205,16 @@ function Join() {
 
   const handleJoin = async (e) => {
     e.preventDefault();
+    const sendForm = {
+      email: formState.email,
+      passWord: formState.password,
+      nickName: formState.nickName,
+      mbti: formState.mbti,
+      interests: formState.interests,
+    };
     setIsLoading(true);
     try {
-      await axiosPost(DB_URL + "/collections/users/records", formState);
+      await axiosPost("/members/signup", sendForm);
       getNofity("success", "회원가입이 완료되었습니다.");
       setIsLoading(false);
       navigate("/login");

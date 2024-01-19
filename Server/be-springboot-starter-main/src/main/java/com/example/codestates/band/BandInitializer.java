@@ -34,7 +34,5 @@ public class BandInitializer implements ApplicationRunner {
                 Band.StatusUpdate.SignUp));
 
 
-
-
     }
 }

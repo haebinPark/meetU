@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Range;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 
@@ -25,7 +28,8 @@ public class BandPostDto {
     @NotBlank
     //@Pattern() 현재 미설정
     private String joinPass; //반 가입 신청시 비밀번호
-    private String nickName;
+
+
 
 //  private String userName; // 신청자 성명
 

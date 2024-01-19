@@ -17,7 +17,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="UERS")
 public class Member {
 
     @Id
@@ -71,4 +70,6 @@ public class Member {
 
 
     }
+
+
 }

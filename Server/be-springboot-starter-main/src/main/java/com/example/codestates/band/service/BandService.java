@@ -29,7 +29,6 @@ public class BandService {
         int banNumber = band.getBanNumber();
 
 
-
         verifyExistBand(school, schoolCode, grade, banNumber);
         band.setSchool(school);
         band.setGrade(grade);
@@ -52,7 +51,6 @@ public class BandService {
         // 중학교, 고등학교의 경우 4학년 이상 입력할 수 없게 하는 코드.
 
         return bandRepository.save(band);
-
 
    }
 
@@ -92,7 +90,7 @@ public class BandService {
     }
 
 
-    //public Band findBandId(long bandId){
+//    public Band findBandId(long bandId){
 //        return findVerifiedBandByQuery(bandId);
 //    }
 //
@@ -102,14 +100,48 @@ public class BandService {
 //        //BandID를 기준으로 내림차순으로 조회함.
 //    }
 
-    public Band findSchool(String school){
-        return findVerifiedBandByQuery_S(school);
-    }
+    public Band findBand(long bandId) { return findVerifiedBandByQuery(bandId);}
 
-    public Page<Band> findSchools(int page, int size){
-        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("school").descending()));
+
+    public Page<Band> findBands(int page, int size){
+        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("bandId").descending()));
         //학교를 기준으로 내림차순으로 조회함.
     }
+
+
+//    public Band findSchool(String school){
+//        return findVerifiedBandByQuery_S(school);
+//    }
+
+//    public Page<Band> findSchools(int page, int size){
+//        return bandRepository.findAll(PageRequest.of(page,size, Sort.by("school").descending()));
+//        //학교를 기준으로 내림차순으로 조회함.
+//    }
+
+
+    //조회관련(학교, 학교코드, 학년, 반을 모두 사용할 경우)
+
+
+    public Band findBandDetails(String school, String schoolCode, int grade, int banNumber){
+
+        return findVerifiedBandByDetails(school, schoolCode, grade, banNumber);
+
+    }
+
+    private Band findVerifiedBandByDetails(String school, String schoolCode, int grade, int banNumber){
+
+        Optional<Band> optionalBand = bandRepository.findBySchoolAndSchoolCodeAndGradeAndBanNumber(
+                school,schoolCode,grade,banNumber);
+
+        Band findBandDetails = optionalBand.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+
+
+        return  findBandDetails;
+    }
+
+
+
 
 
     //삭제관련
@@ -139,25 +171,17 @@ public class BandService {
     //중복 여부 검증 메서드
 
 
-//    private Band findVerifiedBandByQuery(long bandId) {
-//        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
-//        Band findBandId =
-//                optionalBand.orElseThrow(() ->
-//                        new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
-//
-//        return findBandId;
-//
-//    } // 고유ID로 검색함.
-
-    private Band findVerifiedBandByQuery_S(String school) {
-        Optional<Band> optionalBand = bandRepository.findBySchool(school);
-        Band findSchool =
+    private Band findVerifiedBandByQuery(long bandId) {
+        Optional<Band> optionalBand = bandRepository.findByBandId(bandId);
+        Band findBand =
                 optionalBand.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
 
-        return findSchool;
+        return findBand;
 
-    } //학교로 검색함.
+    } // 고유ID로 검색.
+
+
 
 
     public Band saveBand(Band band){

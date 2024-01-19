@@ -15,7 +15,6 @@ const Login = lazy(() => import("./pages/Member/Login.jsx"));
 const Membership = lazy(() => import("./pages/Member/Membership.jsx"));
 const Band = lazy(() => import("./pages/Band/Band.jsx"));
 const GuestBook = lazy(() => import("./pages/GuestBook/GuestBook.jsx"));
-const Note = lazy(() => import("./pages/Note/Note.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage/MyPage.jsx"));
 
 const router = createBrowserRouter(
@@ -28,7 +27,6 @@ const router = createBrowserRouter(
         <Route path="membership" element={<Membership />} />
         <Route path="band" element={<Band />} />
         <Route path="guestbook" element={<GuestBook />} />
-        <Route path="note" element={<Note />} />
         <Route path="mypage" element={<MyPage />} />
       </Route>
     </>,

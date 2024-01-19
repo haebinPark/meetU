@@ -65,7 +65,7 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
             setPassword(member.getPassword());
             setRole(member.getRole());//member에 데이트 베이스에서 조회한 role을 전달
             setMbti(member.getMbti());
-            setNickName(member.getNickName());
+            setNickname(member.getNickname());
             setStyleCode(member.getStyleCode());
 //          setBandId(member.getBandId());
 //          //bandID들고와서 설정하기
@@ -86,20 +86,17 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
 
 
         //갑자기 이게 안넣어지면 오류가 뜬다 왜?-> 명칭이 달라서 그런거
-        @Override
-        public String getPassword() {
-            return getPassword();
-        }
+
         //(2-4)스프링 시큐리티에서 인식 할 수있는 username을 member클래스의 email 주소로 채우고 있다. 리턴값은 null일 수 없다.
         @Override
         public String getUsername() {
             return getEmail();
         }
         //respons에 들어가야할 정보들에 대한 메서드들을 정의
-        public Long getMemberId(){return getMemberId();}
-        public Mbti getMbti(){return getMbti();}
-        public String getNickName(){return getNickName();}
-        public NickNameColor getNickNameColor(){return getNickNameColor();}
+        public Long getMemberId(){return super.getMemberId();}
+        public Mbti getMbti(){return super.getMbti();}
+        public String getNickname(){return super.getNickname();}
+        public NickNameColor getNickNameColor(){return super.getStyleCode();}
 
         @Override
         public boolean isAccountNonExpired() {

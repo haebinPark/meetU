@@ -68,17 +68,15 @@ public class MemberAuthenticationSuccessHandler implements AuthenticationSuccess
 //        out.flush();
 //        }
         Map<String, Object> responseData = new HashMap<>();
-        responseData.put("username", authentication.getName());
+        responseData.put("email", authentication.getName());
         responseData.put("authorities", authentication.getAuthorities());
         //여기에 username(email)을 가지고 와서 사용자 정보들을 반환하는 코드 작성해야함
-
-
-        responseData.put("nickname", ((MemberDetailsService.MemberDetails) userDetails).getNickName());
+        responseData.put("nickname", ((MemberDetailsService.MemberDetails) userDetails).getNickname());
         responseData.put("memberId",((MemberDetailsService.MemberDetails) userDetails).getMemberId());
         //responseData.put("bandID",userDetails.getBandId());
         responseData.put("mbti",((MemberDetailsService.MemberDetails) userDetails).getMbti());
         //responseData.put("interests",userDetails.getInterests());
-        responseData.put("color",((MemberDetailsService.MemberDetails) userDetails).getNickNameColor());
+        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getStyleCode());
 
         //아니면 responsdto로 작성해서 확인해야함
 

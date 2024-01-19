@@ -35,7 +35,7 @@ public class MemberService {
     //회원 생성
     public Member createMember(Member member) {
         verifyExistEmail(member.getEmail());
-        verifyExistNickName(member.getNickName());
+        verifyExistNickName(member.getNickname());
         //패스워드 암호화
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
@@ -76,6 +76,7 @@ public class MemberService {
     public Page<Member> findMembers(String type, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         // 회원 목록 조회
+
         return memberRepository.findAll(pageRequest);
     }
 
@@ -86,8 +87,8 @@ public class MemberService {
             throw new IllegalArgumentException("Email already exists");
         }
     }
-        private void verifyExistNickName(String nickName) {
-            Optional<Member> member = memberRepository.findByNickName(nickName);
+        private void verifyExistNickName(String nickname) {
+            Optional<Member> member = memberRepository.findByNickname(nickname);
             if (member.isPresent()) {
                 throw new IllegalArgumentException("Nickname already exists");
             }

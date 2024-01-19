@@ -7,7 +7,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
-        private String nickName;
+        private String nickname;
         private String password;
         private String email;
 
@@ -15,7 +15,7 @@ public class MemberDto {
     @Getter
     public static class Patch{
         private Long memberId;
-        private String nickName;
+        private String nickname;
 
 
         public void setMemberId(Long memberId){

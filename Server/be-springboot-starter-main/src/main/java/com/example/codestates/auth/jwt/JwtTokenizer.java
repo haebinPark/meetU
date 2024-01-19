@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 public class JwtTokenizer {
     @Getter
-    @Value("$(jwt.key)")
+    @Value("${jwt.key}")
     private String secretKey;
 
     @Getter
@@ -105,8 +105,6 @@ public class JwtTokenizer {
         (4-1)의 Decoders.BASE64.decode() 메서드는 Base64 형식으로 인코딩 된 Secret Key를 디코딩한 후, byte array를 반환합니다.
         (4-2)의 Keys.hmacShaKeyFor() 메서드는 key byte array를 기반으로 적절한 HMAC 알고리즘을 적용한 Key(java.security.Key) 객체를 생성합니다.
          jjwt 0.9.x 버전에서는 서명 과정에서 HMAC 알고리즘을 직접 지정해야 했지만 최신 버전에서는 내부적으로 적절한 HMAC 알고리즘을 지정해 준다는 사실을 기억하기 바랍니다.
-
-
          */
         return key;
     }

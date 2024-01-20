@@ -63,12 +63,12 @@ const DeleteButton = styled.button`
   margin-left: 10px;
 `;
 
-function GuestComment({ id, nickName, contexts, createdAt, onDelete }) {
+function GuestComment({ id, nickName, contexts, created, onDelete }) {
   const [sendButtonOpen, setSendButtonOpen] = useState(false);
 
   const handelSendButton = () => setSendButtonOpen(!sendButtonOpen);
 
-  const parsedDate = new Date(createdAt).toLocaleDateString("ko-kr");
+  const parsedDate = new Date(created).toLocaleDateString("ko-kr");
 
   const ComHandleDelete = () => {
     onDelete(id);

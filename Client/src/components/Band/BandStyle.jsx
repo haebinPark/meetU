@@ -32,3 +32,28 @@ export const SelectBox = styled.select`
   padding: 5px;
   border-radius: 5px;
 `;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const TableHeader = styled.th`
+  border: 1px solid #fff;
+  padding: 8px;
+  text-align: center;
+  color: #fff;
+  background-color: var(--brand-color);
+`;
+
+export const TableRow = styled.tr`
+  &:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+`;
+
+export const TableCell = styled.td`
+  border: 1px solid var(--brand-color);
+  padding: 8px;
+  text-align: center;
+`;

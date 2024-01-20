@@ -4,11 +4,11 @@ const ClassSearchForm = ({ classInput, setClassInput }) => (
   <SearchForm>
     <SearchInput
       type="search"
-      id="class"
+      id="banNum"
       value={classInput}
       onChange={(e) => setClassInput(e.target.value)}
     />
-    <label htmlFor="class"> 반 </label>
+    <label htmlFor="banNum"> 반 </label>
   </SearchForm>
 );
 

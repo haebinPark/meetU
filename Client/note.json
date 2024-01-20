@@ -77,6 +77,16 @@
       "joinPass": "test11",
       "userName": "집에가고싶은무지",
       "statusUpdate": " ApplicationCompleted"
+    },
+    {
+      "bandId": 2,
+      "school": "미츄",
+      "schoolCode": "초등학교",
+      "grade": 3,
+      "banNumber": 1,
+      "joinPass": "test11",
+      "userName": "오우예씨몬",
+      "statusUpdate": "SignUp"
     }
   ]
 }

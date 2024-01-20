@@ -1,5 +1,4 @@
-import { Mobile } from "../../layout/MediaQuery.jsx";
-import { useState } from "react";
+// 마크업 컴포넌트
 import MemberLayout from "../../layout/MemberLayout.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import MemberForm from "../../components/Member/MemberForm.jsx";
@@ -11,18 +10,33 @@ import MemberFormRadio from "../../components/Member/MemberFormRadio.jsx";
 import MemberFormCheckbox from "../../components/Member/MemberFormCheckbox.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
 import Button from "../../components/Common/Button.jsx";
+import Spinner from "../../components/Common/Spinner.jsx";
+// 훅, 유틸
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  EmailReg,
+  PasswordReg,
+  NicknameReg,
+} from "../../utils/inputValidation.js";
+import { BASE_URL, DB_URL } from "../../utils/constance.js";
+
+// 라이브러리
+import { Mobile } from "../../layout/MediaQuery.jsx";
 import getNofity from "../../utils/getNotify.js";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { axiosGet, axiosPost } from "../../utils/axios.js";
 
 function Join() {
+  const navigate = useNavigate();
+
+  // 전제 입력값 상태
   const [formState, setFormState] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
-    nickname: "",
+    nickName: "",
     mbti: "",
-    interests: ["음악", "영화", "운동"],
+    interests: [],
   });
 
   // 에러 메세지 상태
@@ -43,8 +57,138 @@ function Join() {
     errorMessage: "한글, 영문, 숫자 조합 2~6자리(특수문자 불가)",
   });
 
+  // 로딩 스피너 상태
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 이메일 입력
+  const handleEmail = (e) => {
+    const { value } = e.target;
+    const deleteSpaceEmail = value.trim();
+
+    if (!EmailReg(deleteSpaceEmail) || deleteSpaceEmail === "") {
+      setEmailError({
+        ...emailError,
+        isError: true,
+        errorMessage: "이메일 형식으로 입력해주세요.",
+      });
+    } else {
+      setEmailError({
+        ...emailError,
+        isError: false,
+        errorMessage: "이메일 형식으로 입력해주세요.",
+      });
+      setFormState({ ...formState, email: deleteSpaceEmail });
+    }
+  };
+
+  // 이메일 중복 검사
+  const chekckEmailDupe = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axiosGet(
+        BASE_URL + `/members/type=checkemail?email=${formState.email}`,
+      );
+      if (!response.data.isEmailAvailable) {
+        setEmailError({
+          ...emailError,
+          isError: true,
+          errorMessage: "이미 가입된 이메일입니다.",
+        });
+        getNofity("error", "이미 가입된 이메일입니다.");
+      } else {
+        setEmailError({
+          ...emailError,
+          isError: false,
+          errorMessage: "사용 가능한 이메일입니다.",
+        });
+        getNofity("success", "사용 가능한 이메일입니다.");
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  // 비밀번호 입력
+  const handlePassword = (e) => {
+    const { value } = e.target;
+    const deletedSpacePassword = value.trim();
+    if (!PasswordReg(deletedSpacePassword)) {
+      setPasswordError({ ...passwordError, isError: true });
+      return;
+    }
+    setPasswordError({ ...passwordError, isError: false });
+    setFormState({ ...formState, password: deletedSpacePassword });
+  };
+
+  // 비밀번호확인 입력
+  const handlePasswordConfirm = (e) => {
+    const { value } = e.target;
+    const deletedSpaceValue = value.trim();
+    if (formState.password !== deletedSpaceValue) {
+      setPasswordConfirmError({ ...passwordConfirmError, isError: true });
+      return;
+    }
+    setPasswordConfirmError({ ...passwordConfirmError, isError: false });
+    setFormState({
+      ...formState,
+      passwordConfirm: deletedSpaceValue,
+    });
+  };
+
+  // 닉네임 입력
+  const handleNickname = (e) => {
+    const { value } = e.target;
+    const deletedSpaceValue = value.trim();
+    if (!NicknameReg(deletedSpaceValue)) {
+      SetNicknameError({ ...nicknameError, isError: true });
+      return;
+    }
+    SetNicknameError({ ...nicknameError, isError: false });
+    setFormState({ ...formState, nickName: deletedSpaceValue });
+  };
+
+  // 닉네임 중복 검사
+  const checkNicknameDupe = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axiosGet(
+        BASE_URL + `/members/type=checknickname?nickname=${formState.nickName}`,
+      );
+      if (!response.data.isNicknameAvailable) {
+        SetNicknameError({
+          ...nicknameError,
+          isError: true,
+          errorMessage: "이미 가입된 닉네임입니다.",
+        });
+        getNofity("error", "이미 가입된 닉네임입니다.");
+      } else {
+        SetNicknameError({
+          ...nicknameError,
+          isError: false,
+          errorMessage: "사용 가능한 닉네임입니다.",
+        });
+        getNofity("success", "사용 가능한 닉네임입니다.");
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  // MBTI 선택
+  const handleMbti = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+
   // 관심사 선택
-  const handleIntersts = (value) => {
+  const handleIntersts = (e) => {
+    const { value } = e.target;
     const interestSet = new Set([...formState.interests]);
     let interestArray = [];
 
@@ -56,24 +200,30 @@ function Join() {
       interestSet.add(value);
     }
     interestArray = [...interestSet];
-    return interestArray;
+    setFormState({ ...formState, interests: interestArray });
   };
 
-  // input 입력
-  const handelInput = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "interests") {
-      const addedInterests = handleIntersts(value);
-      setFormState({ ...formState, [name]: addedInterests });
-    } else {
-      setFormState({ ...formState, [name]: value });
+  const handleJoin = async (e) => {
+    e.preventDefault();
+    const sendForm = {
+      email: formState.email,
+      passWord: formState.password,
+      nickName: formState.nickName,
+      mbti: formState.mbti,
+      interests: formState.interests,
+    };
+    setIsLoading(true);
+    try {
+      await axiosPost("/members/signup", sendForm);
+      getNofity("success", "회원가입이 완료되었습니다.");
+      setIsLoading(false);
+      navigate("/login");
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      getNofity("error", "오류가 발생했습니다.");
     }
   };
-
-  // 에러 핸들링
-  const handleDebounceInput = () => {};
-  const handleJoin = (e) => e.preventDefault();
 
   return (
     <MemberLayout>
@@ -96,9 +246,9 @@ function Join() {
             defaultValue={formState.email}
             placeholder="example@email.com"
             duplicationCheck={true}
-            onChange={handelInput}
+            onChange={handleEmail}
+            chekckEmailDupe={chekckEmailDupe}
           />
-          <span>{formState.email}</span>
           <MemberErrorText $isError={emailError.isError}>
             {emailError.errorMessage}
           </MemberErrorText>
@@ -112,7 +262,7 @@ function Join() {
             defaultValue={formState.password}
             placeholder="비밀번호"
             duplicationCheck={false}
-            onChange={handelInput}
+            onChange={handlePassword}
           />
           <MemberErrorText $isError={passwordError.isError}>
             {passwordError.errorMessage}
@@ -120,12 +270,13 @@ function Join() {
 
           {/* 비밀번호 확인*/}
           <MemberFormInput
+            type="password"
             name="passwordConfirm"
             label="비밀번호확인"
             defaultValue={formState.passwordConfirm}
             placeholder="비밀번호 확인"
             duplicationCheck={false}
-            onChange={handelInput}
+            onChange={handlePasswordConfirm}
           />
           {passwordConfirmError.isError && (
             <MemberErrorText $isError={passwordConfirmError.isError}>
@@ -141,7 +292,8 @@ function Join() {
             defaultValue={formState.nickname}
             placeholder="닉네임"
             duplicationCheck={true}
-            onChange={handelInput}
+            onChange={handleNickname}
+            checkNicknameDupe={checkNicknameDupe}
           />
           <MemberErrorText $isError={nicknameError.isError}>
             {nicknameError.errorMessage}
@@ -149,13 +301,13 @@ function Join() {
         </MemberFormBlock>
         {/* MBTI */}
         <MemberFormBlock>
-          <MemberFormRadio isChecked={formState.mbti} onChange={handelInput} />
+          <MemberFormRadio isChecked={formState.mbti} onChange={handleMbti} />
         </MemberFormBlock>
         {/* 관심사 */}
         <MemberFormBlock>
           <MemberFormCheckbox
             checkedList={formState.interests}
-            onChange={handelInput}
+            onChange={handleIntersts}
           />
         </MemberFormBlock>
         {/* 회원가입 버튼 */}
@@ -165,7 +317,8 @@ function Join() {
           </Button>
         </MemberFormButtonBlock>
       </MemberForm>
-      <ToastContainer />
+      {/* 로딩 스피너 */}
+      <Spinner isOpen={isLoading} />
     </MemberLayout>
   );
 }

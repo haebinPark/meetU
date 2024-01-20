@@ -31,7 +31,11 @@ function NickNameTag({ children, $styleCode }) {
   return (
     <NickName $styleCode={$styleCode} onClick={handleNote}>
       {children}
-      {noteOpen && <SendNoteButton>쪽지 보내기</SendNoteButton>}
+      {noteOpen && (
+        <SendNoteButton $positionRight="-60%" $positionBottom="-30%">
+          쪽지 보내기
+        </SendNoteButton>
+      )}
     </NickName>
   );
 }

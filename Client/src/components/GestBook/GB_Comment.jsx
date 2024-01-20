@@ -16,6 +16,7 @@ const CommentEntry = styled.li`
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-template-areas: "name comment button date";
+  position: relative;
 
   @media screen and (max-width: 768px) {
     grid-template-areas:
@@ -62,6 +63,7 @@ const DeleteButton = styled.button`
   opacity: 0.5;
   margin-left: 10px;
 `;
+
 
 function GuestComment({ id, nickName, contexts, created, onDelete }) {
   const [sendButtonOpen, setSendButtonOpen] = useState(false);

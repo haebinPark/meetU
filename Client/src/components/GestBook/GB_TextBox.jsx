@@ -12,7 +12,7 @@ const TextInputStyled = styled.textarea`
   resize: none;
 `;
 
-const TextInput = ({ value, onChange, border, maxLength }) => {
+const TextInput = ({ value, onChange, border, maxLength, placeholder }) => {
   return (
     <TextInputStyled
       type="text"
@@ -20,7 +20,7 @@ const TextInput = ({ value, onChange, border, maxLength }) => {
       onChange={onChange}
       $border={border}
       maxLength={maxLength}
-      placeholder="글을 적어 보세요"
+      placeholder={placeholder}
     />
   );
 };

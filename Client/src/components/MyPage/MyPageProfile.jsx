@@ -15,7 +15,7 @@ function MyPageProfile({ userInfo, styleCode }) {
     <Dl>
       <HiddenTitle as="dt">닉네임</HiddenTitle>
       <NickNameTagBig $styleCode={styleCode}>
-        {userInfo.nickName}
+        {userInfo.nickname}
       </NickNameTagBig>
       <HiddenTitle as="dt">이메일</HiddenTitle>
       <dd>{userInfo.email}</dd>

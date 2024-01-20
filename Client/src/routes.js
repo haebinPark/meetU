@@ -7,6 +7,8 @@ import {
 import { lazy } from "react";
 
 const App = lazy(() => import("./App"));
+const PageLayout = lazy(() => import("./layout/PageLayout.jsx"));
+const PrivateLayout = lazy(() => import("./layout/PrivateLayout.jsx"));
 const Introduction = lazy(
   () => import("./pages/Introduction/Introduction.jsx"),
 );
@@ -21,13 +23,17 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
-        <Route path="introduction" element={<Introduction />} />
-        <Route path="join" element={<Join />} />
-        <Route path="login" element={<Login />} />
-        <Route path="membership" element={<Membership />} />
-        <Route path="band" element={<Band />} />
-        <Route path="guestbook" element={<GuestBook />} />
-        <Route path="mypage" element={<MyPage />} />
+        <Route element={<PageLayout />}>
+          <Route path="introduction" element={<Introduction />} />
+          <Route path="join" element={<Join />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route element={<PrivateLayout />}>
+          <Route path="mypage" element={<MyPage />} />
+          <Route path="band" element={<Band />} />
+          <Route path="guestbook" element={<GuestBook />} />
+          <Route path="membership" element={<Membership />} />
+        </Route>
       </Route>
     </>,
   ),

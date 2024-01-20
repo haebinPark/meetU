@@ -57,14 +57,9 @@ const NavList = styled.ul`
 `;
 
 const navItems = [
-  { id: 0, link: "/introduction", menuName: "소개" },
   { id: 1, link: "/band", menuName: "우리 반" },
-  { id: 2, link: "/guestbook", menuName: "방명록" },
-  { id: 4, link: "/mypage", menuName: "마이페이지" },
-  { id: 5, link: "/", menuName: "로그아웃" },
-  { id: 6, link: "/join", menuName: "회원가입" },
-  { id: 7, link: "/login", menuName: "로그인" },
-  { id: 8, link: "/membership", menuName: "회원정보 수정" },
+  { id: 2, link: "/mypage", menuName: "마이페이지" },
+  { id: 3, link: "/", menuName: "로그아웃" },
 ];
 
 const NavItem = styled.li`

@@ -1,12 +1,15 @@
 import Header from "./Header.jsx";
+import Navigation from "./Navigation.jsx";
 import Main from "./Main.jsx";
 import Footer from "./Footer.jsx";
 import { Outlet } from "react-router-dom";
 
-function PageLayout() {
+function PrivateLayout() {
   return (
     <>
-      <Header />
+      <Header>
+        <Navigation />
+      </Header>
       <Main>
         <Outlet />
       </Main>
@@ -15,4 +18,4 @@ function PageLayout() {
   );
 }
 
-export default PageLayout;
+export default PrivateLayout;

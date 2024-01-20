@@ -1,10 +1,12 @@
 import { useState } from "react";
+import pb from "../../api/pocketbase.js";
 import MemberLayout from "../../layout/MemberLayout.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import MyPageSection from "../../components/MyPage/MyPageSection.jsx";
 import MyPageProfile from "../../components/MyPage/MyPageProfile.jsx";
 import MyPageChangeInfo from "../../components/MyPage/MyPageChangeInfo.jsx";
 import DivisionLine from "../../components/MyPage/DivisionLine.jsx";
+import MyPageNoBand from "../../components/MyPage/MyPageNoBand.jsx";
 import MyPageRecommend from "../../components/MyPage/MyPageRecommend.jsx";
 import MyPageFriendList from "../../components/MyPage/MyPageFriendList.jsx";
 
@@ -72,13 +74,7 @@ const friendsList = [
 ];
 
 function MyPage() {
-  const [userInfo, setUserInfo] = useState({
-    userId: 12345,
-    email: "user@example.com",
-    nickName: "아띠Um12",
-    mbti: "INTJ",
-    interests: ["CODING", "TREVEL", "MUSIC"],
-  });
+  const [userInfo, setUserInfo] = useState(pb.authStore.model);
   const [styleCode, setStyleCode] = useState("#f4eeee");
   const [openColorPalette, setOpenColoPalette] = useState(false);
 
@@ -98,7 +94,6 @@ function MyPage() {
       <MyPageSection sectionTite="프로필">
         <MyPageProfile userInfo={userInfo} styleCode={styleCode} />
       </MyPageSection>
-
       {/* 회원정보 수정 */}
       <MyPageSection sectionTite="회원정보 수정" height="7rem">
         <MyPageChangeInfo
@@ -108,19 +103,20 @@ function MyPage() {
           handleStyleCode={handleStyleCode}
         />
       </MyPageSection>
-
       {/* 구분선 */}
       <DivisionLine />
-
-      {/* 친구추천 */}
-      <MyPageSection sectionTite="친구 추천">
-        <MyPageRecommend>
-          <MyPageFriendList interest="MBTI" friendsList={friendsList} />
-          <MyPageFriendList interest="코딩" friendsList={friendsList} />
-          <MyPageFriendList interest="봉사활동" friendsList={friendsList} />
-          <MyPageFriendList interest="음악" friendsList={friendsList} />
-        </MyPageRecommend>
-      </MyPageSection>
+      {userInfo.band === "" ? (
+        <MyPageNoBand />
+      ) : (
+        <MyPageSection sectionTite="친구 추천">
+          <MyPageRecommend>
+            <MyPageFriendList interest="MBTI" friendsList={friendsList} />
+            <MyPageFriendList interest="코딩" friendsList={friendsList} />
+            <MyPageFriendList interest="봉사활동" friendsList={friendsList} />
+            <MyPageFriendList interest="음악" friendsList={friendsList} />
+          </MyPageRecommend>
+        </MyPageSection>
+      )}
     </MemberLayout>
   );
 }

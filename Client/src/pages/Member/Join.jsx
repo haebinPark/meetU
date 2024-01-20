@@ -19,12 +19,11 @@ import {
   PasswordReg,
   NicknameReg,
 } from "../../utils/inputValidation.js";
-import { BASE_URL, DB_URL } from "../../utils/constance.js";
 
 // 라이브러리
 import { Mobile } from "../../layout/MediaQuery.jsx";
 import getNofity from "../../utils/getNotify.js";
-import { axiosGet, axiosPost } from "../../utils/axios.js";
+import pb from "../../api/pocketbase.js";
 
 function Join() {
   const navigate = useNavigate();
@@ -32,9 +31,10 @@ function Join() {
   // 전제 입력값 상태
   const [formState, setFormState] = useState({
     email: "",
+    emailVisibility: true,
     password: "",
     passwordConfirm: "",
-    nickName: "",
+    nickname: "",
     mbti: "",
     interests: [],
   });
@@ -86,10 +86,10 @@ function Join() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axiosGet(
-        BASE_URL + `/members/type=checkemail?email=${formState.email}`,
-      );
-      if (!response.data.isEmailAvailable) {
+      const response = await pb.collection("users").getList(1, 1, {
+        filter: `(email='${formState.email}')`,
+      });
+      if (response.items.length > 0) {
         setEmailError({
           ...emailError,
           isError: true,
@@ -147,7 +147,7 @@ function Join() {
       return;
     }
     SetNicknameError({ ...nicknameError, isError: false });
-    setFormState({ ...formState, nickName: deletedSpaceValue });
+    setFormState({ ...formState, nickname: deletedSpaceValue });
   };
 
   // 닉네임 중복 검사
@@ -155,10 +155,10 @@ function Join() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axiosGet(
-        BASE_URL + `/members/type=checknickname?nickname=${formState.nickName}`,
-      );
-      if (!response.data.isNicknameAvailable) {
+      const response = await pb.collection("users").getList(1, 1, {
+        filter: `(nickname='${formState.nickname}')`,
+      });
+      if (response.items.length > 0) {
         SetNicknameError({
           ...nicknameError,
           isError: true,
@@ -205,16 +205,9 @@ function Join() {
 
   const handleJoin = async (e) => {
     e.preventDefault();
-    const sendForm = {
-      email: formState.email,
-      passWord: formState.password,
-      nickName: formState.nickName,
-      mbti: formState.mbti,
-      interests: formState.interests,
-    };
     setIsLoading(true);
     try {
-      await axiosPost("/members/signup", sendForm);
+      await pb.collection("users").create(formState);
       getNofity("success", "회원가입이 완료되었습니다.");
       setIsLoading(false);
       navigate("/login");

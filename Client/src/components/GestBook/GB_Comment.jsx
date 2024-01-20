@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import SendNoteButton from "../Common/SendNoteButton.jsx";
 
-const CommentEntry = styled.ul`
+const CommentEntry = styled.li`
   /* 방명록 항목에 대한 스타일 */
   border-bottom: 2px solid var(--box-gray);
   width: 95%;
@@ -21,25 +21,26 @@ const CommentEntry = styled.ul`
   @media screen and (max-width: 768px) {
     grid-template-areas:
       "name name date date"
-      "comment comment button button";
+      "comment comment coment button";
   }
 `;
 
-const CommentNameStyle = styled.li`
+const CommentNameStyle = styled.strong`
   /* 방명록 이름에 대한 스타일 */
   font-weight: 700;
   font-size: 1rem;
   grid-area: name;
+  position: relative;
 `;
 
-const CommentStyle = styled.li`
+const CommentStyle = styled.p`
   /* 방명록 내용에 대한 스타일 */
   font-size: 1rem;
   padding-left: 1rem;
   grid-area: comment;
 `;
 
-const CommentDateStyle = styled.li`
+const CommentDateStyle = styled.time`
   /* 방명록 날짜에 대한 스타일 */
   font-size: 0.6rem;
   padding-left: 10px;
@@ -54,13 +55,6 @@ const ButtonStyle = styled.div`
   display: flex;
   align-items: center;
 `;
-const EditButton = styled.button`
-  /* 수정 버튼에 대한 스타일 */
-  font-size: 0.6rem;
-  color: var(--font-gray);
-  opacity: 0.5;
-  margin-left: 10px;
-`;
 
 const DeleteButton = styled.button`
   /* 삭제 버튼에 대한 스타일 */
@@ -70,29 +64,23 @@ const DeleteButton = styled.button`
   margin-left: 10px;
 `;
 
-const GuestComment = ({ id, nickName, contexts, date, onEdit, onDelete }) => {
-  const [isSelected, setIsSelected] = useState(false);
+
+function GuestComment({ id, nickName, contexts, created, onDelete }) {
   const [sendButtonOpen, setSendButtonOpen] = useState(false);
 
   const handelSendButton = () => setSendButtonOpen(!sendButtonOpen);
 
-  const parsedDate = new Date(date).toLocaleDateString("ko-kr");
+  const parsedDate = new Date(created).toLocaleDateString("ko-kr");
 
-  const ComHanldeEdit = () => {
-    setIsSelected(true);
-    onEdit(id);
-  };
   const ComHandleDelete = () => {
     onDelete(id);
     getNotify("success", "삭제되었습니다!");
   };
+
   return (
     <>
-      <CommentEntry
-        style={{ backgroundColor: isSelected ? "lightgray" : "white" }}
-      >
+      <CommentEntry key={id}>
         <CommentNameStyle onClick={handelSendButton}>
-          {" "}
           {nickName}
           {sendButtonOpen && (
             <SendNoteButton $positionBottom="5px" $positionLeft="50px">
@@ -102,14 +90,13 @@ const GuestComment = ({ id, nickName, contexts, date, onEdit, onDelete }) => {
         </CommentNameStyle>
         <CommentStyle> {contexts}</CommentStyle>
         <ButtonStyle>
-          <EditButton onClick={ComHanldeEdit}>Edit</EditButton>
-          <DeleteButton onClick={ComHandleDelete}>x</DeleteButton>
+          <DeleteButton onClick={() => ComHandleDelete(id)}>x</DeleteButton>
         </ButtonStyle>
         <CommentDateStyle>{parsedDate}</CommentDateStyle>
       </CommentEntry>
       <ToastContainer />
     </>
   );
-};
+}
 
 export default GuestComment;

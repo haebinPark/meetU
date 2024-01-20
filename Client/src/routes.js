@@ -6,6 +6,11 @@ import {
 
 import { lazy } from "react";
 
+const LandingRoute = lazy(() => import("./components/Routes/LandingRoute.jsx"));
+const PublicRoute = lazy(() => import("./components/Routes/PublicRoute.jsx"));
+const PrivateRoute = lazy(() => import("./components/Routes/PrivateRoute.jsx"));
+const BandRoute = lazy(() => import("./components/Routes/BandRoute.jsx"));
+
 const App = lazy(() => import("./App"));
 const PageLayout = lazy(() => import("./layout/PageLayout.jsx"));
 const PrivateLayout = lazy(() => import("./layout/PrivateLayout.jsx"));
@@ -22,16 +27,18 @@ const MyPage = lazy(() => import("./pages/MyPage/MyPage.jsx"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<App />}>
+      <Route path="/" element={<LandingRoute />} />
+      <Route element={<PublicRoute />}>
         <Route element={<PageLayout />}>
           <Route path="introduction" element={<Introduction />} />
           <Route path="join" element={<Join />} />
           <Route path="login" element={<Login />} />
         </Route>
+      </Route>
+      <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout />}>
           <Route path="mypage" element={<MyPage />} />
-          <Route path="band" element={<Band />} />
-          <Route path="guestbook" element={<GuestBook />} />
+          <Route path="band" element={<BandRoute />} />
           <Route path="membership" element={<Membership />} />
         </Route>
       </Route>

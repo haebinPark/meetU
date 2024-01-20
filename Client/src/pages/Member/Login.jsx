@@ -10,9 +10,11 @@ import MemberQuestionBlock from "../../components/Member/MemberQuestionBlock.jsx
 import Spinner from "../../components/Common/Spinner.jsx";
 import { useState } from "react";
 import getNofity from "../../utils/getNotify";
-import { axiosPost } from "../../utils/axios.js";
+import pb from "../../api/pocketbase.js";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({ identity: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,13 +27,12 @@ function Login() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axiosPost(
-        "/collections/users/auth-with-password",
-        formState,
-      );
-      localStorage.setItem("token", res.data.token);
+      await pb
+        .collection("users")
+        .authWithPassword(formState.identity, formState.password);
       getNofity("success", "로그인에 성공하였습니다.");
       setIsLoading(false);
+      navigate("/mypage");
     } catch (error) {
       console.log(error);
       getNofity("error", "로그인에 실패하였습니다.");

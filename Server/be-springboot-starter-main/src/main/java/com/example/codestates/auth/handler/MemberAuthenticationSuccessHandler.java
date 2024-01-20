@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,7 @@ AuthenticationSuccessHandler 인터페이스에는 onAuthenticationSuccess() 추
 @Slf4j
 //@RequiredArgsConstructor
 @Component
+@Transactional
 public class MemberAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     //private final MemberRepository memberRepository;
 
@@ -73,10 +75,10 @@ public class MemberAuthenticationSuccessHandler implements AuthenticationSuccess
         //여기에 username(email)을 가지고 와서 사용자 정보들을 반환하는 코드 작성해야함
         responseData.put("nickname", ((MemberDetailsService.MemberDetails) userDetails).getNickname());
         responseData.put("memberId",((MemberDetailsService.MemberDetails) userDetails).getMemberId());
-        //responseData.put("bandID",userDetails.getBandId());
+//        responseData.put("bandID",((MemberDetailsService.MemberDetails) userDetails).getBandJoinLists());
         responseData.put("mbti",((MemberDetailsService.MemberDetails) userDetails).getMbti());
         //responseData.put("interests",userDetails.getInterests());
-        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getBgColor());
+//        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getBgColor());
 
         //아니면 responsdto로 작성해서 확인해야함
 

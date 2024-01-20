@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,8 +58,8 @@ public class MemberService {
        member.setPassword(encryptedPassword);
 //
        // 추가: DB에 User Role 저장
-        String role = authorityUtils.createRoles(member.getEmail());
-       member.setRole(role);
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+       member.setRoles(roles);
 //
 //
        return memberRepository.save(member);

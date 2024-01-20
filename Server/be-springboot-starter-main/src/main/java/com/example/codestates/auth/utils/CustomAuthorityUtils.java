@@ -5,11 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class CustomAuthorityUtils {
     //(1) application.yml에 추가한 프로퍼티를 가져오는 표현식
     //@Value("${mail.address.admin}>프로퍼티 경로")
@@ -42,7 +44,7 @@ public class CustomAuthorityUtils {
         return authorities;
     }
     //DB에 roles를 저장하는 코드
-    public String createRoles(String email){
-        return "USER_ROLES_STRING";
+    public List<String> createRoles(String email){
+        return USER_ROLES_STRING;
     }
 }

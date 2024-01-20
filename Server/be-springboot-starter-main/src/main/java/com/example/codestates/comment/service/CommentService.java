@@ -32,14 +32,14 @@ public class CommentService {
     }
 
     public Comment createComment(long bandId, Comment comment) {
-        Band band= bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+        Band band= bandRepository.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
         //comment.setBand(band);
         return commentRepository.save(comment);
 
     }
 
     public Comment updateComment(long bandId,long commentId,Comment comment) {
-        bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+        bandRepository.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
         Comment foundComment = findComment(commentId);
         Comment updatedComment = beanUtils.copyNonNullProperties(comment, foundComment);
 
@@ -54,13 +54,13 @@ public class CommentService {
     }
 
     public Page<Comment> findComment(long bandId, int page, int size) {
-        bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+        bandRepository.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
 
         return commentRepository.findAll(PageRequest.of(page - 1, size));
     }
 
     public void deleteComment(long bandId,long commentId) {
-        bandRepository.findByBandId(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
+        bandRepository.findById(bandId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BAND_NOT_FOUND));
         Comment foundComment = findComment(commentId);
         commentRepository.delete(foundComment);
     }

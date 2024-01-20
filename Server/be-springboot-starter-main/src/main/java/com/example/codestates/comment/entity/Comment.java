@@ -25,13 +25,31 @@ public class Comment {
     @Column(nullable = false, length = 20)
     private String nickname;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "band_id")
     private Band band;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name ="member_nickname")
-//    private Member member;
+    public void setBand(Band band) {
+        this.band = band;
+    }
+    public void addComment(Band band){
+        this.band =band;
+        if(this.band.getComments().contains(this)){
+            this.band.addComment(this);
+        }
+    }
+
+    @ManyToOne
+    @JoinColumn(name ="member_id")
+    private Member member;
+    public void setMember(Member member) {
+    this.member = member;
+    }
+    public void addComment(Member member){
+        this.member =member;
+        if(this.member.getComments().contains(this)){
+            this.member.addComment(this);
+        }
+    }
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

@@ -1,6 +1,7 @@
 package com.example.codestates.band.entity;
 
 import com.example.codestates.audit.Auditable;
+import com.example.codestates.comment.entity.Comment;
 import com.example.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,14 +40,30 @@ public class Band extends Auditable {
 //    @Column(length = 100, nullable = false)
 //    private String userName; // 신청자 성명
 
-
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_NICKNAME") // Member 테이블에서 참조할 외래키의 이름
-    private Member member;
-
-
-    @OneToMany(mappedBy = "band", cascade = CascadeType.PERSIST)
-    private List<BandJoinList> bandJoinLists = new ArrayList<>();
+//    @OneToMany(mappedBy = "band", cascade = CascadeType.PERSIST)
+//    private List<BandJoinList> bandJoinLists = new ArrayList<>();
+//    public void addBandJoinList(BandJoinList bandJoinList){
+//        this.bandJoinLists.add(bandJoinList);
+//        if(bandJoinList.getBand() != this){
+//            bandJoinList.addBandJoinList(this);
+//        }
+//    }
+    @OneToMany(mappedBy = "band",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    private List<Member> members = new ArrayList<>();
+    public void addMember(Member member){
+        this.members.add(member);
+        if(member.getBand() !=this){
+            member.addMember(this);
+        }
+    }
+    @OneToMany(mappedBy="band", cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    private List<Comment> comments =new ArrayList<>();
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        if (comment.getBand() != this) {
+            comment.addComment(this);
+        }
+    }
 
 
     //반 신청 상태에 대한 코드

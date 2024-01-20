@@ -5,9 +5,9 @@ spring:
       path: /h2
   datasource:
     # MySQL 설정
-    url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Seoul
-    username: root
-    password: tjdal@132454
+    url: jdbc:mysql://localhost:3306/meetu?serverTimezone=Asia/Seoul
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

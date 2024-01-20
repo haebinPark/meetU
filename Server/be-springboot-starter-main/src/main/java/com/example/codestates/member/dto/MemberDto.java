@@ -1,5 +1,8 @@
 package com.example.codestates.member.dto;
 
+//import com.example.codestates.band.entity.BandJoinList;
+import com.example.codestates.bgcolor.entity.BgColor;
+import com.example.codestates.mbti.entity.Mbti;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -26,7 +29,9 @@ public class MemberDto {
         private String nickname;
         private String password;
         private String email;
-        private String bgColorName;  // 사용자가 선택한 배경색의 이름
+        private BgColor bgColor;
+        private Mbti mbti;
+//        private BandJoinList bandJoinList;// 사용자가 선택한 배경색의 이름
     }
     @Getter
     public static class Patch{

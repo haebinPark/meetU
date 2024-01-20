@@ -3,10 +3,12 @@ package com.example.codestates.bgcolor.service;
 import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.bgcolor.repository.BgColorRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class BgColorService {
     private final BgColorRepository bgColorRepository;
     private BgColor defaultBgColor; // 기본 배경색을 저장하는 필드를 추가합니다.

@@ -13,9 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-@Component
 @Slf4j
+@Component
 public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint {
     //AuthenticationEntryPoint를 구현한 MemberAuthenticationEntryPoint
     //MemberAuthenticationEntryPoint 클래스는 인증 과정에서 AuthenticationException 이 발생할 경우 호출

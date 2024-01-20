@@ -1,5 +1,7 @@
 package com.example.codestates.auth.userdetails;
 
+import com.example.codestates.band.entity.Band;
+//import com.example.codestates.band.entity.BandJoinList;
 import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.mbti.entity.Mbti;
 import com.example.codestates.member.entity.Member;
@@ -12,13 +14,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 //user의 인증 정보를 테이블에 저장하고, 테이블에 저장된 인증 정보를 이용해 인증 프로세스를 진행
 
 //데이터베이스의 인증 정보로 인증을 처리하는 custom UserDetailsService
 @Component
+@Transactional
 public class MemberDetailsService implements UserDetailsService { //(1)UserDetailsService 인터페이스 구현
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtils authorityUtils;
@@ -64,11 +69,11 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
             setMemberId(member.getMemberId());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
-            setRole(member.getRole());//member에 데이트 베이스에서 조회한 role을 전달
+            setRoles(member.getRoles());//member에 데이트 베이스에서 조회한 role을 전달
             setMbti(member.getMbti());
             setNickname(member.getNickname());
-            setBgColor(member.getBgColor());
-//          setBandId(member.getBandId());
+//            setBgColor(member.getBgColor());
+//            setBandJoinLists(member.getBandJoinLists());
 //          //bandID들고와서 설정하기
             //setInteresting(member.getInteresing()); //이건 리스트로 받아와야함
 //          // 관심사 설정하기
@@ -81,7 +86,7 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
 
-            return authorityUtils.createAuthorities(this.getRole()); //(2-3) 리팩토링 포인트
+            return authorityUtils.createAuthorities(this.getRoles()); //(2-3) 리팩토링 포인트
             // member에 전달한 role 정보를 메서드의 파리미터로 전달하여 권한 목록을 생성하고있다
         }
 
@@ -98,6 +103,11 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         public Mbti getMbti(){return super.getMbti();}
         public String getNickname(){return super.getNickname();}
         public BgColor getBgColor(){return super.getBgColor();}
+
+//        @Override
+//        public List<BandJoinList> getBandJoinLists() {
+//            return super.getBandJoinLists();
+//        }
 
         @Override
         public boolean isAccountNonExpired() {

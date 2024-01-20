@@ -26,8 +26,15 @@ public class BgColor { //BackgroundColor 줄인 단어
     @Column(nullable = false)
     private String hexCode;// 색상의 Hex 코드를 저장하는 필드
 
-    @OneToMany(mappedBy = "bgColor")
+    @OneToMany(mappedBy = "bgColor",cascade = CascadeType.PERSIST)
     private List<Member> members = new ArrayList<>();
+    public void addMember(Member member){
+        this.members.add(member);
+        if(member.getBgColor() != this){
+            member.addMember(this);
+        }
+    }
+
 
     //BgColorInitializer에서 사용하는 생성자 (@AllArgsConstructor은 필드를 모두 받는거만 생성하기에 필요한 2개만 받는 따로 만듬)
     public BgColor(String colorName, String hexCode) {

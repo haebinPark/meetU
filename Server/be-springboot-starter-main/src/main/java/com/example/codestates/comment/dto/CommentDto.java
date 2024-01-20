@@ -18,8 +18,8 @@ public class CommentDto {
     public static class Patch {
         private Long commentId;
         private String context;
-        public void setContext(Long commentId){
-            this.context =context;
+        public void setCommentId(Long commentId){
+            this.commentId =commentId;
         }
     }
 

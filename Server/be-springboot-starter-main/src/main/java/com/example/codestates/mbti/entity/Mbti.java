@@ -28,9 +28,14 @@ public class Mbti {
     @Column(nullable = false)
     private String mbtiColor; //색상값 가져와서 적용해야하는데 방법 알아봐야함
 
-    @OneToMany(mappedBy = "mbti")
+    @OneToMany(mappedBy = "mbti",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<Member> members = new ArrayList<>();
-
+    public void addMember(Member member){
+        this.members.add(member);
+        if(member.getMbti() != this){
+            member.addMember(this);
+        }
+    }
     public enum MbtiType {
         ISTJ("ISTJ"), ISFJ("ISFJ"), INFJ("INFJ"), INTJ("INTJ"),
         ISTP("ISTP"), ISFP("ISFP"), INFP("INFP"), INTP("INTP"),

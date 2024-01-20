@@ -64,7 +64,6 @@ const DeleteButton = styled.button`
   margin-left: 10px;
 `;
 
-
 function GuestComment({ id, nickName, contexts, created, onDelete }) {
   const [sendButtonOpen, setSendButtonOpen] = useState(false);
 

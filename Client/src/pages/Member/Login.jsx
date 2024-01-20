@@ -32,7 +32,7 @@ function Login() {
         .authWithPassword(formState.identity, formState.password);
       getNofity("success", "로그인에 성공하였습니다.");
       setIsLoading(false);
-      navigate("/mypage");
+      navigate("/band");
     } catch (error) {
       console.log(error);
       getNofity("error", "로그인에 실패하였습니다.");

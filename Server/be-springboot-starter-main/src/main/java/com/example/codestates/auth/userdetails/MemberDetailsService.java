@@ -1,7 +1,7 @@
 package com.example.codestates.auth.userdetails;
 
-import com.example.codestates.band.entity.Band;
 //import com.example.codestates.band.entity.BandJoinList;
+import com.example.codestates.band.entity.Band;
 import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.mbti.entity.Mbti;
 import com.example.codestates.member.entity.Member;
@@ -17,8 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+        import java.util.Optional;
 //user의 인증 정보를 테이블에 저장하고, 테이블에 저장된 인증 정보를 이용해 인증 프로세스를 진행
 
 //데이터베이스의 인증 정보로 인증을 처리하는 custom UserDetailsService
@@ -74,6 +73,8 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
             setNickname(member.getNickname());
 //            setBgColor(member.getBgColor());
 //            setBandJoinLists(member.getBandJoinLists());
+ //           setBand(member.getBand());
+            setMbti(member.getMbti());
 //          //bandID들고와서 설정하기
             //setInteresting(member.getInteresing()); //이건 리스트로 받아와야함
 //          // 관심사 설정하기
@@ -103,6 +104,7 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         public Mbti getMbti(){return super.getMbti();}
         public String getNickname(){return super.getNickname();}
         public BgColor getBgColor(){return super.getBgColor();}
+ //       public Band getBandId(){return super.getBand();};
 
 //        @Override
 //        public List<BandJoinList> getBandJoinLists() {

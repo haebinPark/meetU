@@ -3,12 +3,12 @@ package com.example.codestates.band.dto;
 
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.member.entity.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Builder
 public class BandResponseDto {
 

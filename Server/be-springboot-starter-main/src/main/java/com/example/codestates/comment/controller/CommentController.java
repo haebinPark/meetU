@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -35,8 +36,7 @@ public class CommentController {
 
 
     @PostMapping(params = {"band_id"})
-    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId, @RequestBody CommentDto.Post requestBody) {
-
+    public ResponseEntity<Comment> postComment(@RequestParam("band_id") long bandId,@RequestBody CommentDto.Post requestBody) {
             Comment comment = commentService.createComment(bandId,mapper.commentPostDtoTocomment(requestBody));
             URI location = UriCreator.createUri(COMMENT_DEFAULT_URL, comment.getCommentId());
 
@@ -49,7 +49,7 @@ public class CommentController {
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size){
 
-        Page<Comment> foundComment = commentService.findComment(bandId, page-1,size);
+        Page<Comment> foundComment = commentService.findComments(bandId, page-1,size);
         List<Comment> comments = foundComment.getContent();
         return ResponseEntity.ok(new MultiResponseDto(mapper.commentsToCommentResponseDtos(comments), foundComment));
     }
@@ -62,8 +62,9 @@ public class CommentController {
     public ResponseEntity patchComment(@RequestParam("band_id") long bandId,
                                        @PathVariable("comment_id") long commentId,
                                       @RequestBody CommentDto.Patch requestBody ){
-        requestBody.setCommentId(commentId);
-        Comment updateComment = commentService.updateComment(bandId,commentId,mapper.commentPatchDtoTocomment(requestBody));
+        String patchNickname = requestBody.getNickname();
+
+        Comment updateComment = commentService.updateComment(bandId,commentId, mapper.commentPatchDtoTocomment(requestBody));
         return ResponseEntity.ok(mapper.commentToCommentResponseDto(updateComment));
     }
 }

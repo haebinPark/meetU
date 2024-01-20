@@ -18,7 +18,9 @@ public class CommentDto {
     public static class Patch {
         private Long commentId;
         private String context;
-        public void setCommentId(Long commentId){
+        private String nickname;
+
+        public void setCommentId(long commentId) {
             this.commentId =commentId;
         }
     }

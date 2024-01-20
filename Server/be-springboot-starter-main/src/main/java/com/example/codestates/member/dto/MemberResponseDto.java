@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+@AllArgsConstructor
+
 public class MemberResponseDto {
     private Long memberId;
-    private String nickName;
+    private String nickname;
     private String email;
     private String bgColorInfo;// 색상,색상값을을 "색상:색상값" 형태로 바꿔 저장하는 필드
 

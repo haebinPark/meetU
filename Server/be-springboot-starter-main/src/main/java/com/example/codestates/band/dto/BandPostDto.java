@@ -2,6 +2,7 @@ package com.example.codestates.band.dto;
 
 
 import com.example.codestates.member.dto.MemberDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Range;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 
 
 @Getter
+@AllArgsConstructor
 public class BandPostDto {
 
     @NotBlank

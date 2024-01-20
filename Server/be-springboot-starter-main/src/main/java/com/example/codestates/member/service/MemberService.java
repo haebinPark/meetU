@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
@@ -66,14 +68,21 @@ public class MemberService {
     }
 
     //회원 정보 수정
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member, @Positive long memberId) {
         // 회원 정보 찾기
         Member foundMember = memberRepository.findById(memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Optional.ofNullable(member.getNickname())
+                .ifPresent(nickname -> foundMember.setNickname(nickname));
+//        Optional.ofNullable(member.getBgColor())
+//                .ifPresent(bgColor -> foundMember.getBgColor(bgColor));
+//        Optional.ofNullable(member.getMemberStatus())
+//                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 
         // 정보 업데이트
-        Member updatedMember = beanUtils.copyNonNullProperties(member, foundMember);
-        return memberRepository.save(updatedMember);
+        //Member updatedMember = beanUtils.copyNonNullProperties(foundMember, member);
+        return memberRepository.save(foundMember);
     }
 
 
@@ -95,16 +104,21 @@ public class MemberService {
     private void verifyExistEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent()) {
-            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
+            throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
     }
 
         private void verifyExistNickName(String nickname) {
             Optional<Member> member = memberRepository.findByNickname(nickname);
             if (member.isPresent()) {
-                throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
+                throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
             }
         }
+    public Member saveMember(Member member){
+
+        return memberRepository.save(member);
+
+    }//더미데이터 생성 관련
 
 
     }

@@ -75,7 +75,7 @@ public class MemberAuthenticationSuccessHandler implements AuthenticationSuccess
         //여기에 username(email)을 가지고 와서 사용자 정보들을 반환하는 코드 작성해야함
         responseData.put("nickname", ((MemberDetailsService.MemberDetails) userDetails).getNickname());
         responseData.put("memberId",((MemberDetailsService.MemberDetails) userDetails).getMemberId());
-//        responseData.put("bandID",((MemberDetailsService.MemberDetails) userDetails).getBandJoinLists());
+//        responseData.put("band",((MemberDetailsService.MemberDetails) userDetails).getBand());
         responseData.put("mbti",((MemberDetailsService.MemberDetails) userDetails).getMbti());
         //responseData.put("interests",userDetails.getInterests());
 //        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getBgColor());

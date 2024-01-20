@@ -1,6 +1,7 @@
 package com.example.codestates.comment.entity;
 
 
+import com.example.codestates.audit.Auditable;
 import com.example.codestates.band.entity.Band;
 import com.example.codestates.member.entity.Member;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class Comment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
@@ -51,9 +52,6 @@ public class Comment {
         }
     }
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-    @Column(nullable = false, name="LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
+
 
 }

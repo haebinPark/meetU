@@ -37,6 +37,43 @@ function MyPage() {
     await pb.collection("users").authRefresh();
   }
 
+  function translateInterest(en) {
+    switch (en) {
+      case "MUSIC":
+        return "음악";
+      case "MOVIE":
+        return "영화";
+      case "EXERCISE":
+        return "운동";
+      case "TRAVEL":
+        return "여행";
+      case "GAME":
+        return "게임";
+      case "FOOD":
+        return "음식";
+      case "VOLUNTEER":
+        return "봉사활동";
+      case "ART":
+        return "미술";
+      case "READING":
+        return "독서";
+      case "FASHION":
+        return "패션";
+      case "CODING":
+        return "코딩";
+      case "COOKING":
+        return "요리";
+      case "DANCE":
+        return "춤";
+      case "PHOTO":
+        return "사진";
+      case "MEDIA":
+        return "영상";
+      case "STUDY":
+        return "공부";
+    }
+  }
+
   function handleColorChange(e) {
     e.preventDefault();
     if (!openColorPalette) {
@@ -132,18 +169,18 @@ function MyPage() {
           <MyPageRecommend>
             <MyPageFriendList interest="MBTI" friendsList={mbtiFriends} />
             <MyPageFriendList
-              interest={firstInterests.interest}
+              interest={translateInterest(firstInterests.interest)}
               friendsList={firstInterests.friendsList}
             />
             {secondInterests.interest && (
               <MyPageFriendList
-                interest={secondInterests.interest}
+                interest={translateInterest(secondInterests.interest)}
                 friendsList={secondInterests.friendsList}
               />
             )}
             {thirdInterests.interest && (
               <MyPageFriendList
-                interest={thirdInterests.interest}
+                interest={translateInterest(thirdInterests.interest)}
                 friendsList={thirdInterests.friendsList}
               />
             )}

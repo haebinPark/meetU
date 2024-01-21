@@ -9,10 +9,9 @@ import { styled } from "styled-components";
 import { useState, useEffect } from "react";
 
 import getNofity from "../../utils/getNotify.js";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import pb from "../../api/pocketbase.js";
+import Spinner from "../../components/Common/Spinner.jsx";
 //스타일//
 const TextContainSt = styled.section`
   margin-top: 10px;
@@ -33,12 +32,14 @@ function GuestBook() {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const loginUser = pb.authStore.model.id;
   const loginBand = pb.authStore.model.band;
   const loginName = pb.authStore.model.nickname;
 
   //전체 방명록 불러오기
   useEffect(() => {
+    setIsLoading(true);
     pb.collection("comment")
       .getList(1, 20, {
         filter: `(band="${loginBand}")`,
@@ -49,7 +50,8 @@ function GuestBook() {
         // console.log(response);
         setComments(response.items);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => setIsLoading(false));
   }, []);
 
   //방명록 등록
@@ -116,7 +118,6 @@ function GuestBook() {
             </Button>
           </form>
         </TextContainSt>
-        <ToastContainer />
       </section>
       <section>
         {/*  방명록 조회 부분 */}
@@ -142,6 +143,7 @@ function GuestBook() {
           onClick={setPage}
         />
       </section>
+      <Spinner isOpen={isLoading} />
     </>
   );
 }

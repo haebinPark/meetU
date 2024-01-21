@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import getNotify from "../../utils/getNotify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
@@ -16,7 +15,6 @@ const CommentEntry = styled.li`
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-template-areas: "name comment button date";
-  position: relative;
 
   @media screen and (max-width: 768px) {
     grid-template-areas:

@@ -140,7 +140,7 @@ function Band() {
           <SearchButton type="submit" onClick={handleSearchClick} />
         </SearchSection>
       </section>
-      <section>
+      <section style={{ marginTop: "20px" }}>
         <PageTitle>반 목록</PageTitle>
         <Table>
           <thead>
@@ -156,17 +156,19 @@ function Band() {
                   `${schoolInput}${schoolType} ${gradeInput}학년 ${classInput}반`}
               </TableCell>
               <TableCell>
-                <>
-                  {isBand ? (
-                    <BandJoinButton onClick={handleJoinClick}>
-                      반 가입하기
-                    </BandJoinButton>
-                  ) : (
-                    <BandRequestButton onClick={handleRequestClick}>
-                      반 개설하기
-                    </BandRequestButton>
-                  )}
-                </>
+                {isVisible && (
+                  <>
+                    {isBand ? (
+                      <BandJoinButton onClick={handleJoinClick}>
+                        반 가입하기
+                      </BandJoinButton>
+                    ) : (
+                      <BandRequestButton onClick={handleRequestClick}>
+                        반 개설하기
+                      </BandRequestButton>
+                    )}
+                  </>
+                )}
               </TableCell>
             </TableRow>
           </tbody>

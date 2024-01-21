@@ -207,16 +207,17 @@ function Join() {
   const handleJoin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      await pb.collection("users").create(formState);
-      getNofity("success", "회원가입이 완료되었습니다.");
-      setIsLoading(false);
-      navigate("/login");
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      getNofity("error", "오류가 발생했습니다.");
-    }
+    await pb
+      .collection("users")
+      .create(formState)
+      .then(() => {
+        getNofity("success", "회원가입이 완료되었습니다.");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (

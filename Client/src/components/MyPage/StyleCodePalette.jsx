@@ -72,56 +72,33 @@ const StyleCodeLabel = styled.label`
   font-size: 0.8rem;
 `;
 
-const styleCode = {
-  brown: "#f4eeee",
-  orange: "#faebdd",
-  yellow: "#fbf3db",
-  green: "#edf3ec",
-  blue: "#e7f3f8",
-  purple: "#f6f3f9",
-  pink: "#faf1f5",
-  red: "#fdebec",
-};
+const colorList = [
+  { styleCode: "#f4eeee", colorName: "갈색" },
+  { styleCode: "#faebdd", colorName: "주황" },
+  { styleCode: "#fbf3db", colorName: "노랑" },
+  { styleCode: "#edf3ec", colorName: "초록" },
+  { styleCode: "#e7f3f8", colorName: "파랑" },
+  { styleCode: "#f6f3f9", colorName: "보라" },
+  { styleCode: "#faf1f5", colorName: "분홍" },
+  { styleCode: "#fdebec", colorName: "빨강" },
+];
 
-const translateColor = (en) => {
-  switch (en) {
-    case "brown":
-      return "갈색";
-    case "orange":
-      return "주황";
-    case "yellow":
-      return "노랑";
-    case "green":
-      return "초록";
-    case "blue":
-      return "파랑";
-    case "purple":
-      return "보라";
-    case "pink":
-      return "분홍";
-    case "red":
-      return "빨강";
-  }
-};
-
-const styleCodeList = Object.entries(styleCode);
-
-function StyleCodePalette({ styleCode, handleStyleCode }) {
+function StyleCodePalette({ selectedColor, handleStyleCode }) {
   return (
     <StyleCodeUl>
-      {styleCodeList.map((item) => {
+      {colorList.map((item) => {
         return (
-          <StyleCodeLi key={item[0]}>
+          <StyleCodeLi key={item.styleCode}>
             <StyleCodeInput
               type="radio"
-              id={item[0]}
-              name={item[0]}
-              value={item[1]}
-              checked={styleCode === item[1]}
+              id={item.styleCode}
+              name={item.styleCode}
+              value={item.styleCode}
+              checked={selectedColor === item.styleCode}
               onChange={handleStyleCode}
             />
-            <StyleCodeLabel htmlFor={item[0]}>
-              {translateColor(item[0])}
+            <StyleCodeLabel htmlFor={item.styleCode}>
+              {item.colorName}
             </StyleCodeLabel>
           </StyleCodeLi>
         );

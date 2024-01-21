@@ -12,8 +12,8 @@ const Ul = styled.ul`
 
 function MyPageChangeInfo({
   openColorPalette,
-  handleColorPalette,
-  styleCode,
+  handleColorChange,
+  selectedColor,
   handleStyleCode,
 }) {
   return (
@@ -27,14 +27,14 @@ function MyPageChangeInfo({
             variant="subbtn"
             type="submit"
             width="7rem"
-            onClick={handleColorPalette}
+            onClick={handleColorChange}
           >
             {openColorPalette ? "변경 완료" : "색상 변경"}
           </Button>
           {openColorPalette && (
             <StyleCodePalette
-              styleCode={styleCode}
               handleStyleCode={handleStyleCode}
+              selectedColor={selectedColor}
             />
           )}
         </form>

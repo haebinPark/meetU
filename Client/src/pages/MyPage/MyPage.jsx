@@ -9,6 +9,7 @@ import DivisionLine from "../../components/MyPage/DivisionLine.jsx";
 import MyPageNoBand from "../../components/MyPage/MyPageNoBand.jsx";
 import MyPageRecommend from "../../components/MyPage/MyPageRecommend.jsx";
 import MyPageFriendList from "../../components/MyPage/MyPageFriendList.jsx";
+import getNofity from "../../utils/getNotify";
 
 const friendsList = [
   {
@@ -75,31 +76,44 @@ const friendsList = [
 
 function MyPage() {
   const [userInfo, setUserInfo] = useState(pb.authStore.model);
-  const [styleCode, setStyleCode] = useState("#f4eeee");
   const [openColorPalette, setOpenColoPalette] = useState(false);
 
-  const handleColorPalette = (e) => {
-    e.preventDefault();
-    setOpenColoPalette(!openColorPalette);
-  };
+  async function postColor() {
+    const userId = pb.authStore.model.id;
+    const data = { styleCode: userInfo.styleCode };
+    await pb.collection("users").update(userId, data);
+    await pb.collection("users").authRefresh();
+  }
 
-  const handleStyleCode = (e) => {
-    setStyleCode(e.target.value);
-  };
+  function handleColorChange(e) {
+    e.preventDefault();
+    if (!openColorPalette) {
+      setOpenColoPalette(!openColorPalette);
+      return;
+    }
+    postColor();
+    getNofity("success", "색상이 변경되었습니다.");
+    setOpenColoPalette(!openColorPalette);
+  }
+
+  function handleStyleCode(e) {
+    const { value } = e.target;
+    setUserInfo({ ...userInfo, styleCode: value });
+  }
 
   return (
     <MemberLayout>
       <PageTitle>마이페이지</PageTitle>
       {/* 프로필 */}
       <MyPageSection sectionTite="프로필">
-        <MyPageProfile userInfo={userInfo} styleCode={styleCode} />
+        <MyPageProfile userInfo={userInfo} />
       </MyPageSection>
-      {/* 회원정보 수정 */}
+      {/* 회원정보 수정, 색상 변경 */}
       <MyPageSection sectionTite="회원정보 수정" height="7rem">
         <MyPageChangeInfo
+          selectedColor={userInfo.styleCode}
           openColorPalette={openColorPalette}
-          handleColorPalette={handleColorPalette}
-          styleCode={styleCode}
+          handleColorChange={handleColorChange}
           handleStyleCode={handleStyleCode}
         />
       </MyPageSection>

@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
 import NickNameTag from "./NickNameTag.jsx";
-
-const RecomendTitle = styled.dt`
-  font-weight: 500;
-`;
+import RecommendTitle from "./RecommendTitle.jsx";
+import NoFriends from "./NoFriends.jsx";
 
 const FriendWrapper = styled.div`
   width: 100%;
@@ -15,30 +13,31 @@ const FriendWrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 4rem;
   padding-bottom: 10px;
+
+  &::-webkit-scrollbar {
+    background: none;
+  }
 `;
 
 function MyPageFriendList({ interest, friendsList }) {
+  const friendsListLength = friendsList?.length;
   return (
     <>
-      {interest === "MBTI" ? (
-        <RecomendTitle>
-          나와 같은 <span>{interest}</span> 친구
-        </RecomendTitle>
+      {/* 추천 소제목 */}
+      <RecommendTitle interest={interest} />
+      {!friendsListLength ? (
+        <NoFriends interest={interest} />
       ) : (
-        <RecomendTitle>
-          <span>{interest}</span>에 관심 있는 친구
-        </RecomendTitle>
+        <FriendWrapper>
+          {friendsList?.map((friend) => {
+            return (
+              <NickNameTag key={friend.id} $styleCode={friend.styleCode}>
+                {friend.nickname}
+              </NickNameTag>
+            );
+          })}
+        </FriendWrapper>
       )}
-
-      <FriendWrapper>
-        {friendsList.map((friend) => {
-          return (
-            <NickNameTag key={friend.userId} $styleCode={friend.styleCode}>
-              {friend.nickName}
-            </NickNameTag>
-          );
-        })}
-      </FriendWrapper>
     </>
   );
 }

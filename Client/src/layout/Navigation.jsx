@@ -1,8 +1,10 @@
 import { styled } from "styled-components";
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import hambergerIcon from "../assets/nav-hamberger.svg";
 import xmarkIcon from "../assets/x-mark.svg";
+import pb from "../api/pocketbase";
+import getNofity from "../utils/getNotify";
 
 const Nav = styled.nav`
   @media screen and (max-width: 767px) {
@@ -58,12 +60,13 @@ const NavList = styled.ul`
 
 const navItems = [
   { id: 1, link: "/band", menuName: "우리 반" },
-  { id: 2, link: "/mypage", menuName: "마이페이지" },
-  { id: 3, link: "/", menuName: "로그아웃" },
+  // { id: 2, link: "/note", menuName: "쪽지함" },
+  { id: 3, link: "/mypage", menuName: "마이페이지" },
 ];
 
 const NavItem = styled.li`
   color: var(--font-gray);
+  cursor: pointer;
 
   /* 마우스 hover 또는 선택 시 */
   &:hover,
@@ -78,8 +81,14 @@ const NavItem = styled.li`
 function Navigation() {
   const [openNav, setOpenNav] = useState(false);
   const { pathname } = useLocation();
+  const navigation = useNavigate();
 
   const openNavList = () => setOpenNav(!openNav);
+  const handleLogout = () => {
+    pb.authStore.clear();
+    getNofity("success", "로그아웃되었습니다.");
+    navigation("introduction");
+  };
 
   return (
     <Nav>
@@ -98,6 +107,7 @@ function Navigation() {
             <Link to={item.link}>{item.menuName}</Link>
           </NavItem>
         ))}
+        <NavItem onClick={handleLogout}>로그아웃</NavItem>
       </NavList>
     </Nav>
   );

@@ -6,7 +6,11 @@ import {
 
 import { lazy } from "react";
 
-const App = lazy(() => import("./App"));
+const LandingRoute = lazy(() => import("./components/Routes/LandingRoute.jsx"));
+const PublicRoute = lazy(() => import("./components/Routes/PublicRoute.jsx"));
+const PrivateRoute = lazy(() => import("./components/Routes/PrivateRoute.jsx"));
+const BandRoute = lazy(() => import("./components/Routes/BandRoute.jsx"));
+
 const PageLayout = lazy(() => import("./layout/PageLayout.jsx"));
 const PrivateLayout = lazy(() => import("./layout/PrivateLayout.jsx"));
 const Introduction = lazy(
@@ -14,24 +18,26 @@ const Introduction = lazy(
 );
 const Join = lazy(() => import("./pages/Member/Join.jsx"));
 const Login = lazy(() => import("./pages/Member/Login.jsx"));
-const Membership = lazy(() => import("./pages/Member/Membership.jsx"));
-const Band = lazy(() => import("./pages/Band/Band.jsx"));
-const GuestBook = lazy(() => import("./pages/GuestBook/GuestBook.jsx"));
+// const Note = lazy(() => import("./pages/Note/Note.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage/MyPage.jsx"));
+const Membership = lazy(() => import("./pages/Member/Membership.jsx"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<App />}>
+      <Route path="/" element={<LandingRoute />} />
+      <Route element={<PublicRoute />}>
         <Route element={<PageLayout />}>
           <Route path="introduction" element={<Introduction />} />
           <Route path="join" element={<Join />} />
           <Route path="login" element={<Login />} />
         </Route>
+      </Route>
+      <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout />}>
+          <Route path="band" element={<BandRoute />} />
+          {/* <Route path="note" element={<Note />} /> */}
           <Route path="mypage" element={<MyPage />} />
-          <Route path="band" element={<Band />} />
-          <Route path="guestbook" element={<GuestBook />} />
           <Route path="membership" element={<Membership />} />
         </Route>
       </Route>

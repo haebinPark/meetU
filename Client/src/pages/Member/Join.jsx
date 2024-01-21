@@ -37,6 +37,7 @@ function Join() {
     nickname: "",
     mbti: "",
     interests: [],
+    styleCode: "#f4eeee",
   });
 
   // 에러 메세지 상태

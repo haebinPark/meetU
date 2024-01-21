@@ -10,12 +10,12 @@ const Dl = styled.dl`
   color: var(--font-gray);
 `;
 
-function MyPageProfile({ userInfo, styleCode }) {
+function MyPageProfile({ userInfo }) {
   return (
     <Dl>
       <HiddenTitle as="dt">닉네임</HiddenTitle>
-      <NickNameTagBig $styleCode={styleCode}>
-        {userInfo.nickName}
+      <NickNameTagBig $styleCode={userInfo.styleCode}>
+        {userInfo.nickname}
       </NickNameTagBig>
       <HiddenTitle as="dt">이메일</HiddenTitle>
       <dd>{userInfo.email}</dd>

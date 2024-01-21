@@ -6,8 +6,6 @@ import PageDescription from "../../components/Common/PageDescription.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 
 import getNotify from "../../utils/getNotify";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import Spinner from "../../components/Common/Spinner.jsx";
 
 //반검색
@@ -105,7 +103,12 @@ function Band() {
       const bandUp = response.items[0].id;
       const updateJoin = { band: `${bandUp}` };
       await pb.collection("users").update(loginUser, updateJoin);
-      getNotify("success", "가입이 완료되었습니다.");
+      getNotify("success", () => (
+        <div>
+          반 가입이 완료되었습니다. <br /> 반의 방명록으로 이동합니다.
+        </div>
+      ));
+      await pb.collection("users").authRefresh();
       setIsLoading(false);
       navigate("/guestbook");
     } catch (error) {
@@ -174,7 +177,6 @@ function Band() {
           </tbody>
         </Table>
       </section>
-      <ToastContainer />
       <Spinner isOpen={isLoading} />
     </>
   );

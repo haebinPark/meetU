@@ -60,7 +60,7 @@ const NavList = styled.ul`
 
 const navItems = [
   { id: 1, link: "/band", menuName: "우리 반" },
-  { id: 2, link: "/note", menuName: "쪽지함" },
+  // { id: 2, link: "/note", menuName: "쪽지함" },
   { id: 3, link: "/mypage", menuName: "마이페이지" },
 ];
 

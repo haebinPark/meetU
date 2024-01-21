@@ -18,7 +18,7 @@ const Introduction = lazy(
 );
 const Join = lazy(() => import("./pages/Member/Join.jsx"));
 const Login = lazy(() => import("./pages/Member/Login.jsx"));
-const Note = lazy(() => import("./pages/Note/Note.jsx"));
+// const Note = lazy(() => import("./pages/Note/Note.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage/MyPage.jsx"));
 const Membership = lazy(() => import("./pages/Member/Membership.jsx"));
 
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout />}>
           <Route path="band" element={<BandRoute />} />
-          <Route path="note" element={<Note />} />
+          {/* <Route path="note" element={<Note />} /> */}
           <Route path="mypage" element={<MyPage />} />
           <Route path="membership" element={<Membership />} />
         </Route>

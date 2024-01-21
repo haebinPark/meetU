@@ -1,4 +1,5 @@
-import axios from "axios";
+import pb from "../../api/pocketbase.js";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageDescription from "../../components/Common/PageDescription.jsx";
@@ -7,6 +8,7 @@ import PageTitle from "../../components/Common/PageTitle.jsx";
 import getNotify from "../../utils/getNotify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Spinner from "../../components/Common/Spinner.jsx";
 
 //반검색
 import {
@@ -34,72 +36,85 @@ function Band() {
   const [gradeInput, setGradeInput] = useState("");
   const [classInput, setClassInput] = useState("");
   const [schoolType, setSchoolType] = useState("초등학교");
-  const [searchResult, setSearchResult] = useState([]);
-  const nickname = localStorage.getItem("nickname");
+  const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //반 가입 상태관리//
   const [isBand, setIsBand] = useState(false);
   const navigate = useNavigate();
-  // 검색에 필요한 데이터를 `reqDate` 객체에 담는다.
-  const reqDate = {
-    school: schoolInput,
-    schoolType,
-    grade: gradeInput,
-    banNum: classInput,
-  };
+  const loginUser = pb.authStore.model.id;
+
   const handleSearchClick = async (event) => {
     event.preventDefault();
+    setIsVisible(true);
+    setIsLoading(true);
     try {
       // 서버로부터 데이터를 받아온다.
-      const { items } = await axios.get(
-        "https://aeng0908.pockethost.io/api/collections/bands/records",
-      );
-      if (items.status === 200) {
-        // 검색 결과를 상태로 업데이트한다.
-        setSearchResult(items);
+      const response = await pb.collection("band").getList(1, 1, {
+        filter: `(school= "${schoolInput}" &&
+        schoolCode= "${schoolType}" &&
+        grade= ${gradeInput} &&
+        bandNumber= ${classInput})`,
+      });
+      if (response.items.length === 0) {
         // `isBand` 상태를 업데이트합니다.
+        setIsBand(false);
+        getNotify("error", "해당하는 반이 없습니다.");
+        setIsLoading(false);
+      } else if (response.items.length > 0) {
         setIsBand(true);
-      } else {
-        getNotify("error", "검색에 실패하였습니다.");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("검색 오류", error);
       getNotify("error", "검색오류가 발생했습니다");
+      setIsLoading(false);
     }
   };
-
+  const data = {
+    school: `${schoolInput}`,
+    schoolCode: `${schoolType}`,
+    grade: gradeInput,
+    bandNumber: classInput,
+  };
   async function handleRequestClick(event) {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      const data = {
-        nickName: nickname,
-        reqDate,
-      };
-      const response = await axios.post("api/collections/bands/records", data);
-      if (response.data.success) {
-        getNotify("success", "개설 요청이 완료되었습니다.");
-      } else {
-        getNotify("error", "개설 요청에 실패하였습니다.");
-      }
+      await pb.collection("band").create(data);
+      setIsBand(true);
+      getNotify("success", "개설 요청이 완료되었습니다.");
+      setIsLoading(false);
     } catch (error) {
       console.error("개설 요청 중 오류 발생:", error);
       getNotify("error", "개설 요청 중 오류가 발생하였습니다.");
+      setIsLoading(false);
     }
   }
+
   async function handleJoinClick(event) {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      const result = await axios.post("api/collections/bands/records"); // 서버에 가입 요청
-
-      if (result.success) {
-        getNotify("success", "가입이 완료되었습니다.");
-        navigate("/guestbook");
-      }
+      const response = await pb.collection("band").getList(1, 1, {
+        filter: `(school= "${schoolInput}" &&
+        schoolCode= "${schoolType}" &&
+        grade= ${gradeInput} &&
+        bandNumber= ${classInput})`,
+      });
+      const bandUp = response.items[0].id;
+      const updateJoin = { band: `${bandUp}` };
+      await pb.collection("users").update(loginUser, updateJoin);
+      getNotify("success", "가입이 완료되었습니다.");
+      setIsLoading(false);
+      navigate("/guestbook");
     } catch (error) {
-      "가입오류", error;
+      console.error("가입요청 중 오류 발생:", error);
+      getNotify("error", "가입에 실패하였습니다.");
+      setIsLoading(false);
     }
-    getNotify("error", "가입에 실패하였습니다.");
   }
+
   return (
     <>
       <section style={{ textAlign: "center" }}>
@@ -125,7 +140,7 @@ function Band() {
           <SearchButton type="submit" onClick={handleSearchClick} />
         </SearchSection>
       </section>
-      <section>
+      <section style={{ marginTop: "20px" }}>
         <PageTitle>반 목록</PageTitle>
         <Table>
           <thead>
@@ -137,30 +152,30 @@ function Band() {
           <tbody>
             <TableRow>
               <TableCell>
-                {isBand ? (
-                  `${schoolInput}${schoolType} ${gradeInput}학년 ${classInput}반`
-                ) : (
-                  <span style={{ color: "#999999" }}>검색 결과 없음</span>
-                )}
+                {isVisible &&
+                  `${schoolInput}${schoolType} ${gradeInput}학년 ${classInput}반`}
               </TableCell>
               <TableCell>
-                <>
-                  {isBand ? (
-                    <BandJoinButton onClick={handleJoinClick}>
-                      반 가입하기
-                    </BandJoinButton>
-                  ) : (
-                    <BandRequestButton onClick={handleRequestClick}>
-                      반 개설하기
-                    </BandRequestButton>
-                  )}
-                </>
+                {isVisible && (
+                  <>
+                    {isBand ? (
+                      <BandJoinButton onClick={handleJoinClick}>
+                        반 가입하기
+                      </BandJoinButton>
+                    ) : (
+                      <BandRequestButton onClick={handleRequestClick}>
+                        반 개설하기
+                      </BandRequestButton>
+                    )}
+                  </>
+                )}
               </TableCell>
             </TableRow>
           </tbody>
         </Table>
       </section>
       <ToastContainer />
+      <Spinner isOpen={isLoading} />
     </>
   );
 }

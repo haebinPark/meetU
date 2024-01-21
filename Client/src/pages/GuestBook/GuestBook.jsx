@@ -1,5 +1,4 @@
 import PageTitle from "../../components/Common/PageTitle.jsx";
-import axios from "axios";
 import PageDescription from "../../components/Common/PageDescription.jsx";
 import Pagination from "../../components/Common/Pagination.jsx";
 
@@ -13,6 +12,7 @@ import getNofity from "../../utils/getNotify.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import pb from "../../api/pocketbase.js";
 //스타일//
 const TextContainSt = styled.section`
   margin-top: 10px;
@@ -29,42 +29,43 @@ const GBViewStyle = styled.ul`
   height: auto;
 `;
 
-axios.defaults.baseURL = "https://most-application.pockethost.io/";
-
 function GuestBook() {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
-  const userId = localStorage.getItem("userId");
   const [page, setPage] = useState(1);
-  const pageSize = window.innerWidth <= 768 ? 10 : 15; // 모바일일 때는 10개, 웹사이트일 때는 15개
+  const loginUser = pb.authStore.model.id;
+  const loginBand = pb.authStore.model.band;
+  const loginName = pb.authStore.model.nickname;
 
+  //전체 방명록 불러오기
   useEffect(() => {
-    axios
-      .get(`api/collections/comment/records?expand=userId&perpage=${pageSize}`)
+    pb.collection("comment")
+      .getList(1, 20, {
+        filter: `(band="${loginBand}")`,
+        sort: "-created",
+        expand: "userId",
+      })
       .then((response) => {
-        const sortedComments = response.data.items.reverse(); // 역순 정렬
-        setComments(sortedComments);
+        // console.log(response);
+        setComments(response.items);
       })
       .catch((error) => console.error(error));
-  }, [page, pageSize]);
+  }, []);
 
+  //방명록 등록
   const ComHandleSumbmit = async (event) => {
     event.preventDefault();
+    const data = {
+      userId: loginUser,
+      contexts: text,
+      band: loginBand,
+    };
     try {
-      const response = await axios.post("api/collections/comments/records", {
-        contexts: text,
-      });
-      if (response.status === 200) {
-        setText("");
-        getNofity("success", "글이 등록되었습니다.");
-        axios
-          .get(`api/collections/comments/records`)
-          .then((response) => {
-            const sortedComments = response.data.items.reverse(); // 역순 정렬
-            console.log(sortedComments);
-          })
-          .catch((error) => console.error(error));
-      }
+      const res = await pb.collection("comment").create(data);
+      res.expand = { userId: { nickname: loginName } };
+      setComments((prev) => [res, ...prev]);
+      setText("");
+      getNofity("success", "글이 등록되었습니다.");
     } catch (error) {
       console.error("글을 등록하는 도중 오류가 발생했습니다:", error);
     }
@@ -74,9 +75,20 @@ function GuestBook() {
     setText(event.target.value);
   };
 
-  const handleDelete = (userId) => {
-    setComments(comments.filter((items) => items.id === userId.contexts.id));
+  //삭제기능
+  const handleDelete = async (id) => {
+    // 선택된 방명록 아이디를 가져온다.
+    // 가져온 아이디에 해댕하는 글을 지운다
+    // 가저온 아이디 이외의 글은 다시 방명록에 넣는다.
+    try {
+      await pb.collection("comment").delete(id);
+      setComments(comments.filter((comment) => comment.id !== id));
+      getNofity("success", "삭제되었습니다!");
+    } catch (error) {
+      console.error("삭제 오류발생:", error);
+    }
   };
+
   return (
     <>
       <div style={{ textAlign: "center" }}>
@@ -109,22 +121,25 @@ function GuestBook() {
       <section>
         {/*  방명록 조회 부분 */}
         <GBViewStyle>
-          {comments.map((comment) => (
-            <Gestcomment
-              key={comment.id}
-              id={comment.id}
-              nickName={comment.expand.userId.nickname}
-              contexts={comment.contexts}
-              created={comment.created}
-              onDelete={handleDelete}
-            />
-          ))}
+          {comments.map((comment) => {
+            return (
+              <Gestcomment
+                key={comment.id}
+                id={comment.id}
+                nickName={comment.expand.userId.nickname}
+                contexts={comment.contexts}
+                created={comment.created}
+                handleDelete={handleDelete}
+                isWrite={comment.userId === loginUser}
+                comment={comment}
+              />
+            );
+          })}
         </GBViewStyle>
         <Pagination
           page={page}
-          pageSize={pageSize}
           totalItems={comments.length}
-          onPageChange={setPage}
+          onClick={setPage}
         />
       </section>
     </>

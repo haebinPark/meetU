@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import getNotify from "../../utils/getNotify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
@@ -16,7 +15,6 @@ const CommentEntry = styled.li`
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-template-areas: "name comment button date";
-  position: relative;
 
   @media screen and (max-width: 768px) {
     grid-template-areas:
@@ -64,17 +62,19 @@ const DeleteButton = styled.button`
   margin-left: 10px;
 `;
 
-function GuestComment({ id, nickName, contexts, created, onDelete }) {
+function GuestComment({
+  comment,
+  id,
+  nickName,
+  contexts,
+  created,
+  handleDelete,
+  isWrite,
+}) {
   const [sendButtonOpen, setSendButtonOpen] = useState(false);
-
   const handelSendButton = () => setSendButtonOpen(!sendButtonOpen);
 
   const parsedDate = new Date(created).toLocaleDateString("ko-kr");
-
-  const ComHandleDelete = () => {
-    onDelete(id);
-    getNotify("success", "삭제되었습니다!");
-  };
 
   return (
     <>
@@ -88,9 +88,17 @@ function GuestComment({ id, nickName, contexts, created, onDelete }) {
           )}
         </CommentNameStyle>
         <CommentStyle> {contexts}</CommentStyle>
-        <ButtonStyle>
-          <DeleteButton onClick={() => ComHandleDelete(id)}>x</DeleteButton>
-        </ButtonStyle>
+        {isWrite && (
+          <ButtonStyle>
+            <DeleteButton
+              onClick={() => {
+                handleDelete(comment.id);
+              }}
+            >
+              x
+            </DeleteButton>
+          </ButtonStyle>
+        )}
         <CommentDateStyle>{parsedDate}</CommentDateStyle>
       </CommentEntry>
       <ToastContainer />

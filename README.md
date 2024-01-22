@@ -43,7 +43,16 @@
   - 반(BAND)생성 신청, 반 조회 기능, 반 삭제 기능 구현
     
   **이성미**
-  - 
+  - ERD 작성
+  - 방명록 기능 구현
+  - 회원 가입(controller, repository, entity) 구현
+  - 공통 기능 구현(GlobalExceptionAdvice, responseDTO 등)
+  - CSR 방식 로그인 구현
+  - 연관 관계 매핑 및 편의 메서드 작성
+  - 전체 기능 통합 테스트 (Postman)
+  - 오류 코드 수정과 리펙토링
+  - API 문서 작성 및 수정
+  - Git Hub 관리
     
   **김준년**
   - 닉네임 배경색 DB저장 및 저장된 색상 목록 조회

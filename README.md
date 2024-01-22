@@ -3,14 +3,20 @@
 <img width="1082" alt="">
 
 
-<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/f5a26af6-e30d-4afd-b932-5d96886882c1" width="130px" />
+<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/e2039718-4898-43de-9c26-0e4a19c30efc" width="400px" />
 
-### 신학기 친구 사귀기! meetU(미츄)
-  
+
+### 소개글
+" 새학기에 친구 사귀기를 어려워하는 분들을 위해 <br />
+미츄를 사용하여 나의 관심사와 같은 반 친구를 사귀어 보세요. <br />
+미츄는 친구를 만들 수 있는 사소한 계기가 되어 줄 것입니다. "
+
+<br />
+
 **팀명 : 아띠**
   
 **프로젝트 기간 : 2023.12.21 ~ 2024.1.23**   
-<br />
+
 
   ### 배포 링크 <a href="https://aeng0908.github.io/introduction">meetU</a>
 <br />

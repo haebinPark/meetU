@@ -40,7 +40,7 @@
   - 
     
   **박종봉**
-  - 
+  - 반 작성, 
     
   **이성미**
   - 
@@ -59,6 +59,7 @@
 
 ##  개발 환경
 ![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)
+![GITHUB](https://img.shields.io/badge/GITHUB-%2320232a.svg?style=for-the-badge&logo=GITHUB&logoColor=%2361DAFB)
 ![INTELLIJIDEA](https://img.shields.io/badge/INTELLIJIDEA-%231572B6.svg?style=for-the-badge&logo=INTELLIJIDEA&logoColor=white)
 ![WINDOWS](https://img.shields.io/badge/WINDOWS-%23007ACC.svg?style=for-the-badge&logo=WINDOWS&logoColor=white)
 ![MACOS](https://img.shields.io/badge/MACOS-%2320232a.svg?style=for-the-badge&logo=MACOS&logoColor=%2361DAFB)
@@ -71,14 +72,18 @@
 ### 프론트엔드
   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
   ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-%23007ACC.svg?style=for-the-badge&logo=JavaScript&logoColor=white)
   ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-  ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
-  ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-  ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-  <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
-  <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazon s3&logoColor=white">
-
+  ![netlify](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=netlify&logoColor=white)
+  ![Prettier](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=Prettier&logoColor=white)
+  ![react-router-dom](https://img.shields.io/badge/react-router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+  <img src="https://img.shields.io/badge/react-toastify-FF9900?style=for-the-badge&logo=react-toastify&logoColor=white">
+  <img src="https://img.shields.io/badge/react-modal-527FFF?style=for-the-badge&logo=react-modal&logoColor=white">
+  <img src="https://img.shields.io/badge/react-responsive-527FFF?style=for-the-badge&logo=react-responsive&logoColor=white">
+  <img src="https://img.shields.io/badge/pocketbase-4479A1?style=for-the-badge&logo=pocketbase&logoColor=white">
+  <img src="https://img.shields.io/badge/ESLint-5A29E4?style=for-the-badge&logo=ESLint&logoColor=white">
+  <img src="https://img.shields.io/badge/creat-react-app-5A29E4?style=for-the-badge&logo=creat-react-app&logoColor=white">
+   ![JavaScript](https://img.shields.io/badge/styled-components-%23007ACC.svg?style=for-the-badge&logo=styled-components&logoColor=white)
 </br>
    
    ###  백엔드
@@ -88,9 +93,10 @@
   <img src="https://img.shields.io/badge/mySQL-4479A1?style=for-the-badge&logo=mySQL&logoColor=white">
   <img src="https://img.shields.io/badge/JAVA-5A29E4?style=for-the-badge&logo=JAVA&logoColor=white">
   <img src="https://img.shields.io/badge/GRADLE-569A31?style=for-the-badge&logo=gradle&logoColor=white">
-   <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
+  <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
   <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white">
   <img src="https://img.shields.io/badge/amazonaws-527FFF?style=for-the-badge&logo=amazonaws&logoColor=white">
+  <img src="https://img.shields.io/badge/JWT-4479A1?style=for-the-badge&logo=jwt&logoColor=white">
   
 </br>
   

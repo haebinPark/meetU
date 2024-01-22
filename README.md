@@ -1,1 +1,115 @@
-# abc02_001
+<div align="center">
+
+<img width="1082" alt="">
+
+### 신학기 친구 사귀기! MEET YOU(밋츄)
+  
+**팀명 : 아띠**
+  
+**프로젝트 기간 : 2023.12.21 ~ 2024.1.23**   
+<br />
+
+  ### 배포 링크 <a href="https://aeng0908.github.io/introduction">MEET YOU</a>
+<br />
+
+  
+## 👥 팀 소개
+  |<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />
+|:---:|:---:|:---:|
+|[이승운](https://github.com/chefnoel)|[김다인](https://github.com/kimInDa)|[정연희](https://github.com/Aeng0908)|
+|FE 부팀장|FE|FE|
+
+ |<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />
+|:---:|:---:|:---:|:---:|:---:|
+|[박종봉](https://github.com/parallel45)|[이성미](https://github.com/wnelwldh)|[김준년](https://github.com/Brilmin)|[박해빈](https://github.com/haebinPark)|[김다소미](https://github.com/beeekim)|
+|BE 팀장|BE|BE|BE|BE|BE|
+
+<details>
+  <summary>담당 파트</summary>
+  <div markdown="1">
+    
+<br />
+
+  **이승운**
+  - 
+    
+  **김다인**
+  - 
+    
+  **정연희**
+  - 
+    
+  **박종봉**
+  - 
+    
+  **이성미**
+  - 
+    
+  **김준년**
+  - 
+
+  **박해빈**
+  - 
+
+  **김다소미**
+  - 
+
+</div>
+</details>
+
+##  개발 환경
+![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)
+![INTELLIJIDEA](https://img.shields.io/badge/INTELLIJIDEA-%231572B6.svg?style=for-the-badge&logo=INTELLIJIDEA&logoColor=white)
+![WINDOWS](https://img.shields.io/badge/WINDOWS-%23007ACC.svg?style=for-the-badge&logo=WINDOWS&logoColor=white)
+![MACOS](https://img.shields.io/badge/MACOS-%2320232a.svg?style=for-the-badge&logo=MACOS&logoColor=%2361DAFB)
+![POSTMAN](https://img.shields.io/badge/POSTMAN-%23E34F26.svg?style=for-the-badge&logo=POSTMAN&logoColor=white)
+
+</br>
+
+##  기술 스택
+
+### 프론트엔드
+  ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+  ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
+  ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+  ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+  ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+  ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+  ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+  <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+  <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazon s3&logoColor=white">
+
+</br>
+   
+   ###  백엔드
+
+  <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=spring security&logoColor=white">
+  <img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white">
+  <img src="https://img.shields.io/badge/mySQL-4479A1?style=for-the-badge&logo=mySQL&logoColor=white">
+  <img src="https://img.shields.io/badge/JAVA-5A29E4?style=for-the-badge&logo=JAVA&logoColor=white">
+  <img src="https://img.shields.io/badge/GRADLE-569A31?style=for-the-badge&logo=gradle&logoColor=white">
+   <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
+  <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white">
+  <img src="https://img.shields.io/badge/amazonaws-527FFF?style=for-the-badge&logo=amazonaws&logoColor=white">
+  
+</br>
+  
+  
+   
+  
+
+    
+  ## 📒 기획 명세서
+<a href="https://docs.google.com/spreadsheets/d/1L4wACPQCKQ7hr-v-saBtJC0c9OAXE6tAE3GvGZy0RnM/edit#gid=461303735" target="_blank">사용자 요구사항 정의서 및 테이블정의서</a>  
+
+<a href="https://docs.google.com/presentation/d/1kQ7nEFaEMkEkPnIlwcOXH-kEH2KPIL78p8azkLdtWC0/edit#slide=id.g2ab847394c7_0_53" target="_blank">화면정의서</a> 
+
+<br />
+  
+  ## 📗 서비스 메뉴얼
+ 
+  <a href="">서비스 메뉴얼 링크</a> 
+   
+  ## 브랜치 규칙
+<img width="579" alt="스크린샷" src="https://postfiles.pstatic.net/MjAyNDAxMjJfMTkz/MDAxNzA1OTEwNzI1NDk2.6YsafjGcwBT6A-pYbiLgT3e85GmOhUySGy7dDntHNpwg.1IiOdZDjgG7OOAl_CThqCwNiqxATRh13D-7ll3Ri2bkg.JPEG.guang90/pppw.JPG?type=w966">
+

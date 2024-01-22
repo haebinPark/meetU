@@ -2,6 +2,7 @@ package com.example.codestates.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -24,11 +25,11 @@ public class JwtTokenizer {
     private String secretKey;
 
     @Getter
-    @Value("40")
+    @Value("${jwt.access-token-expiration-minutes}")
     private int accessTokenExpirationMinutes;
 
     @Getter
-    @Value("400")
+    @Value("${jwt.refresh-token-expiration-minutes}")
     private int refreshTokenExpirationMinutes;
 
     //(1) plain text 형태인 Secretkey의 byte[]를 Base64형식의 문자열로 인코딩
@@ -107,6 +108,29 @@ public class JwtTokenizer {
          jjwt 0.9.x 버전에서는 서명 과정에서 HMAC 알고리즘을 직접 지정해야 했지만 최신 버전에서는 내부적으로 적절한 HMAC 알고리즘을 지정해 준다는 사실을 기억하기 바랍니다.
          */
         return key;
+    }
+    public boolean validateToken(String token){
+        try{
+            Jwts.parserBuilder()
+                    .setSigningKey(getKeyFromBase64EncodedKey(encodeBase64SecretKey(secretKey)))
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        }catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
+    public String getRefreshToken(String refreshToken){
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getKeyFromBase64EncodedKey(encodeBase64SecretKey(secretKey)))
+                    .build()
+                    .parseClaimsJws(refreshToken)
+                    .getBody();
+            return claims.getSubject();
+        }catch (JwtException | IllegalArgumentException e){
+            return null;
+        }
     }
 
 }

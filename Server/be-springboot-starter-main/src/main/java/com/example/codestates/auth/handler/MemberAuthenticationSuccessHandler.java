@@ -43,42 +43,16 @@ public class MemberAuthenticationSuccessHandler implements AuthenticationSuccess
         log.info("# Authenticated successfully");
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        String username = userDetails.getUsername();
-//
-//        Optional<Member> memberOptional = memberRepository.findByEmail(username);
-//        if(memberOptional.isPresent()){
-//            Member member = memberOptional.get();
-//            MemberResponseDto memberResponseDto = new MemberResponseDto();
-//            memberResponseDto.setMemberId(member.getMemberId());
-//            memberResponseDto.setEmail(member.getEmail());
-//            memberResponseDto.setNickName(member.getNickName());
-//            memberResponseDto.setBandId(member.getBandId());
-//            memberResponseDto.setMemberStatus(member.isMemberStatus());
-        //    memberResponseDto.setMbti(member.getMbti());
-        //    memberResponseDto.setInterests(member.getInterests());
-        //    memberResponseDto.setNickNameColor(member.getNickNameColor());
-//            memberResponseDto.setRole(member.getRoles());
-//        ApiResponse<MemberResponseDto> apiResponse = new ApiResponse<>(true, "Login successful", memberResponseDto);
-//
-//        // ApiResponse를 JSON 형태로 변환하여 응답
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String jsonResponse = objectMapper.writeValueAsString(apiResponse);
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        PrintWriter out = response.getWriter();
-//        out.print(jsonResponse);
-//        out.flush();
-//        }
+
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("email", authentication.getName());
         responseData.put("authorities", authentication.getAuthorities());
         //여기에 username(email)을 가지고 와서 사용자 정보들을 반환하는 코드 작성해야함
         responseData.put("nickname", ((MemberDetailsService.MemberDetails) userDetails).getNickname());
         responseData.put("memberId",((MemberDetailsService.MemberDetails) userDetails).getMemberId());
-//        responseData.put("band",((MemberDetailsService.MemberDetails) userDetails).getBand());
+
         responseData.put("mbti",((MemberDetailsService.MemberDetails) userDetails).getMbti());
-        //responseData.put("interests",userDetails.getInterests());
-//        responseData.put("stylecode",((MemberDetailsService.MemberDetails) userDetails).getBgColor());
+
 
         //아니면 responsdto로 작성해서 확인해야함
 

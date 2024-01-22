@@ -1,7 +1,7 @@
 package com.example.codestates.auth.userdetails;
 
-//import com.example.codestates.band.entity.BandJoinList;
-import com.example.codestates.band.entity.Band;
+
+
 import com.example.codestates.bgcolor.entity.BgColor;
 import com.example.codestates.mbti.entity.Mbti;
 import com.example.codestates.member.entity.Member;
@@ -41,14 +41,12 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         Member findMember = optionalMember.orElseThrow(()-> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         //(4) 데이터베이스에서 조회한 회원의 이메일 정보를 이용해 Role 기반의 권한 정보(GrantedAuthority)컬랙션을 생성
-        //Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(findMember.getEmail());
 
         //(5) 데이터베이스에서 조회한 인증정보와 4에서 생성한 권한 정보를 스프링 시큐리티에선 아직 알지 못하기 때문에 스프링 시큐리티에 정보들을 제공해야 하며,
         // UserDetails 인터페이스의 구현체인 User클래스의 객체를 통해 제공
         //데이터베이스에서 조회한 User클래스의 객체를 리턴하면 스프링 시큐리티가 이 정보를 이용해 인증 절차를 수행
         //데이터베이스에서 User의 인증 정보만 스프링 시큐리티에 넘겨주고 인증 처리는 스프링 시큐리티가 대신해줌
         //>>>
-        //return new User(findMember.getEmail(), findMember.getPassword(), authorities);
         //>>>
         //>>>
         return new MemberDetails(findMember);
@@ -71,12 +69,8 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
             setRoles(member.getRoles());//member에 데이트 베이스에서 조회한 role을 전달
             setMbti(member.getMbti());
             setNickname(member.getNickname());
-//            setBgColor(member.getBgColor());
-//            setBandJoinLists(member.getBandJoinLists());
- //           setBand(member.getBand());
             setMbti(member.getMbti());
 //          //bandID들고와서 설정하기
-            //setInteresting(member.getInteresing()); //이건 리스트로 받아와야함
 //          // 관심사 설정하기
 
 
@@ -103,13 +97,8 @@ public class MemberDetailsService implements UserDetailsService { //(1)UserDetai
         public Long getMemberId(){return super.getMemberId();}
         public Mbti getMbti(){return super.getMbti();}
         public String getNickname(){return super.getNickname();}
-        public BgColor getBgColor(){return super.getBgColor();}
- //       public Band getBandId(){return super.getBand();};
+        public BgColor getBgColor(){return super.getBgColor();}//오버스택 조심하기
 
-//        @Override
-//        public List<BandJoinList> getBandJoinLists() {
-//            return super.getBandJoinLists();
-//        }
 
         @Override
         public boolean isAccountNonExpired() {

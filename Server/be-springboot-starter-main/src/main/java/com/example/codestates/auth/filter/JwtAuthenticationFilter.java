@@ -72,6 +72,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("memberId",member.getMemberId());
         claims.put("username",member.getEmail());
         claims.put("role",member.getRoles());
+        claims.put("nickname", member.getNickname());
 
         String subject = member.getEmail();
 

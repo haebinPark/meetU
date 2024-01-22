@@ -2,24 +2,28 @@
 
 <img width="1082" alt="">
 
-### 신학기 친구 사귀기! MEET YOU(밋츄)
+
+<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/f5a26af6-e30d-4afd-b932-5d96886882c1" width="130px" />
+
+### 신학기 친구 사귀기! meetU(미츄)
   
 **팀명 : 아띠**
   
 **프로젝트 기간 : 2023.12.21 ~ 2024.1.23**   
 <br />
 
-  ### 배포 링크 <a href="https://aeng0908.github.io/introduction">MEET YOU</a>
+  ### 배포 링크 <a href="https://aeng0908.github.io/introduction">meetU</a>
 <br />
 
   
 ## 👥 팀 소개
-  |<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />
+
+  |<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/5bc86099-5348-4451-8ddc-c58a05d683a0" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/9e479ca8-ee30-4c46-9bab-bc6c61fad811" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/251fb669-2e03-4e04-8754-400480f69deb " width="130px" />
 |:---:|:---:|:---:|
 |[이승운](https://github.com/chefnoel)|[김다인](https://github.com/kimInDa)|[정연희](https://github.com/Aeng0908)|
 |FE 부팀장|FE|FE|
 
- |<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />|<img src="" width="130px" />
+ |<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/67692a3d-5ea2-415c-83e0-36a19eb4c804" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/c149de39-0434-411d-bce2-da7791e071a0" width="130px" />|<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/519b178a-6308-48c4-ba7c-be3d94c4e8d3" width="130px" />
 |:---:|:---:|:---:|:---:|:---:|
 |[박종봉](https://github.com/parallel45)|[이성미](https://github.com/wnelwldh)|[김준년](https://github.com/Brilmin)|[박해빈](https://github.com/haebinPark)|[김다소미](https://github.com/beeekim)|
 |BE 팀장|BE|BE|BE|BE|BE|
@@ -37,12 +41,21 @@
   - 
     
   **정연희**
-  - 
+  -
+  
+ - 방명록 페이지 구현
+ - 반(BAND)페이지 구현
+ - 앱 소개 페이지 구현 
+
+
     
   **박종봉**
+  -
+  
   - 반(BAND)생성 신청, 반 조회 기능, 반 삭제 기능 구현
     
   **이성미**
+  -
   
   - ERD 작성
   - 방명록 기능 구현
@@ -55,6 +68,8 @@
   - Git Hub 관리
     
   **김준년**
+  -
+  
   - 닉네임 배경색 DB저장 및 저장된 색상 목록 조회
   - 닉네임 배경색 저장,조회 단위 테스트(Postmen)
   - AWS를 활용한 배포환경 및 구축(EC2,RDS)

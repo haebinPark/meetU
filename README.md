@@ -18,12 +18,12 @@
   
 ## 👥 팀 소개
 
-  |<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/5bc86099-5348-4451-8ddc-c58a05d683a0" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/9e479ca8-ee30-4c46-9bab-bc6c61fad811" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/251fb669-2e03-4e04-8754-400480f69deb " width="130px" />
-|:---:|:---:|:---:|
-|[이승운](https://github.com/chefnoel)|[김다인](https://github.com/kimInDa)|[정연희](https://github.com/Aeng0908)|
-|FE 부팀장|FE|FE|
+  |<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/5bc86099-5348-4451-8ddc-c58a05d683a0" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/9e479ca8-ee30-4c46-9bab-bc6c61fad811" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/251fb669-2e03-4e04-8754-400480f69deb " width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/67692a3d-5ea2-415c-83e0-36a19eb4c804" width="130px" />
+|:---:|:---:|:---:|:---:|
+|[이승운](https://github.com/chefnoel)|[김다인](https://github.com/kimInDa)|[정연희](https://github.com/Aeng0908)|[최지현](https://github.com/Hyeon82)|
+|FE 부팀장|FE|FE|FE|
 
- |<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/67692a3d-5ea2-415c-83e0-36a19eb4c804" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/c149de39-0434-411d-bce2-da7791e071a0" width="130px" />|<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/519b178a-6308-48c4-ba7c-be3d94c4e8d3" width="130px" />
+ |<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/ee00ec7a-b594-4da2-95c9-09be06a265f3" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/c149de39-0434-411d-bce2-da7791e071a0" width="130px" />|<img src="" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/519b178a-6308-48c4-ba7c-be3d94c4e8d3" width="130px" />
 |:---:|:---:|:---:|:---:|:---:|
 |[박종봉](https://github.com/parallel45)|[이성미](https://github.com/wnelwldh)|[김준년](https://github.com/Brilmin)|[박해빈](https://github.com/haebinPark)|[김다소미](https://github.com/beeekim)|
 |BE 팀장|BE|BE|BE|BE|BE|

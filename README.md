@@ -82,7 +82,7 @@
   <img src="https://img.shields.io/badge/react-responsive-527FFF?style=for-the-badge&logo=react-responsive&logoColor=white">
   <img src="https://img.shields.io/badge/pocketbase-4479A1?style=for-the-badge&logo=pocketbase&logoColor=white">
   <img src="https://img.shields.io/badge/ESLint-5A29E4?style=for-the-badge&logo=ESLint&logoColor=white">
-  <img src="https://img.shields.io/badge/creat-react-app-5A29E4?style=for-the-badge&logo=creat-react-app&logoColor=white">
+  <img src="https://img.shields.io/badge/creat-react-5A29E4?style=for-the-badge&logo=creat-react&logoColor=white">
    ![JavaScript](https://img.shields.io/badge/styled-components-%23007ACC.svg?style=for-the-badge&logo=styled-components&logoColor=white)
 </br>
    

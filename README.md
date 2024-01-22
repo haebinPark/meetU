@@ -43,6 +43,7 @@
   - 반(BAND)생성 신청, 반 조회 기능, 반 삭제 기능 구현
     
   **이성미**
+  
   - ERD 작성
   - 방명록 기능 구현
   - 회원 가입(controller, repository, entity) 구현

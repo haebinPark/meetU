@@ -139,7 +139,7 @@
   ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
   ![JavaScript](https://img.shields.io/badge/JavaScript-%23007ACC.svg?style=for-the-badge&logo=JavaScript&logoColor=white)
   ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-  ![netlify](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=netlify&logoColor=white)
+  ![netlify](https://img.shields.io/badge/netlify-%23593d88.svg?style=for-the-badge&logo=netlify&logoColor=white)
   ![Prettier](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=Prettier&logoColor=white)
   ![react-router-dom](https://img.shields.io/badge/react-router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
   <img src="https://img.shields.io/badge/react-toastify-FF9900?style=for-the-badge&logo=react-toastify&logoColor=white">

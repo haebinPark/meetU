@@ -20,7 +20,7 @@
 **프로젝트 기간 : 2023.12.21 ~ 2024.1.23**   
 
 
-  ### 배포 링크 <a href="https://fe--abc-meetu.netlify.app/">meetU</a>
+  ### 배포 링크 <a href="https://65af5b04ddd90ea1a27a97a1--abc-meetu.netlify.app">meetU</a>
 <br />
 
   

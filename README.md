@@ -82,7 +82,7 @@
   **이성미**
   -
   
-  - ERD 작성
+  - API 명세서, 테이블 명세서, ERD 작성
   - 방명록 기능 구현
   - 회원관련 기능(controller, repository, entity) 구현
   - 공통 기능 구현(GlobalExceptionAdvice, responseDTO 등)

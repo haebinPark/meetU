@@ -5,6 +5,8 @@
 
 <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/e2039718-4898-43de-9c26-0e4a19c30efc" width="400px" />
 
+![미츄-목업3](https://github.com/codestates-seb/abc02_001/assets/105577805/fe3b34a5-0c88-4346-8936-a56237f22d92)
+
 
 ### 소개글
 " 새학기에 친구 사귀기를 어려워하는 분들을 위해 <br />

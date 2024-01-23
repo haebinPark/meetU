@@ -4,6 +4,7 @@ export const SearchSection = styled.div`
   align-items: center;
   justify-content: center;
   @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
   }
 `;
 
@@ -16,7 +17,7 @@ export const SearchSchoolInput = styled.input`
   border: 1px solid var(--brand-color);
   margin-left: 10px;
   padding: 5px;
-  width: 60%;
+  width: 100px;
   margin-top: 7px;
   text-align: center;
   border-radius: 5px;
@@ -24,10 +25,10 @@ export const SearchSchoolInput = styled.input`
 
 export const SearchInput = styled.input`
   border: 1px solid var(--brand-color);
-  margin-left: 10px;
+  margin-left: 20px;
   margin-top: 5px;
   padding: 5px;
-  width: 30%;
+  width: 50px;
   text-align: center;
   border-radius: 5px;
 `;
@@ -42,6 +43,8 @@ export const SelectBox = styled.select`
 
 export const Table = styled.table`
   width: 100%;
+  justify-content: center;
+  align-items: center;
   border-collapse: collapse;
 `;
 

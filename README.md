@@ -31,8 +31,7 @@
 |[이승운](https://github.com/chefnoel)|[김다인](https://github.com/kimInDa)|[정연희](https://github.com/Aeng0908)|[최지현](https://github.com/Hyeon82)|
 |FE 부팀장|FE|FE|FE|
 
- |<img src="https://github.com/codestates-seb/abc02_001/assets/41185705/9405b296-bc3f-400a-9a8c-961d91448fd1" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/ee00ec7a-b594-4da2-95c9-09be06a265f3" 
-width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/c149de39-0434-411d-bce2-da7791e071a0" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/41185705/ec741b25-8476-4a78-87ee-c06345f1fe07" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/519b178a-6308-48c4-ba7c-be3d94c4e8d3" width="130px" />
+ |<img src="https://github.com/codestates-seb/abc02_001/assets/41185705/9405b296-bc3f-400a-9a8c-961d91448fd1" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/ee00ec7a-b594-4da2-95c9-09be06a265f3" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/c149de39-0434-411d-bce2-da7791e071a0" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/41185705/ec741b25-8476-4a78-87ee-c06345f1fe07" width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89781834/519b178a-6308-48c4-ba7c-be3d94c4e8d3" width="130px" />
 |:---:|:---:|:---:|:---:|:---:|
 |[박종봉](https://github.com/parallel45)|[이성미](https://github.com/wnelwldh)|[김준년](https://github.com/Brilmin)|[박해빈](https://github.com/haebinPark)|[김다소미](https://github.com/beeekim)|
 |BE 팀장|BE|BE|BE|BE|BE|
@@ -73,7 +72,7 @@ width="130px" />|<img src="https://github.com/codestates-seb/abc02_001/assets/89
  - 방명록 페이지 마크업, CSS, 기능 구현
  - 반(BAND)페이지 마크업, CSS, 기능 구현
  - 서비스 소개 페이지 마크업, CSS, 기능 구현
- - 쪽지함 페이지 마크업, CSS 구현
+ - 페이지네이션 마크업, CSS 구현
  - 쪽지함 페이지 마크업, CSS 구현
 
 

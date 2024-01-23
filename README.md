@@ -47,13 +47,13 @@
 
  **FRONT END**
  -
- <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/9f1aeff5-24bd-4d96-ab22-d69f8312a915" width="1200px" />
+ <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/a602eb67-b647-487c-9a42-0f994a35723d" width="1200px" />
 
 
     
  **BACK END**
  -
- <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/b9fc14bf-d05e-4ec8-8ba7-b3b6e0a20be4" width="1200px" />
+ <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/53448d0d-490f-4e5d-97fc-fc109a0283c5" width="1200px" />
 
   <br />  
 

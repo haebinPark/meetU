@@ -89,6 +89,7 @@
 </div>
 </details>
 
+![meetU](https://github.com/codestates-seb/abc02_001/assets/41185705/62443e16-e7b5-4e21-8cf6-a03c0e621d42)
 ##  개발 환경
 ![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)
 ![GITHUB](https://img.shields.io/badge/GITHUB-%2320232a.svg?style=for-the-badge&logo=GITHUB&logoColor=%2361DAFB)

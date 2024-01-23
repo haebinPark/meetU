@@ -9,6 +9,24 @@ import SlickPage4 from "../../assets/slickpage4.gif";
 
 const Image = styled.img`
   width: 100%;
+  position: relative;
+`;
+
+const ArrowButton = styled.button`
+  position: absolute;
+  z-index: 1;
+  font-size: 1rem;
+  color: var(--brand-color);
+  background-color: var(--brand-color);
+  border-radius: 40px;
+  top: 50%;
+
+  &.left {
+    left: -1rem;
+  }
+  &.right {
+    right: -1rem;
+  }
 `;
 
 export default function Slick() {
@@ -46,16 +64,16 @@ export default function Slick() {
 
 const NextArrow = ({ onClick }) => {
   return (
-    <button onClick={onClick} type="button">
-      w
-    </button>
+    <ArrowButton className="right" onClick={onClick} type="button">
+      o
+    </ArrowButton>
   );
 };
 
 const PrevArrow = ({ onClick }) => {
   return (
-    <button onClick={onClick} type="button">
-      n
-    </button>
+    <ArrowButton className="left" onClick={onClick} type="button">
+      o
+    </ArrowButton>
   );
 };

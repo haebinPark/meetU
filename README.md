@@ -36,99 +36,33 @@
 |[박종봉](https://github.com/parallel45)|[이성미](https://github.com/wnelwldh)|[김준년](https://github.com/Brilmin)|[박해빈](https://github.com/haebinPark)|[김다소미](https://github.com/beeekim)|
 |BE 팀장|BE|BE|BE|BE|BE|
 
+
+
+
 <details>
   <summary>담당 파트</summary>
   <div markdown="1">
     
 <br />
 
-  **이승운**
-  - 
-
-  - FE 팀장
-  - 파비콘 디자인 및 제작
-  - 메인 로고 디자인 및 제작
-    
-  **김다인**
-  - 
-  
-  - 서비스 소개, 회원가입, 로그인, 마이페이지, 회원정보수정 페이지 디자인 & Framer 시안 제작
-  - 포켓베이스 DB 구성
-  - 공통 컴포넌트 마크업, CSS, 기능 구현 (반응형 헤더, 네비게이션, 푸터, 토스트 알림(react-toastify), 로딩 스피너(react-modal))
-  - 페이지 라우터 구현(react-router)
-  - 서비스 소개 페이지 마크업, CSS 구현
-  - 회원가입 페이지 마크업, CSS, 기능 구현
-  - 로그인 페이지 마크업, CSS, 기능 구현
-  - 마이페이지 마크업, CSS, 기능 구현
-  - 회원정보 수정 페이지 마크업, CSS 구현
-    
-  **정연희**
-  -
-  
- - 방명록, 반(BAND), 쪽지함 페이지 디자인 & Figma 시안 제작
- - 포켓베이스 DB 구성
- - 앱 소개 이미지 제작
- - 공통 컴포넌트 마크업, CSS 구현(버튼 컴포넌트(styled-component))
- - 방명록 페이지 마크업, CSS, 기능 구현
- - 반(BAND)페이지 마크업, CSS, 기능 구현
- - 서비스 소개 페이지 마크업, CSS, 기능 구현
- - 페이지네이션 마크업, CSS 구현
- - 쪽지함 페이지 마크업, CSS 구현
+ **FRONT END**
+ -
+ <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/9f1aeff5-24bd-4d96-ab22-d69f8312a915" width="1200px" />
 
 
     
-  **박종봉**
-  -
-  
-    
-  - 반(BAND)생성 신청, 반 조회 기능, 반 삭제 기능 구현
-  - 반 DB 작성
-  - 반 관련 기능 단위테스트(Postman)
-  - API문서 작성
+ **BACK END**
+ -
+ <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/b9fc14bf-d05e-4ec8-8ba7-b3b6e0a20be4" width="1200px" />
 
-    
-  **이성미**
-  -
-  
-  - API 명세서, 테이블 명세서, ERD 작성
-  - 방명록 기능 구현
-  - 회원관련 기능(controller, repository, entity) 구현
-  - 공통 기능 구현(GlobalExceptionAdvice, responseDTO 등)
-  - CSR 방식 로그인 구현
-  - 연관 관계 매핑 및 편의 메서드 작성
-  - 전체 기능 통합 테스트 (Postman)
-  - 통합 오류 코드 수정과 리펙토링
-  - Git Hub 관리
-    
-  **김준년**
-  -
-  
-  - 닉네임 배경색 DB저장 및 저장된 색상 목록 조회
-  - 닉네임 배경색 저장,조회 단위 테스트(Postmen)
-  - AWS를 활용한 배포환경 및 구축(EC2,RDS)
-
-  **박해빈**
-  -
-  
-  - 공통 기능 구현
-  - 오류 코드 수정 및 리펙토링
-  - API 문서 작성
-  - 테이블 명세서 작성
-  - 사용자 요구사항 정의서 작성
-  - Notion 문서 작성 및 관리
-  - 프로젝트 일정 조율 및 관리
-
- **김다소미**
-
-  - 회원 가입 기능 구현
-  - 요구사항 정의서 작성
-  - 로그인, 회원가입 API 명세서 작성
-  
-    
+  <br />  
 
 </div>
 </details>
 
+
+ <br />
+ 
 ![meetU](https://github.com/codestates-seb/abc02_001/assets/41185705/2f2689af-a15b-4797-9bd1-8a25c584d313)
 ##  개발 환경
 ![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)

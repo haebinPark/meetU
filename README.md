@@ -153,6 +153,7 @@
   <img src="https://img.shields.io/badge/mySQL-4479A1?style=for-the-badge&logo=mySQL&logoColor=white">
   <img src="https://img.shields.io/badge/JAVA-5A29E4?style=for-the-badge&logo=JAVA&logoColor=white">
   <img src="https://img.shields.io/badge/GRADLE-569A31?style=for-the-badge&logo=gradle&logoColor=white">
+  </br>
   <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
   <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white">
   <img src="https://img.shields.io/badge/amazonaws-527FFF?style=for-the-badge&logo=amazonaws&logoColor=white">

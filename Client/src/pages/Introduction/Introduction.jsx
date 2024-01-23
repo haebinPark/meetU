@@ -4,11 +4,10 @@ import PageDescription from "../../components/Common/PageDescription.jsx";
 import PageTitle from "../../components/Common/PageTitle.jsx";
 import ButtonStyleLink from "../../components/MyPage/ButtonStyleLink.jsx";
 import MemberFormButtonBlock from "../../components/Member/MemberFormButtonBlock.jsx";
+import Slick from "../../components/Introduction/Slick.jsx";
 
 const ImageSlcik = styled.div`
-  width: 100%;
-  height: 25rem;
-  background-color: skyblue;
+  width: 95%;
 `;
 
 function Introduction() {
@@ -17,7 +16,10 @@ function Introduction() {
       <PageTitle $fontSize="2.8rem" $fontWeight="600">
         Nice to meetU!
       </PageTitle>
-      <ImageSlcik />
+      <ImageSlcik>
+        <Slick />
+      </ImageSlcik>
+
       <PageDescription>
         설레는 새학기, <br />
         나와 같은 관심사를 가진 친구는 누구일까? <br />

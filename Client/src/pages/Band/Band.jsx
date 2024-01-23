@@ -132,15 +132,17 @@ function Band() {
             schoolType={schoolType}
             setSchoolType={setSchoolType}
           />
-          <GradeSearchForm
-            gradeInput={gradeInput}
-            setGradeInput={setGradeInput}
-          />
-          <ClassSearchForm
-            classInput={classInput}
-            setClassInput={setClassInput}
-          />
-          <SearchButton type="submit" onClick={handleSearchClick} />
+          <div style={{ display: "flex" }}>
+            <GradeSearchForm
+              gradeInput={gradeInput}
+              setGradeInput={setGradeInput}
+            />
+            <ClassSearchForm
+              classInput={classInput}
+              setClassInput={setClassInput}
+            />
+            <SearchButton type="submit" onClick={handleSearchClick} />
+          </div>
         </SearchSection>
       </section>
       <section style={{ marginTop: "20px" }}>

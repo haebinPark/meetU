@@ -174,6 +174,7 @@
 </div>
 </details>
 
+<br /> 
     
   ## 📒 기획 명세서
 <a href="https://docs.google.com/spreadsheets/d/1L4wACPQCKQ7hr-v-saBtJC0c9OAXE6tAE3GvGZy0RnM/edit#gid=461303735" target="_blank">사용자 요구사항 정의서 및 테이블정의서</a>  

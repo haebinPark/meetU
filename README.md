@@ -5,23 +5,13 @@
 
 <img src="https://github.com/codestates-seb/abc02_001/assets/89781834/e2039718-4898-43de-9c26-0e4a19c30efc" width="400px" />
 
-![미츄-목업3](https://github.com/codestates-seb/abc02_001/assets/105577805/fe3b34a5-0c88-4346-8936-a56237f22d92)
+![미츄-목업3](https://github.com/codestates-seb/abc02_001/assets/105577805/fe3b34a5-0c88-4346-8936-a56237f22d92)
 
 
-### 프로젝트 소개글
+### 소개글
 " 새학기에 친구 사귀기를 어려워하는 분들을 위해 <br />
 미츄를 사용하여 나의 관심사와 같은 반 친구를 사귀어 보세요. <br />
 미츄는 친구를 만들 수 있는 사소한 계기가 되어 줄 것입니다. "
-
-<br />
-
-### 프로젝트 배경 및 기획의도
-" 새해가 밝았고, 모두가 새로운 마음으로 한 해를 시작하는 1월 말, 그것은 바로 새 학기의 시작이었습니다. <br />
-새 학기는 누군가에게는 설레는 시작이지만, 동시에 새로운 환경에 적응해야 한다는 부담을 동반합니다. <br />
-특히 새로운 반에서 친구를 사귀는 일은 많은 학생들에게 큰 고민이 되곤 합니다. <br /><br />
-이러한 고민을 해결하고자 저희 팀은 ' 나의 관심사와 같은 반 친구를 사귀기 서비스'를 기획하게 되었습니다. <br /> 
-미츄는 새 학기를 맞이하는 학생들이 손쉽게 반 친구들과 소통하고, 새로운 인연을 맺을 수 있도록 돕는 플랫폼입니다. <br /> 
-학생들의 취향과 관심사를 반영하여 매칭 시스템을 구축, 학생들이 좀 더 편안하게 대화를 시작할 수 있는 기반을 마련했습니다. "
 
 <br />
 
@@ -72,8 +62,7 @@
 
 
  <br />
-
-##  기술 스택 
+ 
 ![meetU](https://github.com/codestates-seb/abc02_001/assets/41185705/2f2689af-a15b-4797-9bd1-8a25c584d313)
 ##  개발 환경
 ![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)
@@ -85,7 +74,7 @@
 
 </br>
 
-
+##  기술 스택
 
 ### 프론트엔드
   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -119,62 +108,10 @@
   
 </br>
   
-##  프로젝트 진행 단계
-<details>
-  <summary>자세히 보기</summary>
-  <div markdown="1">
-    
-<br />
-
-| 프로젝트 진행 단계 | 세부 설명 |
-|:---:|:---:|
-| 1. 요구사항 분석 및 설계 | - 프로젝트의 목표, 기능성, 성능 요구사항을 명확히 합니다.</br> - 시스템 아키텍처를 설계하고, 데이터베이스 및 서버 구조를 계획합니다.|
-| 2. 개발 환경 설정 | - 필요한 개발 툴과 소프트웨어를 설치하고, 개발 서버를 구축합니다.</br>- 버전 관리 시스템(Git 등)을 설정합니다.|
-| 3. 코딩 및 기능 구현 | - 데이터 모델을 생성하고, API를 개발합니다.</br> - 비즈니스 로직을 구현하고, 필요한 경우 단위 테스트를 작성합니다.|
-| 4. 통합 및 테스트 | - 개발된 기능들을 통합하고 시스템이 제대로 작동하는지 확인합니다.</br> - 통합 테스트, 성능 테스트, 보안 테스트 등을 수행합니다.|
-| 5. 배포 및 유지보수 | - 완성된 백엔드 시스템을 생산 환경에 배포합니다.</br> - 문제점을 모니터링하며 지속적으로 개선 사항을 반영합니다.|
-<br />  
-
-</div>
-</details>
-
-</br>
   
-##  프로젝트 세부 과정
-<details>
-  <summary>자세히 보기</summary>
-  <div markdown="1">
-    
-<br />
+   
+  
 
-| 프로젝트 세부과정 | 세부 과정 설명 |
-|:---:|:---:|
-| 1. 프로젝트 | - 세부 과정 설명 들어 갈 부분 |
-
-<br />  
-
-</div>
-</details>
-
-</br>
-
-## 프로젝트 회고
-<details>
-  <summary>자세히 보기</summary>
-  <div markdown="1">
-    
-<br />
-
-![Nice to미츄meetU!-2](https://github.com/haebinPark/meetU/assets/73635024/d34af367-94b1-4b3d-9ec3-dd1d54adde94)
-<br />
-![Nice to미츄meetU!](https://github.com/haebinPark/meetU/assets/73635024/17549761-f517-463e-9dce-93a36809d6e2)
-
-<br />  
-
-</div>
-</details>
-
-<br /> 
     
   ## 📒 기획 명세서
 <a href="https://docs.google.com/spreadsheets/d/1L4wACPQCKQ7hr-v-saBtJC0c9OAXE6tAE3GvGZy0RnM/edit#gid=461303735" target="_blank">사용자 요구사항 정의서 및 테이블정의서</a>  

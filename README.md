@@ -72,7 +72,8 @@
 
 
  <br />
- 
+
+##  기술 스택 
 ![meetU](https://github.com/codestates-seb/abc02_001/assets/41185705/2f2689af-a15b-4797-9bd1-8a25c584d313)
 ##  개발 환경
 ![GIT](https://img.shields.io/badge/GIT-%23E34F26.svg?style=for-the-badge&logo=GIT&logoColor=white)
@@ -84,7 +85,7 @@
 
 </br>
 
-##  기술 스택
+
 
 ### 프론트엔드
   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)

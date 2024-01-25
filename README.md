@@ -155,8 +155,24 @@
 
 </div>
 </details>
-   
-  
+
+</br>
+
+## 프로젝트 회고
+<details>
+  <summary>자세히 보기</summary>
+  <div markdown="1">
+    
+<br />
+
+![Nice to미츄meetU!](https://github.com/haebinPark/meetU/assets/73635024/17549761-f517-463e-9dce-93a36809d6e2)
+<br />
+![Nice to미츄meetU!-2](https://github.com/haebinPark/meetU/assets/73635024/d34af367-94b1-4b3d-9ec3-dd1d54adde94)
+
+<br />  
+
+</div>
+</details>
 
     
   ## 📒 기획 명세서
